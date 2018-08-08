@@ -1,0 +1,66 @@
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	                xmlns:h="http://xmlns.jcp.org/jsf/html"
+	                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	                template="WEB-INF/template/templateBar.xhtml"
+	                xmlns:p="http://primefaces.org/ui"
+	                xmlns:o="http://omnifaces.org/ui"
+					xmlns:of="http://omnifaces.org/functions"
+	                xmlns:f="http://java.sun.com/jsf/core">
+		<ui:define name="content">
+		
+		<h:head>
+			<link rel="stylesheet" type="text/css" href="css/print.css" />
+			<link rel="stylesheet" type="text/css" href="css/styleprint.css"/>
+		</h:head>
+		<f:metadata>
+			<f:viewParam id="emailParam" name="email" value="#{alunoEditBean.email}" required="true" requiredMessage="Email inválido"></f:viewParam>
+			<f:viewAction action="#{alunoEditBean.init}"/>
+		</f:metadata>
+	    <body>
+	    <header class="header print">
+	    	<p><b>Aluno: </b>#{alunoEditBean.aluno.nome}</p>
+	    	<p><b>Treino: </b>#{alunoEditBean.aluno.fichaDeTreino.titulo}<b> | Inicio:</b> #{alunoEditBean.aluno.fichaDeTreino.inicioDoTreino.toLocaleString().subSequence(0, 10)} <b> | Término: </b>#{alunoEditBean.aluno.fichaDeTreino.fimDoTreino.toLocaleString().subSequence(0, 10)} </p>
+	    	<p><b>Observações: </b>Escolióse sem dor</p>
+	    	<p><b>Objetivo: </b>#{alunoEditBean.aluno.fichaDeTreino.objetivo} | #{alunoEditBean.aluno.fichaDeTreino.descricao}</p>
+	    	<p><b>Professor: </b>Dieggo Barreto</p>
+	    	
+	    </header>
+	
+	    <div class="wrap">
+	    	<article class="artigo"> 
+				<h3>Treino A</h3>
+				<p:dataTable value="#{alunoEditBean.ListExercicioA()}" var="fichaDeTreinoA">
+					<p:column  headerText="Exercício" width="80" style="text-align: left">
+						 <h:outputText value="#{fichaDeTreinoA.titulo}"/>
+					</p:column>
+					<p:column  headerText="Séries" width="10" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.seriesI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.seriesF}"/>
+					</p:column>
+					<p:column  headerText="Repetições" width="10" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.repsI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.repsF}"/>
+					</p:column>
+					<p:column  headerText="Carga" width="10" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.cargaI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.cargaF}"/>
+					</p:column>
+					<p:column  headerText="Ajuste" width="5" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.ajuste}"/>
+					</p:column>
+					<p:column  headerText="Intervalo" width="10" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.intervaloI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.intervaloF}"/>
+					</p:column>
+				</p:dataTable>
+				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA">
+				<p:column  headerText="Observações" width="auto" style="text-align: center">
+						 <h:outputText value="#{obsA.obs}"/>
+					</p:column>
+				</p:dataTable>
+				</article>
+		</div>
+	
+	    <footer class="footer">
+	    	<small>© 2018 PersonalAplication developed by <a href="http://www.facebook.com/caiotorrez">Caio Torrez</a>.</small>
+	    </footer>
+	
+	    </body>
+		</ui:define>
+	</ui:composition>

@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		
+		<h:form>
+            <h:panelGrid columns="3">
+             <p:commandButton type="submit" action="/index.xhtml?faces-redirect=true" icon="ui-icon-triangle-1-w" title="Voltar a pagina inicial"/>
+                <p:inputText value="#{treinoListBean.titulo}"/>
+                <p:commandButton id="pesquisaButton" actionListener="#{treinoListBean.search}"
+                                 ajax="true" update="dataTable" icon="ui-icon-search" />
+                <p:defaultCommand target="pesquisaButton"></p:defaultCommand>
+            </h:panelGrid>
+        </h:form>
+        
+		<p:dataTable value="#{treinoListBean.fichaList}" var="fichaList" id="dataTable" emptyMessage="Nenhuma ficha de treino encontrada na busca"
+					rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" sortBy="#{fichaList.status}">				
+					
+		<p:column headerText="Título" width="65"
+					style="text-align: left">
+		<h:outputText value="#{fichaList.titulo}" title="#{fichaList.titulo}"/>
+		</p:column>
+		
+		<p:column headerText="Objetivo" width="65"
+					style="text-align: left">
+		<p:outputLabel value="#{fichaList.objetivo}" title="#{fichaList.objetivo}"></p:outputLabel>
+		</p:column>
+		
+		<p:column headerText="Descrição" width="65"
+					style="text-align: left" >
+		<h:outputText value="#{fichaList.descricao}" title="#{fichaList.descricao}"/>
+		</p:column>
+		
+		<p:column headerText="Inicio" width="65"
+					style="text-align: left">
+		<h:outputText value="#{fichaList.inicioDoTreino.toString().subSequence(8, 10)}/#{fichaList.inicioDoTreino.toString().subSequence(5, 7)}/#{fichaList.inicioDoTreino.toString().subSequence(0, 4)}" title="#{fichaList.inicioDoTreino}"/>
+		</p:column>
+		
+		<p:column headerText="Fim" width="65"
+					style="text-align: left">
+		<h:outputText value="#{fichaList.fimDoTreino.toString().subSequence(8, 10)}/#{fichaList.fimDoTreino.toString().subSequence(5, 7)}/#{fichaList.fimDoTreino.toString().subSequence(0, 4)}" title="#{fichaList.fimDoTreino}"/>
+		</p:column>
+
+		<p:column headerText="Aluno Associado" width="65"
+					style="text-align: left">
+		<h:outputText value="#{fichaList.nomeDoAlunoAssociado}" title="#{fichaList.nomeDoAlunoAssociado}"/>
+		</p:column>
+		
+		<p:column headerText="Status" width="65"
+					style="text-align: left">
+		<h:outputText style="#{fichaList.status == 'Ativo' ? 'color:#1fdf1f;' : 'color:Red;'}"  value="#{fichaList.status}"
+					title="#{fichaList.status}" />
+		</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

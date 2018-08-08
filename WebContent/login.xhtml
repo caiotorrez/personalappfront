@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/template/templateBar.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+				xmlns:of="http://omnifaces.org/functions"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+    <h:head>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'/>	
+    </h:head>
+    <h:body>
+        	<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 350px;height: 420px;padding: 80px 40px;box-sizing: border-box;background: rgba(0,0,0,.5); color: #fff">
+        		<h1 style="margin: 0; padding: 0 0 20px; text-align: center; font-size: 22px;">Login</h1>
+        		<h:form>
+        		<p style="margin:0;padding:0;font-weight:bold">Usuário</p>
+        		<p:inputText style="width: 100%; margin-bottom: 20px; border: none;border-bottom: 1px solid #fff;background: transparent;outline: none;height: 40px;color: #fff;font-size: 16px; background:transparent; outline:none; height: 40px; color: #fff; font-size: 16px;"
+        		 placeholder="Nome do Usuário" value="#{loginBean.username}" required="true" requiredMessage="Informe o nome do usuário"></p:inputText>
+        		 
+        		<p style="margin:0;padding:0;font-weight:bold">Senha</p>
+        		<p:password style="width: 100%; margin-bottom: 20px; border: none;border-bottom: 1px solid #fff;background: transparent;outline: none;height: 40px;color: #fff;font-size: 16px; background:transparent; outline:none; height: 40px; color: #fff; font-size: 16px;"
+        		 type="password" placeholder="Senha do Usuário" value="#{loginBean.password}" required="true" requiredMessage="Informe a senha do usuário"></p:password>
+        		
+        		<p:commandButton style="width: 100%; margin-bottom: 20px; border:none; outline:none; height: 40px; background: #39b0de; color:#fff; font-size:18px; border-radius:20px;" 
+        		type="submit" name="" value="Login" action="#{loginBean.login}" />
+        		</h:form>
+        	</div>
+        	
+        <div class="footer-bottom">
+		<div class="container">
+			<div class="row section group">
+				<div class="col-md-4">
+					<h4 class="m_7">Deseja se tonar um aluno?</h4>
+					<p class="m_8">Envie-nos um Email e entre em contato
+					com nossa equipe.</p>
+					<form class="subscribe">
+						<input type="text" value="Insira seu email" onfocus="this.value = '';"
+							onblur="if (this.value == '') {this.value = 'Insira seu email';}"/>
+						<TEXTAREA rows="6" cols="37" placeholder="Escreva sua mensagem..."></TEXTAREA>
+					</form>
+					<div class="subscribe1">
+						<a href="#">Enviar Email<i class="but_arrow"> </i></a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="f-logo">
+						<img src="images/logo.png" alt="" />
+					</div>
+					<p class="m_9">bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla 
+					bla bla bla bla bla bla bla bla bla bla bla bla 
+					bla bla bla bla bla bla bla bla bla </p>
+					<p class="address">
+						Cel : <span class="m_10">(83)
+							9.8888-8888</span>
+					</p>
+					<p class="address">
+						Email : <span class="m_10">caio.torres@ccc.ufcg.edu.br</span>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<ul class="list">
+						<h4 class="m_7">Menu</h4>
+						<li><a href="#">Informações</a></li>
+						<li><a href="#">Privacidade</a></li>
+						<li><a href="#">Contato</a></li>
+						<li><a href="#">Sobre</a></li>
+					</ul>
+					<ul class="list1">
+						<h4 class="m_7">Comunidade</h4>
+						<li><a href="#">Suporte</a></li>
+						<li><a href="#">FAQ</a></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright">
+		<div class="container">
+			<div class="copy">
+				<p>
+					© 2018 PersonalAplication developed by <a href="www.facebook.com.br/caiotorrez" target="_blank"> CaioTorrez</a>
+				</p>
+			</div>
+			<div class="social">
+				<ul>
+					<li class="facebook"><a href="#"><span> </span></a></li>
+					<li class="instagram"><a href="#"><span> </span></a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+    	</h:body>
+    </ui:define>
+</ui:composition>

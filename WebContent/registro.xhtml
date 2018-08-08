@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/template/templateBar.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+				xmlns:of="http://omnifaces.org/functions"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+    <style type="text/css">
+    	body {
+    	background-attachment: fixed;
+    	background-clip: inherit;
+    	background-color: gray;
+    	background-size: cover;
+    	}
+    
+    </style>
+	<body>
+	<p:commandButton type="submit" action="index.xhtml?faces-redirect=true" icon="ui-icon-triangle-1-w" title="Voltar a pagina inicial" immediate="true"/>
+	
+	<div style="position: fixed; bottom: 30%;left: 38%;">
+	<h1 align="center">Novo Aluno</h1>
+		<h:form enctype="multipart/form-data">
+<!-- 		<p:growl showDetail="true"></p:growl> -->
+<!-- 		<p:fileUpload value="#{alunoCreateBean.imagem}" allowTypes="*jpg, *png" mode="simple"></p:fileUpload> -->
+			<h:panelGrid columns="1">
+				<p:outputLabel value="Nome Completo" for="nome" title="Nome do Usuário"></p:outputLabel>
+				<p:inputText value="#{alunoCreateBean.aluno.nome}" id="nome" placeholder="Nome Completo" size="40" required="true"></p:inputText>
+				<p:outputLabel value="Email" for="email" title="Email do Usuário"></p:outputLabel>
+				<p:inputText value="#{alunoCreateBean.aluno.email}" id="email" placeholder="Email" size="40" required="true"></p:inputText>
+				<p:outputLabel value="Academia" for="academia" title="Nome da Academia"></p:outputLabel>
+				<p:inputText value="#{alunoCreateBean.aluno.academia}" id="academia" placeholder="Nome da Academia" size="40" required="true"></p:inputText>
+				<p:outputLabel for="cel" value="Celular" title="Número do Celular"/>
+        		<p:inputMask id="cel" value="#{alunoCreateBean.aluno.cel}" mask="(99) 99999-9999" placeholder="Número do Celular" size="40" required="true"/>
+			</h:panelGrid>
+			<div>
+				<span style="margin:1px;"></span>
+        		<p:outputLabel for="nasc" value="Nasc" style="margin: 2px;" title="Data de Nascimento"/>
+        		<p:calendar id="nasc" value="#{alunoCreateBean.aluno.data}" showOn="button" size="10" required="true" requiredMessage="Escolha uma data."/>
+        		<span style="margin:6px;"></span>
+        		<p:outputLabel for="genero" value="Sexo" style="margin: 5px;"/>
+        		<p:selectOneMenu id="genero" value="#{alunoCreateBean.aluno.genero}" style="width:auto; vertical-align: bottom;">
+		            <f:selectItem itemLabel="Masculino" itemValue='M'/>
+		            <f:selectItem itemLabel="Feminino" itemValue='F'/>
+       		 	</p:selectOneMenu>
+       		 <div style="margin-top: 15px;">
+				<p:commandButton iconPos="right" icon="ui-icon-check" style="float:right; background-color:red; border-color:red;" value="Salvar Novo Aluno" type="submit" action="#{alunoCreateBean.create}" id="bSave"></p:commandButton>
+			</div>
+       		 </div>
+		</h:form>
+	</div>
+	</body>
+		
+	</ui:define>
+	</ui:composition>

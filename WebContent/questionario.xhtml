@@ -1,0 +1,450 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/template/templateBar.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+				xmlns:of="http://omnifaces.org/functions"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+	
+	
+	<h:body>
+	<h:form>
+	<div id="pretecaoID">
+	
+		<h3> - Pretensões necessidades e objetivos ao iniciar a prática de atividade física </h3>
+	
+		
+		 <p:panel header="Quais são os benefícios que você espera com a prática regular do exercício físico e ou alimentação adequada?" toggleable="true">
+		 <p:selectManyCheckbox  id="beneficiosID" columns="3" layout="responsive" >
+		 <f:selectItem itemLabel="Emagrecimento estético" itemValue="Emagrecimento estético"/>
+		 <f:selectItem itemLabel="Emagrecimento para melhoria da saúde" itemValue="Emagrecimento para melhoria da saúde"/>
+		 <f:selectItem itemLabel="Aumento da massa muscular(hipertrofia)" itemValue="Aumento da massa muscular(hipertrofia)"/>
+		 <f:selectItem itemLabel="Definição muscular" itemValue="Definição muscular"/>
+		 <f:selectItem itemLabel="Aumento do condicionamento físico geral" itemValue="Aumento do condicionamento físico geral"/>
+		 <f:selectItem itemLabel="Controle e enfrentamento do estresse" itemValue="Controle e enfrentamento do estresse"/>
+		 <f:selectItem itemLabel="Controle da ansiedade" itemValue="Controle da ansiedade"/>
+		 <f:selectItem itemLabel="Aumento da longevidade" itemValue="Aumento da longevidade"/>
+		 <f:selectItem itemLabel="Aumento da qualidade de vida" itemValue="Aumento da qualidade de vida"/>
+		 <f:selectItem itemLabel="Prevenção ou controle de doenças metabólicas" itemValue="Prevenção ou controle de doenças metabólicas"/>
+		 <f:selectItem itemLabel="Melhora da saúde mental prevenção da osteoporose" itemValue="Melhora da saúde mental prevenção da osteoporose"/>
+		 <f:selectItem itemLabel="Prevenção de alguns tipos de câncer" itemValue="Prevenção de alguns tipos de câncer"/>
+		 <f:selectItem itemLabel="Prevenção  de quedas" itemValue="Prevenção  de quedas"/>
+		 <f:selectItem itemLabel="Reabilitação física" itemValue="Reabilitação física"/>
+		 <f:selectItem itemLabel="Controle do sobrepeso obesidade" itemValue="Controle do sobrepeso obesidade"/>
+		 <f:selectItem itemLabel="Aumento da energia/disposição" itemValue="Aumento da energia/disposição"/>
+		 <f:selectItem itemLabel="Melhora na qualidade do sono" itemValue="Melhora na qualidade do sono"/>
+		 <f:selectItem itemLabel="Controle do apetite" itemValue="Controle do apetite"/>
+		 <f:selectItem itemLabel="Melhora da aparência física(autoestima/postura)" itemValue="Melhora da aparência física(confiança/autoestima/postura)"/>
+		 <f:selectItem itemLabel="Aumento do desempenho esportivo" itemValue="Aumento do desempenho esportivo"/>
+		 <f:selectItem itemLabel="Redução de dores" itemValue="Redução de dores"/>
+		 <f:selectItem itemLabel="Redução de dor lombar" itemValue="Redução de dor lombar"/>
+		 <f:selectItem itemLabel="Controle do colesterol" itemValue="Controle do colesterol"/>
+		 <f:selectItem itemLabel="Aumento da estabilidade das articulações" itemValue="Aumento da estabilidade das articulações"/>
+		 <f:selectItem itemLabel="Fortalecimento muscular" itemValue="Fortalecimento muscular"/>
+		 <f:selectItem itemLabel="Aumento do convívio social" itemValue="Aumento do convívio social"/>
+		 <f:selectItem itemLabel="Coordenação motora" itemValue="Coordenação motora"/>
+		 <f:selectItem itemLabel="Melhora do desempenho sexual" itemValue="Melhora do desempenho sexual"/>
+		 <f:selectItem itemLabel="Gerenciamento da raiva e hostilidade" itemValue="Gerenciamento da raiva e hostilidade"/>
+		 <f:selectItem itemLabel="Redução das preocupações do dia a dia" itemValue="Redução das preocupações do dia a dia"/>
+		 <f:selectItem itemLabel="Melhora da vestimenta de roupas" itemValue="Melhora da vestimenta de roupas"/>
+		 <f:selectItem itemLabel="Aumento da satisfação com a vida" itemValue="Aumento da satisfação com a vida"/>
+		 <f:selectItem itemLabel="Promoção do relaxamento" itemValue="Promoção do relaxamento"/>
+		 </p:selectManyCheckbox>
+		 <p:outputLabel value="Outro: "></p:outputLabel>
+		 <p:inputTextarea rows="1" cols="30" autoResize="true" style="margin-bottom:-10px" placeholder="Comentário..."/>
+		 </p:panel> 
+	</div>
+	
+	<div>
+		<p:panel header="Histórico de atividade física praticado:" toggleable="true">
+		<p:outputLabel value="Faz Prática de quais atividades físicas?" style="padding-right:5px;"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="60" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/>
+		<p><p:outputLabel value="Qual é sua atividade física principal? " style="padding-right:17px"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="60" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Independentemente da sua rotina de estudo, trabalho e família, qual seria o horário perfeito para você se exercitar?" 
+		style="padding-right:17px"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="94" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Qual foi o treino que lhe trouxe mais resultados?" style="padding-right:17px"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="50" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Qual foi a atividade física que você permaneceu mais tempo praticando? Quantidade de anos ou meses? " style="padding-right:17px"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="94" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Já se lesionou durante sua prática?" style="padding-right:17px"></p:outputLabel>
+		<p:inputTextarea rows="1" cols="62" autoResize="true" style="margin-bottom:-10px;" placeholder="Comentário..."/></p>
+		</p:panel>
+	</div>
+	
+	<div>
+		<p:panel header="Histórico de dores ou desconforto durante os exercícios praticados" toggleable="true">
+		<p:outputLabel for="historicoID" value="Você possui alguma limitação de movimento em alguma articulação?"></p:outputLabel>
+		<p:selectManyCheckbox  id="historicoID" columns="4" layout="responsive">
+		<f:selectItem itemLabel="Pescoço" itemValue="Pescoço"/>
+		<f:selectItem itemLabel="Ombros" itemValue="Ombros"/>
+		<f:selectItem itemLabel="Cotovelos" itemValue="Cotovelos"/>
+		<f:selectItem itemLabel="Punho" itemValue="Punho"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Quadril" itemValue="Quadril"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Tornozelo" itemValue="Tornozelo"/>
+		</p:selectManyCheckbox>
+		<p:inputTextarea rows="1" cols="60" autoResize="true" placeholder="Comentário..." style="margin-left:8px;"/>
+		</p:panel>	
+	</div>
+	</h:form>
+	
+	<div>
+		<p:panel header="Se você treina ou já treinou musculação já sentiu desconforto, dor, estalo articular em algum desses exercícios?" toggleable="true">
+		<p:outputLabel for="agachamentoID" value="Agachamento"></p:outputLabel>
+		<p:selectOneRadio  id="agachamentoID" columns="6" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Quadril" itemValue="Quadril"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="terraID" value="Levantamento Terra"></p:outputLabel>
+		<p:selectOneRadio  id="terraID" columns="6" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Quadril" itemValue="Quadril"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="ombrosID" value="Desenvolvimento de Ombros"></p:outputLabel>
+		<p:selectOneRadio  id="ombrosID" columns="6" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Quadril" itemValue="Quadril"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="costasID" value="Puxador para Costas"></p:outputLabel>
+		<p:selectOneRadio  id="costasID" columns="6" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Quadril" itemValue="Quadril"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="encurtamentoID" value="Você se Sente Encurtado (Encurtamento Muscular)"></p:outputLabel>
+		<p:selectOneRadio  id="encurtamentoID" columns="6" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		</p:panel>
+	</div>
+	
+	<div>
+	<p:panel header="Se você nunca praticou musculação ou está parado a pelo menos 3 meses, responda se alguma dessas ocasiões gera dor ou desconforto:" toggleable="true">
+		<p:outputLabel for="cocorasID" value="Ficar de Cócoras"></p:outputLabel>
+		<p:selectOneRadio  id="cocorasID" columns="5" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="sentarID" value="Sentar e Levantar"></p:outputLabel>
+		<p:selectOneRadio  id="sentarID" columns="5" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="acordarID" value="Ao Acordar"></p:outputLabel>
+		<p:selectOneRadio  id="acordarID" columns="7" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Ombros" itemValue="Ombros"/>
+		</p:selectOneRadio>
+		<p:outputLabel for="sentarTempoID" value="Sentar por Muito Tempo"></p:outputLabel>
+		<p:selectOneRadio  id="sentarTempoID" columns="7" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		<f:selectItem itemLabel="Joelhos" itemValue="Joelhos"/>
+		<f:selectItem itemLabel="Ombros" itemValue="Ombros"/>
+		<f:selectItem itemLabel="pescoço" itemValue="pescoço"/>
+		</p:selectOneRadio>
+	</p:panel>
+	</div>
+	
+	<div>
+	<p:panel header="Comportamento alimentar" toggleable="true">
+		<p:outputLabel for="dietaID" value="Está Fazendo Dieta no Momento?"></p:outputLabel>
+		<p:selectOneRadio  id="dietaID" columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Em caso de já está fazendo dieta, você sente fome constante durante o dia?"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Você considera sua alimentação saudável?"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Você tem comportamentos compulsivos com a alimentação?"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Existe um horário específico em que aconteça a compulsão alimentar?"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+	</p:panel>
+	</div>
+	
+	<div>
+	<p:panel header="Atividades da vida diária" toggleable="true">
+		<p:outputLabel value="Número de horas trabalhadas por semana :"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="20 horas" itemValue="20"/>
+		<f:selectItem itemLabel="20 a 40 horas" itemValue="20 a 40"/>
+		<f:selectItem itemLabel="41 a 60 horas" itemValue="41 a 60"/>
+		</p:selectOneRadio>
+		<p><p:outputLabel value="Atividades desempenhadas no trabalho :" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="94" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+		<p:outputLabel value="Fica sentado por muito tempo?"></p:outputLabel>
+		<p:selectOneRadio columns="10" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p><p:outputLabel value="Quais são os dias mais estressantes da sua semana? Existe um padrão?  :" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="68" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Outros:" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="94" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+		<p:outputLabel value="Observação:" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/>
+	</p:panel>
+	</div>
+	
+	<div id="historicoMedicoID">
+	<p:panel header="Histórico médico" toggleable="true">
+		<p:outputLabel value="Marque aqueles que tiveram alguma cardiopatia antes dos 50 anos."></p:outputLabel>
+		<p:selectManyCheckbox columns="4" layout="responsive">
+		<f:selectItem itemLabel="Pai" itemValue="Pai" />
+		<f:selectItem itemLabel="Mãe" itemValue="Mãe" />
+		<f:selectItem itemLabel="Irmão(ã)" itemValue="Irmão(ã)" />
+		<f:selectItem itemLabel="Avô/avó" itemValue="Avô/avó" />
+		</p:selectManyCheckbox>
+	</p:panel>
+	</div>
+	
+	<div id="problemasDiagnosticadosID">
+	<p:panel header="Histórico médico" toggleable="true" style="">
+		<p:outputLabel value="Marque aqueles que tiveram alguma cardiopatia antes dos 50 anos."></p:outputLabel>
+		<p:selectManyCheckbox columns="6" layout="responsive">
+		<f:selectItem itemLabel="Coração" itemValue="Coração"/>
+		<f:selectItem itemLabel="Rim" itemValue="Rim"/>
+		<f:selectItem itemLabel="Pulmão" itemValue="Pulmão"/>
+		<f:selectItem itemLabel="Olhos" itemValue="Olhos"/>
+		<f:selectItem itemLabel="Articulação hérnia de disco" itemValue="Articulação hérnia de disco" />
+		<f:selectItem itemLabel="Coluna" itemValue="Coluna"/>
+		</p:selectManyCheckbox>
+		<p><p:outputLabel value="Outro: " style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+		<p:outputLabel value="Obstetricia:" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="86" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/>
+	</p:panel>
+	</div>
+	
+	<div id="problemasDiagnosticadosID">
+	<p:panel header="Marque o(os) problema(as) abaixo que tenha sido diagnosticado(a) e tratado(a) por um médico." toggleable="true">
+		<p:outputLabel value="Marque aqueles que tiveram alguma cardiopatia antes dos 50 anos."></p:outputLabel>
+		<p:selectManyCheckbox columns="3" layout="responsive">
+		<f:selectItem itemLabel="Alcoolismo" itemValue="Alcoolismo"/>
+		<f:selectItem itemLabel="Artrite" itemValue="Artrite"/>
+		<f:selectItem itemLabel="Diabetes" itemValue="Diabetes"/>
+		<f:selectItem itemLabel="Problemas musculares" itemValue="Problemas musculares"/>
+		<f:selectItem itemLabel="Problemas renais" itemValue="Problemas renais" />
+		<f:selectItem itemLabel="Problemas oculares" itemValue="Problemas oculares"/>
+		<f:selectItem itemLabel="Úlcera" itemValue="Úlcera"/>
+		<f:selectItem itemLabel="AVC" itemValue="AVC"/>
+		<f:selectItem itemLabel="Anemia" itemValue="Anemia"/>
+		<f:selectItem itemLabel="Asma" itemValue="Asma"/>
+		<f:selectItem itemLabel="Obesidade" itemValue="Obesidade"/>
+		</p:selectManyCheckbox>
+		<p><p:outputLabel value="Outro: " style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+		<p><p:outputLabel value="Você possui alguma alergia?" style=""></p:outputLabel></p>
+		<p:selectOneRadio columns="2" layout="responsive">
+		<f:selectItem itemLabel="Asma" itemValue="Asma"/>
+		<f:selectItem itemLabel="Obesidade" itemValue="Obesidade"/>
+		</p:selectOneRadio>
+		<p><p:outputLabel value="Qual? " style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..."/></p>
+	</p:panel>
+	</div>
+	
+	<div id="sintomasID">
+	<p:panel header="Indique os sintomas, conforme segue:" toggleable="true">
+		<p:outputLabel value="Tosse com sangue"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dor abdominal"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dor nas pernas"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dor nos braços"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dor nas costas ou pescoço"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dor no peito"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Dores articulares"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Falta de ar com esforço leve"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Sentir-se fraco"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Tontura"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Palpitação ou batimento cardíaco acelerado"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sempre" itemValue="Sempre"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Nunca" itemValue="Nunca"/>
+		</p:selectOneRadio>
+	</p:panel>
+	</div>
+	
+	<div id="comportamentoSaudeID">
+	<p:panel header="Comportamento relacionado a saúde" toggleable="true">
+		<p:outputLabel value="Você fuma atualmente?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Algumas vezes" itemValue="Algumas vezes"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Se sim, quantos cigarros por dia?"><p:inputNumber
+		maxValue="99" size="1" minValue="0" value="" style="margin-left:15px;"></p:inputNumber>
+		</p:outputLabel>
+		<p><p:outputLabel value="Consome álcool com frequência?"></p:outputLabel></p>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Quantas horas de sono em média você dorme:"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="3-4 horas/dia" itemValue="3-4 horas/dia"/>
+		<f:selectItem itemLabel="5-7 horas/dia" itemValue="5-7 horas/dia"/>
+		<f:selectItem itemLabel="8 ou mais horas/dia" itemValue="8 ou mais horas/dia"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Você tem distúrbios do sono?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p><p:outputLabel value="Se sim, qual? " style="" title="Exemplo:Rônco, Insônia..."></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..." title="Exemplo:Rônco, Insônia..."/></p>
+		<p:outputLabel value="Possui cálculos renais?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Possui diabetes?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Possui cardiopatia?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Você sente dores nas articulações?"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Possui hérnias ou protrusões? "></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Já sofreu luxação de alguma articulação"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+		<p:outputLabel value="Possui Condromalácia ou Condropatia patelar"></p:outputLabel>
+		<p:selectOneRadio columns="3" layout="responsive">
+		<f:selectItem itemLabel="Sim" itemValue="Sim"/>
+		<f:selectItem itemLabel="Não" itemValue="Não"/>
+		</p:selectOneRadio>
+	</p:panel>
+	</div>
+	
+	<div id="objetivosID">
+	<p:panel header="Objetivos relacionados à atividade física" toggleable="true">
+		<p:outputLabel value="Marque o que almeja em seu treino físico"></p:outputLabel>
+		<p:selectManyCheckbox columns="4" layout="responsive">
+		<f:selectItem itemLabel="Estética" itemValue="Estética" />
+		<f:selectItem itemLabel="Convívio social" itemValue="Convívio social"/>
+		<f:selectItem itemLabel="Lazer" itemValue="Lazer" />
+		<f:selectItem itemLabel="Emagrecimento" itemValue="Emagrecimento"/>
+		<f:selectItem itemLabel="Terapêutico" itemValue="Terapêutico"/>
+		<f:selectItem itemLabel="Condicionamento físico" itemValue="Condicionamento físico"/>
+		</p:selectManyCheckbox>
+		<p><p:outputLabel value="Outro:" style=""></p:outputLabel>
+		<p:inputTextarea rows="1" cols="90" autoResize="true" style="margin-bottom:-10px;margin-left:10px;" placeholder="Comentário..." title="Exemplo:Rônco, Insônia..."/></p>
+	</p:panel>
+	</div>
+
+	</h:body>
+	</ui:define>
+</ui:composition>
