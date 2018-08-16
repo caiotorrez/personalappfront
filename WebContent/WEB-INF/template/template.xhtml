@@ -14,10 +14,9 @@
     	background-attachment: fixed;
     	background-clip: inherit;
     	background-color: black;
-    	background-image: url("/img/bg-login-master.jpg");
+    	background-image: url("/icon/bg-login-master.jpg");
     	background-size: cover;
     	}
-    
     </style>
    
 </h:head>
@@ -29,6 +28,12 @@
         <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"/>
         <ui:insert name="content">
         </ui:insert>
+        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="../img/loader.gif" />
+        </p:dialog>
 
     </div>
     <div id="footer">

@@ -2,16 +2,15 @@ package com.personalapp.util;
 
 import static com.personalapp.custom.CustomURLEncoderDecoder.decodeUTF8;
 
-import java.io.Serializable;
-import java.util.Map;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import javax.faces.annotation.RequestCookieMap;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import java.io.Serializable;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class JsonUtil implements Serializable {

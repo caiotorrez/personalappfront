@@ -56,7 +56,7 @@ public class ExceptionInterceptor implements Serializable {
 		}
 	}
 	
-	private String  defineErroMessage(HttpStatusCodeException codeExcept) throws JsonParseException, JsonMappingException, IOException {
+	private String defineErroMessage(HttpStatusCodeException codeExcept) throws JsonParseException, JsonMappingException, IOException {
 		ErrorDetail errorDetail = new CustomObjectMapper().readValue(codeExcept.getResponseBodyAsString(), ErrorDetail.class);
 		return errorDetail.getErrorsList() == null ? errorDetail.getMessage() : errorDetail.getErrorsList()
 				.stream().map(Errors::getDefaultMessage).collect(Collectors.joining(","));

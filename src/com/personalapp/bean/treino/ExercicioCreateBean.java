@@ -1,12 +1,18 @@
 package com.personalapp.bean.treino;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.io.FilenameUtils;
 import org.omnifaces.util.Messages;
+import org.primefaces.model.UploadedFile;
 
 import com.personalapp.config.ExceptionHandler;
 import com.personalapp.model.treino.Exercicio;
@@ -19,6 +25,7 @@ public class ExercicioCreateBean implements Serializable {
 	
 	private final ExercicioDao exercicioDao;
 	private Exercicio exercicio = new Exercicio();
+	private UploadedFile imagem;
 
 	@Inject
 	public ExercicioCreateBean(ExercicioDao exercicioDao) {
@@ -26,8 +33,11 @@ public class ExercicioCreateBean implements Serializable {
 	}
 	
 	@ExceptionHandler
-	public String create() {
+	public String create() throws IOException {
 		if (this.exercicioDao.findOne(this.exercicio.getTitulo()) == null) {
+			if (this.getImagem() != null) {
+				this.exercicio.setImagem_data(getImagem().getContents());
+			}
 			this.exercicioDao.save(this.exercicio);
 			Messages.create("O Exercicio {0} foi adcionado com sucesso!", this.exercicio.getTitulo()).flash().add();
 			return "exercise.xhtml?faces-redirect=true";
@@ -43,5 +53,13 @@ public class ExercicioCreateBean implements Serializable {
 	public void setExercicio(Exercicio exercicio) {
 		this.exercicio = exercicio;
 	}
+	
 
+	public UploadedFile getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(UploadedFile imagem) {
+		this.imagem = imagem;
+	}
 }

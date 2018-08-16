@@ -26,35 +26,39 @@
 	    	
 	    </header>
 	
-	    <div class="wrap">
-	    	<article class="artigo"> 
+	    <div class="datatable1">
 				<h3>Treino A</h3>
-				<p:dataTable value="#{alunoEditBean.ListExercicioA()}" var="fichaDeTreinoA">
-					<p:column  headerText="Exercício" width="80" style="text-align: left">
+				<p:dataTable id="teste" value="#{alunoEditBean.ListExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+					<p:column  headerText="Exercício" width="80" style="text-align: left" >
 						 <h:outputText value="#{fichaDeTreinoA.titulo}"/>
 					</p:column>
-					<p:column  headerText="Séries" width="10" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.seriesI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.seriesF}"/>
+					<p:column  headerText="Séries" width="10" style="text-align: center" >
+						 <h:outputText value="#{alunoEditBean.ListInfosA().get(index).seriesI} - #{alunoEditBean.ListInfosA().get(index).seriesF}"/>
 					</p:column>
 					<p:column  headerText="Repetições" width="10" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.repsI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.repsF}"/>
+						 <h:outputText value="#{alunoEditBean.ListInfosA().get(index).repsI} - #{alunoEditBean.ListInfosA().get(index).repsF}"/>
 					</p:column>
 					<p:column  headerText="Carga" width="10" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.cargaI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.cargaF}"/>
+						 <h:outputText value="#{alunoEditBean.ListInfosA().get(index).cargaI} - #{alunoEditBean.ListInfosA().get(index).cargaF}"/>
 					</p:column>
 					<p:column  headerText="Ajuste" width="5" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.ajuste}"/>
+						 <h:outputText value="#{alunoEditBean.ListInfosA().get(index).ajuste}"/>
 					</p:column>
 					<p:column  headerText="Intervalo" width="10" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.intervaloI} - #{alunoEditBean.aluno.fichaDeTreino.treinoA.info1.intervaloF}"/>
+						 <h:outputText value="#{alunoEditBean.ListInfosA().get(index).intervaloI} - #{alunoEditBean.ListInfosA().get(index).intervaloF}"/>
+					</p:column>
+					<p:column  headerText="Vídeo" width="10" style="text-align: center">
+						 <p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-play" title="Youtube Video"></p:button>
+					</p:column>
+					<p:column headerText="Informação Teórica" width="10" style="text-align: center">
+						<p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-info" title="Texto Descritivo"></p:button>
 					</p:column>
 				</p:dataTable>
-				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA">
-				<p:column  headerText="Observações" width="auto" style="text-align: center">
-						 <h:outputText value="#{obsA.obs}"/>
+				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA" emptyMessage="Sem Observações">
+				<p:column  headerText="Observações" width="auto" style="text-align: center" >
+						 <h:outputText value="#{obsA.obs == '' ? 'Sem observações' : obsA.obs}" />
 					</p:column>
 				</p:dataTable>
-				</article>
 		</div>
 	
 	    <footer class="footer">

@@ -21,23 +21,28 @@
 	
 	<div style="position: fixed; bottom: 30%;left: 38%;">
 	<h1 align="center">Novo Exercício</h1>
-		<o:form>
-			<h:panelGrid columns="1">
-				<p:outputLabel value="Nome do Exercicio" for="nome" title="Nome do Exercicio"></p:outputLabel>
-				<p:inputText value="#{exercicioCreateBean.exercicio.titulo}" id="nome" placeholder="Nome do Exercicio" size="40" required="true"></p:inputText>
-				<p:outputLabel value="Região Trabalhada" for="regiao" title="Região Trabalhada do Exercício"></p:outputLabel>
-				<p:inputText value="#{exercicioCreateBean.exercicio.regiao}" id="regiao" placeholder="Região Trabalhada Pelo Exercício" size="40" required="true"></p:inputText>
-				<p:outputLabel value="Descrição" for="desc" title="Descrição do Exercício"></p:outputLabel>
-				<p:inputText value="#{exercicioCreateBean.exercicio.descricao}" id="desc" placeholder="Descrição do Exercício" size="40" required="true"></p:inputText>
-				<p:outputLabel value="URL do Video" for="url_video" title="Endereço do video"></p:outputLabel>
-				<p:inputText value="#{exercicioCreateBean.exercicio.urlVideo}" id="url_video" placeholder="URL do Video" size="40" required="true"></p:inputText>
-				<p:outputLabel value="URL dos Detalhes" for="url_detail" title="Endereço dos Detalhes"></p:outputLabel>
-				<p:inputText value="#{exercicioCreateBean.exercicio.urlDetalhes}" id="url_detail" placeholder="URL dos Detalhes" size="40" required="true"></p:inputText>
-			</h:panelGrid>
-       		 <div style="margin-top: 15px;">
-				<p:commandButton iconPos="right" icon="ui-icon-check" style="float:right; background-color:red; border-color:red;" value="Salvar Exercicio" type="submit" action="#{exercicioCreateBean.create()}" id="bSave"></p:commandButton>
-			</div>
-		</o:form>
+		<h:form enctype="multipart/form-data">
+<!-- 			<h:panelGrid columns="1"> -->
+<!-- 				<p:outputLabel value="Nome do Exercicio" for="nome" title="Nome do Exercicio"></p:outputLabel> -->
+<!-- 				<p:inputText value="#{exercicioCreateBean.exercicio.titulo}" id="nome" placeholder="Nome do Exercicio" size="40" required="true"></p:inputText> -->
+<!-- 				<p:outputLabel value="Região Trabalhada" for="regiao" title="Região Trabalhada do Exercício"></p:outputLabel> -->
+<!-- 				<p:inputText value="#{exercicioCreateBean.exercicio.regiao}" id="regiao" placeholder="Região Trabalhada Pelo Exercício" size="40" required="true"></p:inputText> -->
+<!-- 				<p:outputLabel value="Descrição" for="desc" title="Descrição do Exercício"></p:outputLabel> -->
+<!-- 				<p:inputText value="#{exercicioCreateBean.exercicio.descricao}" id="desc" placeholder="Descrição do Exercício" size="40" required="true"></p:inputText> -->
+<!-- 				<p:outputLabel value="URL do Video" for="url_video" title="Endereço do video"></p:outputLabel> -->
+<!-- 				<p:inputText value="#{exercicioCreateBean.exercicio.urlVideo}" id="url_video" placeholder="URL do Video" size="40" required="true"></p:inputText> -->
+<!-- 				<p:outputLabel value="URL dos Detalhes" for="url_detail" title="Endereço dos Detalhes"></p:outputLabel> -->
+<!-- 				<p:inputText value="#{exercicioCreateBean.exercicio.urlDetalhes}" id="url_detail" placeholder="URL dos Detalhes" size="40" required="true"></p:inputText> -->
+<!-- 				<h:outputLabel for="fileIdResume" value="Upload Your Resume:" /> -->
+<!--             	<p:fileUpload value="#{exercicioCreateBean.imagem}" mode="simple" /> -->
+<!--         <p:separator/> -->
+<!-- 			</h:panelGrid> -->
+<!--        		 <div style="margin-top: 15px;"> -->
+<!-- 				<p:commandButton iconPos="right" icon="ui-icon-check" style="float:right; background-color:red; border-color:red;" value="Salvar Exercicio" type="submit" action="#{exercicioCreateBean.create()}" id="bSave"></p:commandButton> -->
+<!-- 			</div> -->
+			    <p:fileUpload mode="simple" value="#{exercicioCreateBean.imagem}" />
+    			<p:commandButton value="Upload" action="#{exercicioCreateBean.upload()}" ajax="false" />
+		</h:form>
 	</div>
 	</body>
 		

@@ -12,7 +12,16 @@ public class Exercicio extends AbstractEntity {
 	private String descricao;
 	private String urlVideo;
 	private String urlDetalhes;
+	private byte[] imagem_data;
 	
+	public byte[] getImagem_data() {
+		return imagem_data;
+	}
+
+	public void setImagem_data(byte[] imagem_data) {
+		this.imagem_data = imagem_data;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}

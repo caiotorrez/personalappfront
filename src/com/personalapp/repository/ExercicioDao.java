@@ -45,6 +45,9 @@ public class ExercicioDao implements Serializable {
 	
     @ExceptionHandler
     public Exercicio findOne(String titulo) {
+    	if (titulo == null || titulo.trim().equals("")) {
+    		return null;
+    	}
         return this.restTemplate.exchange(FIND_ONE_URL, GET, this.jsonUtil.tokenizedHttpEntityHeader(), Exercicio.class, titulo).getBody();
     }
     

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:head>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
+        <title>PersonalAplication</title>
+        <link rel="stylesheet" href="css/user_index_style.css"/>
+    </h:head>
+    
+    <f:metadata>
+		<f:viewParam id="emailParam" name="email" value="#{alunoEditBean.email}" required="true" requiredMessage="Email inválido"></f:viewParam>
+		<f:viewAction action="#{alunoEditBean.init}"/>
+	</f:metadata>
+	
+	<body>
+		<header>
+			<input type="checkbox" id="btn-menu"/>
+			<label for="btn-menu" id="menu-label"><img id="imgmenu" src="icon/menu-icon.png" alt=""/></label>
+			<img id="img-runner" src="icon/runner-icon.png" alt=""/>
+			<nav class="menu">
+				<ul>
+					<li><a id="id1" href=""><b>Inicio</b></a></li>
+					<li><a href="#"><b>Treino</b></a></li>
+                    <li><a href=""><b> Dieta</b></a></li>
+				</ul>
+			</nav>
+		</header>
+		
+		<article>
+		<div class="table1">
+				<h3><p:outputLabel value="#{alunoEditBean.containsTreino('A')? 'Treino A' : ''}"></p:outputLabel></h3>
+				<p:dataTable value="#{alunoEditBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+					<p:column priority="1" headerText="Exercício" width="40" style="text-align: left" >
+						 <p:outputLabel value="#{fichaDeTreinoA.titulo}" onclick="PF('dlg').show()" ondblclick="PF('dlg').show()"></p:outputLabel>
+						 
+						 <p:dialog header="Imagem" widgetVar="dlg" modal="true"
+						    draggable="false" resizable="false" closeOnEscape="true" maximizable="true" responsive="true" position="center">
+						    <p:imageSwitch effect="FlyIn" speed="1000" slideshowAuto="false">
+						      <p:graphicImage library="imagem" name="supino_reto.png" width="100%"/>
+						    </p:imageSwitch>
+						</p:dialog>
+					</p:column>
+					<p:column styleClass="s-ref" priority="1" headerText="Séries" width="5" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).seriesI} - #{alunoEditBean.listInfosA().get(index).seriesF}"/>
+					</p:column>
+					<p:column priority="1" headerText="Reps" width="5" style="text-align: center" >
+						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).repsI} - #{alunoEditBean.listInfosA().get(index).repsF}"/>
+					</p:column>
+					<p:column priority="1" headerText="Carga" width="5" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).cargaI} - #{alunoEditBean.listInfosA().get(index).cargaF}"/>
+					</p:column>
+					<p:column priority="3" headerText="Ajuste" width="5" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).ajuste}"/>
+					</p:column>
+					<p:column priority="2" headerText="Intervalo" width="5" style="text-align: center">
+						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).intervaloI} - #{alunoEditBean.listInfosA().get(index).intervaloF}"/>
+					</p:column>
+					<p:column priority="2" headerText="Vídeo" width="5" style="text-align: center">
+						 <p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-play" title="Youtube Video"></p:button>
+					</p:column>
+					<p:column priority="2" headerText="Info. Teórica" width="5" style="text-align: center">
+						<p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-info" title="Texto Descritivo"></p:button>
+					</p:column>
+				</p:dataTable>
+				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA" emptyMessage="Sem Observações">
+				<p:column priority="1" headerText="Observações" width="auto" style="text-align: center" >
+						 <h:outputText value="#{obsA.obs == '' ? 'Sem observações' : obsA.obs}" />
+					</p:column>
+				</p:dataTable>
+		</div>
+		
+		</article>
+
+        <footer>
+            <div class="footer-corpo">
+                <div class="colunas">
+                    <div class="coluna1">
+                        <h1>Informações da Empresa</h1>
+                        <p>Estamos testando como fazer um rodape com html e css</p>
+                    </div>
+                    
+                    <div class="coluna2">
+                        <h1>Redes Sociais</h1>
+                        <div class="row">
+                            <img src="icon/face-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Facebook</a></label>
+                        </div>
+                        <div class="row">
+                            <img src="icon/insta-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Instagram</a></label>
+                        </div>
+                     </div>
+                    <div class="coluna3">
+                        <h1>Contato</h1>
+                        <div class="row2">
+                            <label>+55 083 - 9.8997-8217</label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+ 
+                <div class="rodape">
+                    <div class="copyrigth">
+                    © 2018 PersonalAplication developed by <a href="http://www.facebook.com.br/caiotorrez" target="_blank"> CaioTorrez</a> 
+                    </div>
+                    <div class="sobre">
+                        About | Contato | Termos e Condições
+                    </div>
+                </div>
+            
+        </footer>   
+        
+	</body>
+	</html>

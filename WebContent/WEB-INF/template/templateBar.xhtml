@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
 <h:body>
-    <div class="header">
-
-
-    </div>
     <div id="content">
         <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"/>
         <ui:insert name="content">
         </ui:insert>
+        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="loader.gif" />
+        </p:dialog>
 
     </div>
     <div id="footer">
