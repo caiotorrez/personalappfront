@@ -1,8 +1,5 @@
 package com.personalapp.bean.treino;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -10,7 +7,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.io.FilenameUtils;
 import org.omnifaces.util.Messages;
 import org.primefaces.model.UploadedFile;
 

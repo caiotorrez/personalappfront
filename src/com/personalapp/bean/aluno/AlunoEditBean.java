@@ -1,7 +1,6 @@
 package com.personalapp.bean.aluno;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -33,9 +32,12 @@ public class AlunoEditBean implements Serializable {
 		this.alunoDao = alunoDao;
 	}
 
-
 	public void init() {
 		this.aluno = this.alunoDao.findOne(email);
+	}
+	
+	public void logon(String email) {
+		this.aluno = this.alunoDao.findAluno(this.email, email);
 	}
 	
 	public boolean containsTreino(String letter) {

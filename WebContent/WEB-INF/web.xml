@@ -4,6 +4,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 	http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
  <display-name>PersonalAPP</display-name>
+ <icon><small-icon>/icon/runner-icon.png</small-icon></icon>
  <context-param>
   <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
   <param-value>true</param-value>
@@ -24,6 +25,10 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
  <welcome-file-list>
  	<welcome-file>login.xhtml</welcome-file>
  </welcome-file-list>
+ <error-page>
+ 	<error-code>404</error-code>
+ 	<location>/error404.xhtml</location>
+ </error-page>
  <servlet-mapping>
   <servlet-name>Faces Servlet</servlet-name>
   <url-pattern>*.xhtml</url-pattern>
@@ -38,6 +43,14 @@ org.primefaces.webapp.filter.FileUploadFilter
 <filter-mapping>
 <filter-name>PrimeFaces FileUpload Filter</filter-name>
 <servlet-name>Faces Servlet</servlet-name>
+</filter-mapping>
+<filter>
+	<filter-name>LoginFilter</filter-name>
+	<filter-class>com.personalapp.filter.LoginFilter</filter-class>
+</filter>
+<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
 </filter-mapping>
 
  

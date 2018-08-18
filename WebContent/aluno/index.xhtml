@@ -11,17 +11,17 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
         <title>Pagina Inicial</title>
-        <link rel="stylesheet" href="resources/css/user_index_style.css"/>
-    </h:head>    
+        <link rel="stylesheet" href="../resources/css/user_index_style.css"/>
+    </h:head>
 	
-<body>
+	<h:body>
 		<header>
 			<input type="checkbox" id="btn-menu"/>
-			<label for="btn-menu" ><img id="imgmenu" src="resources/icon/menu-icon.png" alt=""/></label>
+			<label for="btn-menu" ><img id="imgmenu" src="../resources/icon/menu-icon.png" alt=""/></label>
 			<nav class="menu">
 				<ul>
-					<li><a href=""> inicio</a></li>
-					<li><a href=""> Treino</a></li>
+					<li><a href="#"> inicio</a></li>
+					<li><a><h:link value="aki" outcome="treino.xhtml"><f:param name="email" value="#{loginBean.username}"/> Treino</h:link></a></li>
                     <li><a href=""> Dieta</a></li>
 				</ul>
 			</nav>
@@ -38,10 +38,10 @@
                     <div class="coluna2">
                         <h1>Redes Sociais</h1>
                         <div class="row">
-                            <img src="resources/icon/face-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Facebook</a></label>
+                            <img src="../resources/icon/face-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Facebook</a></label>
                         </div>
                         <div class="row">
-                            <img src="resources/img/insta-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Instagram</a></label>
+                            <img src="../resources/icon/insta-icon.png"></img><label><a href="http://instagram.com/caiotorrez" target="_blank">Siga-nos no Instagram</a></label>
                         </div>
                      </div>
                     <div class="coluna3">
@@ -61,8 +61,7 @@
                         About | Contato | Termos e Condições
                     </div>
                 </div>
-            
         </footer>   
         
-	</body>
+	</h:body>
 	</html>
