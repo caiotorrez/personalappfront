@@ -24,8 +24,7 @@ public class AlunoCreateBean implements Serializable {
 	
 	private final AlunoDao alunoDao;
 	private Aluno aluno = new Aluno();
-//	private UploadedFile imagem;
-
+	
 	@Inject
 	public AlunoCreateBean(AlunoDao alunoDao) {
 		this.alunoDao = alunoDao;
@@ -34,9 +33,6 @@ public class AlunoCreateBean implements Serializable {
 	@ExceptionHandler
 	public String create() {
 		if (this.alunoDao.findOne(this.aluno.getEmail()) == null) {
-//			System.out.println(imagem.toString());
-//			this.aluno.setImagem(this.imagem.getContents());
-			this.aluno.setPassword((String) this.aluno.getData().toLocaleString().subSequence(0, 10));
 			this.alunoDao.save(this.aluno);
 			Messages.create("O Aluno {0} foi adcionado com sucesso!", this.aluno.getNome()).flash().add();
 			return "alunos.xhtml?faces-redirect=true";
@@ -58,14 +54,4 @@ public class AlunoCreateBean implements Serializable {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
-
-//	public UploadedFile getImagem() {
-//		return imagem;
-//	}
-//
-//	public void setImagem(UploadedFile imagem) {
-//		this.imagem = imagem;
-//	}
-	
-	
 }

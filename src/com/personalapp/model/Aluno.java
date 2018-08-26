@@ -10,7 +10,6 @@ public class Aluno extends AbstractEntity {
 	
 
 	private String nome;
-	private String password;
 	private String email;
 	private String academia;
 	private Date data;
@@ -19,13 +18,6 @@ public class Aluno extends AbstractEntity {
 	private FichaDeTreino fichaDeTreino;
 	private MedidasCorporais medidasCorporais;
 	private List<FichaDeTreino> historico;
-	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 	public List<FichaDeTreino> getHistorico() {
 		return historico;

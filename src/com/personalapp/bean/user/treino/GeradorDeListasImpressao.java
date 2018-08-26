@@ -1,4 +1,4 @@
-package com.personalapp.bean.aluno;
+package com.personalapp.bean.user.treino;
 
 import java.io.Serializable;
 import java.util.ArrayList;

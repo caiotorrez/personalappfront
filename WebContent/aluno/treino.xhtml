@@ -14,12 +14,10 @@
         <title>Personal Aplication</title>
         <link rel="icon" type="image/png" href="../resources/icon/runner-icon.png" />
         <link rel="stylesheet" href="../resources/css/user_index_style.css"/>
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{treinoViewBean.init(loginBean.username)}" />
+		</f:metadata>
     </h:head>
-    
-    <f:metadata>
-		<f:viewParam id="emailParam" name="email" value="#{alunoEditBean.email}" required="true" requiredMessage="Email inválido"></f:viewParam>
-		<f:viewAction action="#{alunoEditBean.logon(loginBean.username)}"/>
-	</f:metadata>
 	
 	<h:body>
 		<header>
@@ -28,17 +26,17 @@
 			<img id="img-runner" src="icon/runner-icon.png" alt=""/>
 			<nav class="menu">
 				<ul>
-					<li><a id="id1" href=""><b>Inicio</b></a></li>
+					<li><h:link value="Inicio" outcome="index.xhtml"></h:link></li>
 					<li><a href="#"><b>Treino</b></a></li>
-                    <li><a href=""><b> Dieta</b></a></li>
+                    <li><a href="">Dieta</a></li>
 				</ul>
 			</nav>
 		</header>
 		
 		<article>
 		<div class="table1">
-				<h3><p:outputLabel value="#{alunoEditBean.containsTreino('A') ? 'Treino A' : ''}"></p:outputLabel></h3>
-				<p:dataTable rendered="#{alunoEditBean.containsTreino('A')}" value="#{alunoEditBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+				<h3><p:outputLabel value="#{treinoViewBean.containsTreino('A') ? 'Treino A' : ''}"></p:outputLabel></h3>
+				<p:dataTable rendered="#{treinoViewBean.containsTreino('A')}" value="#{treinoViewBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
 					<p:column priority="1" headerText="Exercício" width="40" style="text-align: left" >
 						 <p:outputLabel value="#{fichaDeTreinoA.titulo}" onclick="PF('dlg').show()" ondblclick="PF('dlg').show()"></p:outputLabel>
 						 
@@ -50,19 +48,19 @@
 						</p:dialog>
 					</p:column>
 					<p:column styleClass="s-ref" priority="1" headerText="Séries" width="5" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).seriesI} - #{alunoEditBean.listInfosA().get(index).seriesF}"/>
+						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).seriesI} - #{treinoViewBean.listInfosA().get(index).seriesF}"/>
 					</p:column>
 					<p:column priority="1" headerText="Reps" width="5" style="text-align: center" >
-						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).repsI} - #{alunoEditBean.listInfosA().get(index).repsF}"/>
+						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).repsI} - #{treinoViewBean.listInfosA().get(index).repsF}"/>
 					</p:column>
 					<p:column priority="1" headerText="Carga" width="5" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).cargaI} - #{alunoEditBean.listInfosA().get(index).cargaF}"/>
+						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).cargaI} - #{treinoViewBean.listInfosA().get(index).cargaF}"/>
 					</p:column>
 					<p:column priority="3" headerText="Ajuste" width="5" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).ajuste}"/>
+						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).ajuste}"/>
 					</p:column>
 					<p:column priority="2" headerText="Intervalo" width="5" style="text-align: center">
-						 <h:outputText value="#{alunoEditBean.listInfosA().get(index).intervaloI} - #{alunoEditBean.listInfosA().get(index).intervaloF}"/>
+						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).intervaloI} - #{treinoViewBean.listInfosA().get(index).intervaloF}"/>
 					</p:column>
 					<p:column priority="2" headerText="Vídeo" width="5" style="text-align: center">
 						 <p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-play" title="Youtube Video"></p:button>
@@ -72,8 +70,8 @@
 					</p:column>
 				</p:dataTable>
 				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA" emptyMessage="Sem Observações">
-				<p:column priority="1" headerText="Observações" width="auto" style="text-align: center" >
-						 <h:outputText value="#{obsA.obs == '' ? 'Sem observações' : obsA.obs}" />
+				<p:column priority="1" headerText="Observações" width="auto"  >
+						 <h:outputText value="#{obsA.obs == '' ? 'Sem observações' : obsA.obs}"/>
 					</p:column>
 				</p:dataTable>
 		</div>

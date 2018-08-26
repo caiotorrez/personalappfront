@@ -25,7 +25,7 @@ public class AlunoDao implements Serializable {
 	
 	private final String ALUNOS_URL = APIUtil.BASE_URL + "/professor/alunos";
 	private final String FIND_ONE_URL = APIUtil.BASE_URL + "/professor/alunos/{email}";
-	private final String FIND_ALUNO_URL = APIUtil.BASE_URL + "/aluno/{email}";
+	private final String FIND_ALUNO_URL = APIUtil.BASE_URL + "/aluno";
 	private final CustomRestTemplate restTemplate;
 	private final JsonUtil jsonUtil;
 	private final CustomTypeReference<List<Aluno>> listAluno;
@@ -57,7 +57,9 @@ public class AlunoDao implements Serializable {
 		return this.restTemplate.exchange(ALUNOS_URL, POST, this.jsonUtil.tokenizedHttpEntityHeader(aluno), Aluno.class).getBody();
 	}	
     @ExceptionHandler
-    public Aluno findAluno(String email, String userEmail) {
-        return this.restTemplate.exchange(FIND_ALUNO_URL, GET, this.jsonUtil.tokenizedHttpEntityHeader(), Aluno.class, email, userEmail).getBody();
+    public Aluno findAluno(String username) {
+		UriComponents url = UriComponentsBuilder.fromUriString(FIND_ALUNO_URL).queryParam("username", username).build();
+		return this.restTemplate.exchange(url.toUriString(), GET, this.jsonUtil.tokenizedHttpEntityHeader(), Aluno.class).getBody();
+
     }
 }

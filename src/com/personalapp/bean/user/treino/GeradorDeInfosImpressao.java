@@ -1,4 +1,4 @@
-package com.personalapp.bean.aluno;
+package com.personalapp.bean.user.treino;
 
 import java.util.ArrayList;
 import java.util.List;
