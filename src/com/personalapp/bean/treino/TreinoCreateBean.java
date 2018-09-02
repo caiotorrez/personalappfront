@@ -70,6 +70,16 @@ public class TreinoCreateBean implements Serializable {
 	private InfoExercicio infoE4 = new InfoExercicio();
 	private InfoExercicio infoE5 = new InfoExercicio();
 	private InfoExercicio infoE6 = new InfoExercicio();
+	private String nome;
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	@Inject
 	public TreinoCreateBean(TreinoDao treinoDao, AlunoDao alunoDao, ExercicioDao exercicioDao, RegiaoDao regiaoDao, InfoExercicioDao infoDao) {
@@ -826,4 +836,5 @@ public class TreinoCreateBean implements Serializable {
 	public void setInfoE6(InfoExercicio infoE6) {
 		this.infoE6 = infoE6;
 	}
+
 }

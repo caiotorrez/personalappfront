@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="WEB-INF/template/templateBar.xhtml"
+                template="../WEB-INF/template/templateBar.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:o="http://omnifaces.org/ui"
 				xmlns:of="http://omnifaces.org/functions"
@@ -9,6 +9,10 @@
 	<ui:define name="content">
 	<h:head>
 	<link href="css/registrotreino.css" rel='stylesheet' type='text/css' />
+		<f:metadata>
+		<f:viewParam id="emailParam" name="email" value="#{treinoCreateBean.email}" required="false"></f:viewParam>
+		<f:viewParam id="nomelParam" name="nome" value="#{treinoCreateBean.nome}" required="false"></f:viewParam>
+	</f:metadata>
 	</h:head>
 	<h:body>
 	<o:form>
@@ -17,7 +21,7 @@
 	   <li> 
 	   		<h:outputText value="Associar treino ao aluno :"  style="margin-right: 4px;"/>
 	   			<h:selectOneMenu id="listaAlunos" value="#{treinoCreateBean.email}" required="true" style="width:200px; height:28px; position:relative;" requiredMessage="É nescessário associar o treino a um aluno.">
-			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
+			 	<f:selectItem itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
  			</h:selectOneMenu>
  			

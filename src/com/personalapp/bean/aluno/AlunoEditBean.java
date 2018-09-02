@@ -1,12 +1,16 @@
 package com.personalapp.bean.aluno;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.event.SelectEvent;
 
 import com.personalapp.config.ExceptionHandler;
 import com.personalapp.model.Aluno;
@@ -53,5 +57,10 @@ public class AlunoEditBean implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
 }

@@ -29,8 +29,10 @@ public class LoginFilter implements Filter, Serializable {
         if (!req.getRequestURI().endsWith("login.xhtml") && !isTokenValid(req)) {
             res.sendRedirect(req.getContextPath() + "/login.xhtml");
             return;
-        }
+        } else {
         chain.doFilter(req, res);
+        return;
+        }
 	}
 	
 	private boolean isTokenValid(HttpServletRequest request) {

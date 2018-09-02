@@ -36,7 +36,7 @@
 			<div>
 				<span style="margin:1px;"></span>
         		<p:outputLabel for="nasc" value="Nasc" style="margin: 2px;" title="Data de Nascimento"/>
-        		<p:inputMask id="nasc" value="#{alunoEditBean.aluno.data}" mask="99/99/9999" size="12" placeholder="__/__/____"/>
+        		<p:calendar id="nasc" value="#{alunoCreateBean.aluno.data}" showOn="button" size="10" required="true" requiredMessage="Escolha uma data."/>
         		<span style="margin:6px;"></span>
         		<p:outputLabel for="genero" value="Gênero" style="margin: 2px;"/>
         		<p:selectOneMenu id="genero" value="#{alunoEditBean.aluno.genero}" style="width:auto; vertical-align: bottom;">

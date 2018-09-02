@@ -1,12 +1,14 @@
-package com.personalapp.bean.user.treino;
+package com.personalapp.bean.user.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.personalapp.model.treino.FichaDeTreino;
 import com.personalapp.model.treino.InfoExercicio;
 
-public class GeradorDeInfosImpressao {
+@SuppressWarnings("serial")
+public class GeradorDeInfosImpressao implements Serializable {
 	
 	public GeradorDeInfosImpressao() {
 	}

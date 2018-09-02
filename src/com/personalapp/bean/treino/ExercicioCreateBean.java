@@ -1,9 +1,8 @@
 package com.personalapp.bean.treino;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,35 +10,40 @@ import org.omnifaces.util.Messages;
 import org.primefaces.model.UploadedFile;
 
 import com.personalapp.config.ExceptionHandler;
+import com.personalapp.model.Imagem;
 import com.personalapp.model.treino.Exercicio;
 import com.personalapp.repository.ExercicioDao;
+import com.personalapp.repository.ImagemDao;
 
 @SuppressWarnings("serial")
 @Named
-@ViewScoped
+@RequestScoped
 public class ExercicioCreateBean implements Serializable {
 	
 	private final ExercicioDao exercicioDao;
+	private final ImagemDao imagemDao;
 	private Exercicio exercicio = new Exercicio();
-	private UploadedFile imagem;
+	private UploadedFile file;
+
 
 	@Inject
-	public ExercicioCreateBean(ExercicioDao exercicioDao) {
+	public ExercicioCreateBean(ExercicioDao exercicioDao, ImagemDao imagemDao) {
 		this.exercicioDao = exercicioDao;
+		this.imagemDao = imagemDao;
 	}
 	
 	@ExceptionHandler
-	public String create() throws IOException {
-		if (this.exercicioDao.findOne(this.exercicio.getTitulo()) == null) {
-			if (this.getImagem() != null) {
-				this.exercicio.setImagem_data(getImagem().getContents());
-			}
-			this.exercicioDao.save(this.exercicio);
-			Messages.create("O Exercicio {0} foi adcionado com sucesso!", this.exercicio.getTitulo()).flash().add();
-			return "exercise.xhtml?faces-redirect=true";
-		} else {
-			Messages.create("O exercicio {0} já está cadastrado.", this.exercicio.getTitulo()).error().fatal().flash().add();
-		} return null;
+	public String create() {
+		if (this.file != null) {
+			Imagem imagem = new Imagem();
+			imagem.setDados(this.file.getContents());
+			imagem.setTamanho(this.file.getSize());
+			imagem.setTitulo(file.getFileName());
+			this.exercicio.setImagem(this.imagemDao.save(imagem));
+		}
+		this.exercicioDao.save(this.exercicio);
+		Messages.create("O Exercício {0} foi criado com sucesso!", this.exercicio.getTitulo()).flash().add();
+		return "index.xhtml?faces-redirect=true";
 	}
 
 	public Exercicio getExercicio() {
@@ -50,12 +54,16 @@ public class ExercicioCreateBean implements Serializable {
 		this.exercicio = exercicio;
 	}
 	
+    public UploadedFile getFile() {
+        return file;
+    }
 
-	public UploadedFile getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(UploadedFile imagem) {
-		this.imagem = imagem;
-	}
-}
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+    
+//    public StreamedContent getimg() {
+//    	byte[] img = this.exercicioDao.findOne("aas").getImagem().getDados();
+//    	return new DefaultStreamedContent(new ByteArrayInputStream(img));
+//    }
+ }

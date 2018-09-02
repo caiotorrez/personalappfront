@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui">
 	<h:head>
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
-        <title>Personal Aplication</title>
-        <link rel="icon" type="image/png" href="../resources/icon/runner-icon.png" />
+        <title>Pagina Inicial</title>
         <link rel="stylesheet" href="../resources/css/user_index_style.css"/>
 		<f:metadata>
 			<f:event type="preRenderView" listener="#{treinoViewBean.init(loginBean.username)}" />
@@ -28,7 +27,7 @@
 				<ul>
 					<li><h:link value="Inicio" outcome="index.xhtml"></h:link></li>
 					<li><a href="#"><b>Treino</b></a></li>
-                    <li><a href="">Dieta</a></li>
+                    <li><h:link value="Medidas" outcome="index.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
@@ -36,18 +35,20 @@
 		<article>
 		<div class="table1">
 				<h3><p:outputLabel value="#{treinoViewBean.containsTreino('A') ? 'Treino A' : ''}"></p:outputLabel></h3>
-				<p:dataTable rendered="#{treinoViewBean.containsTreino('A')}" value="#{treinoViewBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+				
+				<p:dataTable 	 rowKey="row" rendered="#{treinoViewBean.containsTreino('A')}" value="#{treinoViewBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
 					<p:column priority="1" headerText="Exercício" width="40" style="text-align: left" >
-						 <p:outputLabel value="#{fichaDeTreinoA.titulo}" onclick="PF('dlg').show()" ondblclick="PF('dlg').show()"></p:outputLabel>
-						 
-						 <p:dialog header="Imagem" widgetVar="dlg" modal="true"
-						    draggable="false" resizable="false" closeOnEscape="true" maximizable="true" responsive="true" position="center">
-						    <p:imageSwitch effect="FlyIn" speed="1000" slideshowAuto="false">
-						      <p:graphicImage library="imagem" name="supino_reto.png" width="100%"/>
-						    </p:imageSwitch>
-						</p:dialog>
+						<p:outputLabel value="#{fichaDeTreinoA.titulo}"></p:outputLabel>
+<!-- 							 <p:dialog header="#{fichaDeTreinoA.titulo}" widgetVar="dlg" modal="true" -->
+<!-- 							    draggable="false" resizable="false" closeOnEscape="true" maximizable="true" responsive="true" position="center"> -->
+<!-- 							      		<p:graphicImage value="#{fichaDeTreinoA.imagem.picture}"> -->
+<!-- 							      		</p:graphicImage> -->
+<!-- 							</p:dialog> -->
 					</p:column>
-					<p:column styleClass="s-ref" priority="1" headerText="Séries" width="5" style="text-align: center">
+<!-- 					<p:column priority="1" headerText="Imagem" width="40" style="text-align: left" > -->
+<!-- 						<p:graphicImage value="#{treinoViewBean.listExercicioA().get(index).imagem.picture}"></p:graphicImage> -->
+<!-- 					</p:column> -->
+					<p:column styleClass="s-ref" priority="1" headerText="Sé	ries" width="5" style="text-align: center">
 						 <h:outputText value="#{treinoViewBean.listInfosA().get(index).seriesI} - #{treinoViewBean.listInfosA().get(index).seriesF}"/>
 					</p:column>
 					<p:column priority="1" headerText="Reps" width="5" style="text-align: center" >

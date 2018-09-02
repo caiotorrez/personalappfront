@@ -1,6 +1,7 @@
 package com.personalapp.model.treino;
 
 import com.personalapp.model.AbstractEntity;
+import com.personalapp.model.Imagem;
 
 
 @SuppressWarnings("serial")
@@ -12,15 +13,25 @@ public class Exercicio extends AbstractEntity {
 	private String descricao;
 	private String urlVideo;
 	private String urlDetalhes;
-	private byte[] imagem_data;
+	private Imagem imagem;
 	
-	public byte[] getImagem_data() {
-		return imagem_data;
+	public void setImagem(Imagem imagem) {
+		this.imagem = imagem;
 	}
 
-	public void setImagem_data(byte[] imagem_data) {
-		this.imagem_data = imagem_data;
+	public Imagem getImagem() {
+		return imagem;
 	}
+
+//	@JsonIgnore
+//	public DefaultStreamedContent getPicture() {
+//		byte[] img = this.imagem;
+//		return new DefaultStreamedContent(new ByteArrayInputStream(img));
+//	}
+//	
+//	public void setImagem(byte[] imagem) {
+//		this.imagem = imagem;
+//	}
 
 	public String getTitulo() {
 		return titulo;

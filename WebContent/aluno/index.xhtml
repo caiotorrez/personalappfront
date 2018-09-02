@@ -6,7 +6,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+      
 	<h:head>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{treinoViewBean.init(loginBean.username)}"/>
+	</f:metadata>
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
@@ -22,7 +26,7 @@
 				<ul>
 					<li><a href="#"><b>Inicio</b></a></li>
 					<li><h:link value="Treino" outcome="treino.xhtml"></h:link></li>
-                    <li><a href=""> Dieta</a></li>
+                    <li><h:link value="Medidas" outcome="treino.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
