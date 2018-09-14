@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt=br"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"
+	  xmlns:f="http://java.sun.com/jsf/core">
+      
+	  
+	  
+	<h:head>
+	<f:metadata>
+		<f:viewParam id="emailParam" name="email" value="#{medidasCreateBean.email}" required="true" ></f:viewParam>
+		<f:viewParam id="nomelParam" name="nome" value="#{medidasCreateBean.nome}" required="true"></f:viewParam>
+		<f:event type="preRenderView" listener="#{professorViewBean.init(loginBean.username)}"/>
+	</f:metadata>
+        <title>PersonalAPP</title>
+        <link rel="icon" href="../resources/icon/icon-tab.png"></link>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
+        <link rel="stylesheet" href="../resources/css/footer-head.css"/>
+        <link rel="stylesheet" href="../resources/css/bootstrap.css"></link>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    </h:head>
+    <h:body styleClass="backgroud-body" style="background-color: #263238;">
+	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      	<header>
+			<p:inputText type="checkbox" id="btn-menu"/>
+			<p:outputLabel for="btn-menu" ><img id="imgmenu" src="../resources/icon/menu-icon.png" alt=""/></p:outputLabel>
+			<nav class="menu">
+				<ul>
+					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
+					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
+					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+				</ul>
+			</nav>
+		</header>
+	      <div class="collapse navbar-collapse justify-content-md-center" id="navigator">
+	       <ul class="nav navbar-nav">
+	          <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active" id="cadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
+	            <div class="dropdown-menu" aria-labelledby="cadastro">
+	              <h:link styleClass="dropdown-item" value="Aluno" outcome="registro.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treino" outcome="treinoabcd.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercício" outcome="new_exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	         <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active" id="listar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listar</a>
+	            <div class="dropdown-menu" aria-labelledby="listar">
+	              <h:link styleClass="dropdown-item" value="Alunos" outcome="alunos.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treinos" outcome="fichas.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercícios" outcome="exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	          <li class="nav-item dropdown">
+	            <a class="nav-link dropdown-toggle active" id="sub-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+	            <div class="dropdown-menu" aria-labelledby="sub-menu">
+	              <h:link styleClass="dropdown-item" value="Não Sei" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Configuração" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:form>
+	              <h:commandLink styleClass="dropdown-item" action="#{loginBean.logout()}" value="Logout" />
+	              </h:form>
+	            </div>
+	          </li>
+	        </ul>
+	      </div>
+	    </nav>
+  <main>
+   <div class="jumbotron container-fluid" style="margin-top: -40px;">
+   <h:form enctype="multipart/form-data">
+   <p:messages autoUpdate="true" showIcon="false" closable="true" style="opacity: 0.8;"></p:messages>
+   <div class="form-row">
+    <div class="col-md-2 mb-2">
+      <label for="data-avaliacao">Data da Avaliação</label>
+      <input name="data-avaliacao" type="text" id="data-avaliacao" value="#{medidasCreateBean.dataAvaliativa}" class="form-control" placeholder="..." readonly="readonly"></input>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="aluno">Medidas associadas ao aluno:</label>
+      <input name="aluno" type="text" id="aluno" value="#{medidasCreateBean.nome}" class="form-control" placeholder="..." readonly="readonly"></input>
+    </div>
+   </div>
+   <div class="form-row">
+    <div class="col-md-2 mb-3">
+      <p:outputLabel for="metodo" value="Método de Avaliação"></p:outputLabel>
+      <p:inputText styleClass="form-control" id="metodo" placeholder="Método de avaliação" value="#{medidasCreateBean.medidas.metodoDeAvaliacao}" required="true" requiredMessage="Insira o método de avaliação do cliente"></p:inputText>
+    </div>
+    <div class="col-md-2 mb-3">
+      <p:outputLabel for="peso" value="Peso Corporal em Kg"></p:outputLabel>
+	    <p:inputMask value="#{medidasCreateBean.medidas.peso}" mask="999 Kg" slotChar="0" styleClass="form-control" id="peso" placeholder="Peso Kg" required="true" symbolPosition="rigth" requiredMessage="Insira o peso do cliente"></p:inputMask>
+      </div>
+    <div class="col-md-2 mb-3">
+      <p:outputLabel for="gordura" value="% Gordura Corporal"></p:outputLabel>
+	    <p:inputMask value="#{medidasCreateBean.medidas.gorduraCorporal}" slotChar="0" mask="99 %" styleClass="form-control" id="gordura" placeholder="Gordura Corporal %" required="true" requiredMessage="Insira o peso do cliente"></p:inputMask>
+      </div>
+  	</div>
+  <hr />
+  
+     <div class="form-row">
+      <div class="col-md-2 mb-2">
+      <p:outputLabel for="ombros" value="Largura dos Ombros"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.larguraDosOmbros}" styleClass="form-control" id="ombros" placeholder="Centímetros" required="true" requiredMessage="Insira a largura do ombro do cliente"></p:inputMask>
+      </div>
+      <div class="col-md-2 mb-2">
+      <p:outputLabel for="peitoral" value="Largura do Peitoral"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.peitoral}" styleClass="form-control" id="peitoral" placeholder="Centímetros" required="true" requiredMessage="Insira a largura do peitoral do cliente"></p:inputMask>
+      </div>
+      <div class="col-md-2 mb-2">
+      <p:outputLabel for="cintura" value="Cintura"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.cintura}" styleClass="form-control" id="cintura" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência da cintura do cliente"></p:inputMask>
+      </div>
+      <div class="col-md-2 mb-2">
+      <p:outputLabel for="quadril" value="Quadril"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.quadril}" styleClass="form-control" id="quadril" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência do quadril do cliente"></p:inputMask>
+      </div>
+    </div>
+  
+    <div class="form-row">
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="braco-d" value="Braço Direito"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.bracoDireito}" styleClass="form-control" id="braco-d" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência do braço direito do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="braco-e" value="Braço Esquerdo"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.bracoEsquerdo}" styleClass="form-control" id="braco-e" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência do braço esquerdo do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="antebraco-d" value="Antebraço Direito"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.antebracoDireito}" styleClass="form-control" id="antebraco-d" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência do antebraço direito do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="antebraco-e" value="Antebraço Esquerdo"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.antebracoEsquerdo}" styleClass="form-control" id="antebraco-e" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência do antebraço esquerdo do cliente"></p:inputMask>
+     </div>
+   </div>
+     
+    <div class="form-row">
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="perna-d" value="Perna Direita"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.pernaDireita}" styleClass="form-control" id="perna-d" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência da perna direita do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="perna-e" value="Perna Esquerda"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.pernaEsquerda}" styleClass="form-control" id="perna-e" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência da perna esquerda do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="panturrilha-d" value="Panturrilha Direita"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.panturrilhaDireita}" styleClass="form-control" id="panturrilha-d" placeholder="Centímetros" required="true"  requiredMessage="Insira a circunferência da panturrilha direita do cliente"></p:inputMask>
+     </div>
+     <div class="col-md-2 mb-2">
+     <p:outputLabel for="panturrilha-e" value="Panturrilha Esquerda"></p:outputLabel>
+      <p:inputMask mask="999 cm" slotChar="0" value="#{medidasCreateBean.medidas.panturrilhaEsquerda}" styleClass="form-control" id="panturrilha-e" placeholder="Centímetros" required="true" requiredMessage="Insira a circunferência da panturrilha esquerda do cliente"></p:inputMask>
+     </div>
+   </div>
+  
+   <hr />
+   <p:outputLabel for="upload-frontal" value="Insira uma Imagem Frontal do Aluno (Opcional)"></p:outputLabel>
+   <p:fileUpload id="upload-frontal" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file1}"  fileUploadListener="#{medidasCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
+    		invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)" />
+   
+   <p:outputLabel for="upload-posterior" value="Insira uma Imagem Posterior do Aluno (Opcional)"></p:outputLabel>
+   <p:fileUpload id="upload-posterior" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{medidasCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
+    		invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)" />
+
+  <br></br>
+  <hr/>
+  <p:commandButton styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+  <p:commandButton styleClass="btn btn-primary" immediate="true" value="Cadastrar" action="#{medidasCreateBean.build()}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+</h:form>
+     
+		
+        <div class="container"></div>
+     </div>
+     </main>
+			    
+		<footer class="footer navbar-fixed-bottom">
+			<div class="container">
+			<p class="text-center">Copyright - 2018 | Personal Application by <a href="#">Caio Torrez</a></p>
+		</div>
+		
+		</footer>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+</h:body>
+</html>

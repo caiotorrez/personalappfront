@@ -4,7 +4,32 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 	http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
  <display-name>PersonalAPP</display-name>
- <icon><small-icon>/icon/runner-icon.png</small-icon></icon>
+ <icon><small-icon>../resources/icon/icon-tab.png</small-icon></icon>
+ 
+ <context-param>
+  <param-name>primefaces.UPLOADER</param-name>
+  <param-value>auto|native|commons</param-value>
+</context-param>
+
+<listener>
+  <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+</listener>
+
+<filter>
+ <filter-name>PrimeFaces FileUpload Filter</filter-name>
+ <filter-class>
+  org.primefaces.webapp.filter.FileUploadFilter
+ </filter-class>
+</filter>
+<filter-mapping>
+ <filter-name>PrimeFaces FileUpload Filter</filter-name>
+ <servlet-name>Faces Servlet</servlet-name>
+</filter-mapping>
+ 
+ <context-param>
+ 	<param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+ 	<param-value>true</param-value>
+ </context-param>
  <context-param>
   <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
   <param-value>true</param-value>
@@ -29,33 +54,31 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
  	<error-code>404</error-code>
  	<location>/error404.xhtml</location>
  </error-page>
- <servlet-mapping>
-  <servlet-name>Faces Servlet</servlet-name>
-  <url-pattern>*.xhtml</url-pattern>
- </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+</servlet-mapping>
  
+<!-- <filter> -->
+<!--     <filter-name>primeFacesFileUploadFilter</filter-name> -->
+<!--     <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class> -->
+<!-- </filter> -->
+<!-- <filter-mapping> -->
+<!--     <filter-name>primeFacesFileUploadFilter</filter-name> -->
+<!--     <servlet-name>facesServlet</servlet-name> -->
+<!-- </filter-mapping> -->
 <filter>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
- <filter-class>
-org.primefaces.webapp.filter.FileUploadFilter
-</filter-class>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.personalapp.filter.LoginFilter</filter-class>
+<!--     <url-pattern>/faces/Html/Employee/*</url-pattern> -->
 </filter>
 <filter-mapping>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
-<servlet-name>Faces Servlet</servlet-name>
-</filter-mapping>
-<filter>
-	<filter-name>LoginFilter</filter-name>
-	<filter-class>com.personalapp.filter.LoginFilter</filter-class>
-</filter>
-<filter-mapping>
-		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-</filter-mapping>
-
- 
-<filter-mapping>
- <filter-name>PrimeFaces FileUpload Filter</filter-name>
- <servlet-name>Faces Servlet</servlet-name>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/aluno/*</url-pattern>
+    <url-pattern>/professor/*</url-pattern>
 </filter-mapping>
 </web-app>

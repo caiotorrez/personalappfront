@@ -9,8 +9,8 @@
 	<ui:define name="content">
 	<h:head>
 	<link href="css/registrotreino.css" rel='stylesheet' type='text/css' />
-		<f:metadata>
-		<f:viewParam id="emailParam" name="email" value="#{treinoCreateBean.email}" required="false"></f:viewParam>
+	<f:metadata>
+		<f:viewParam id="emailParam" name="email" value="#{treinoCreateBean.email}" required="false" ></f:viewParam>
 		<f:viewParam id="nomelParam" name="nome" value="#{treinoCreateBean.nome}" required="false"></f:viewParam>
 	</f:metadata>
 	</h:head>
@@ -22,8 +22,8 @@
 	   		<h:outputText value="Associar treino ao aluno :"  style="margin-right: 4px;"/>
 	   			<h:selectOneMenu id="listaAlunos" value="#{treinoCreateBean.email}" required="true" style="width:200px; height:28px; position:relative;" requiredMessage="É nescessário associar o treino a um aluno.">
 			 	<f:selectItem itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="" noSelectionOption="true" />
-			 	<f:selectItems value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
- 			</h:selectOneMenu>
+			 	<f:selectItems itemDisabled="#{treinoCreateBean.email != null ? true : false}" value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
+ 				</h:selectOneMenu>
  			
  			<p:outputLabel value="Data de validade do treino" style="margin-left:50px;"></p:outputLabel>
  			<p:outputLabel for="button" value="Inicio:" style="margin-left:10px;margin-right:20px;" />

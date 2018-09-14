@@ -1,54 +1,185 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="../WEB-INF/template/templateBar.xhtml"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:o="http://omnifaces.org/ui"
-				xmlns:of="http://omnifaces.org/functions"
-                xmlns:f="http://java.sun.com/jsf/core">
-	<ui:define name="content">
-    <style type="text/css">
-    	body {
-    	background-attachment: fixed;
-    	background-clip: inherit;
-    	background-color: gray;
-    	background-size: cover;
-    	}
-    
-    </style>
-	<body>
-	<p:commandButton type="submit" action="index.xhtml?faces-redirect=true" icon="ui-icon-triangle-1-w" title="Voltar a pagina inicial" immediate="true"/>
-	
-	<div style="position: fixed; bottom: 30%;left: 38%;">
-	<h1 align="center">Novo Aluno</h1>
-		<h:form enctype="multipart/form-data">
-			<h:panelGrid columns="1">
-				<p:outputLabel value="Nome Completo" for="nome" title="Nome do Usuário"></p:outputLabel>
-				<p:inputText value="#{alunoCreateBean.aluno.nome}" id="nome" placeholder="Nome Completo" size="40" required="true"></p:inputText>
-				<p:outputLabel value="Email" for="email" title="Email do Usuário"></p:outputLabel>
-				<p:inputText value="#{alunoCreateBean.aluno.email}" id="email" placeholder="Email" size="40" required="true"></p:inputText>
-				<p:outputLabel value="Academia" for="academia" title="Nome da Academia"></p:outputLabel>
-				<p:inputText value="#{alunoCreateBean.aluno.academia}" id="academia" placeholder="Nome da Academia" size="40" required="true"></p:inputText>
-				<p:outputLabel for="cel" value="Celular" title="Número do Celular"/>
-        		<p:inputMask id="cel" value="#{alunoCreateBean.aluno.cel}" mask="(99) 99999-9999" placeholder="Número do Celular" size="40" required="true"/>
-			</h:panelGrid>
-			<div>
-				<span style="margin:1px;"></span>
-        		<p:outputLabel for="nasc" value="Nasc" style="margin: 2px;" title="Data de Nascimento"/>
-        		<p:calendar id="nasc" value="#{alunoCreateBean.aluno.data}" showOn="button" size="10" required="true" requiredMessage="Escolha uma data."/>
-        		<span style="margin:6px;"></span>
-        		<p:outputLabel for="genero" value="Sexo" style="margin: 5px;"/>
-        		<p:selectOneMenu id="genero" value="#{alunoCreateBean.aluno.genero}" style="width:auto; vertical-align: bottom;">
-		            <f:selectItem itemLabel="Masculino" itemValue='M'/>
-		            <f:selectItem itemLabel="Feminino" itemValue='F'/>
-       		 	</p:selectOneMenu>
-       		 <div style="margin-top: 15px;">
-				<p:commandButton iconPos="right" icon="ui-icon-check" style="float:right; background-color:red; border-color:red;" value="Salvar Novo Aluno" type="submit" action="#{alunoCreateBean.create}" id="bSave"></p:commandButton>
-			</div>
-       		 </div>
-		</h:form>
-	</div>
-	</body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt=br"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  
+	<h:head>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{professorViewBean.init(loginBean.username)}"/>
+	</f:metadata>
+        <title>PersonalAPP</title>
+        <link rel="icon" href="../resources/icon/icon-tab.png"></link>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
+        <link rel="stylesheet" href="../resources/css/footer-head.css"/>
+        <link rel="stylesheet" href="../resources/css/bootstrap.css"></link>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+		<script src="../resources/javascript/cep.js"></script>
+
+    </h:head>
+    <h:body styleClass="backgroud-body" style="background-color: #263238;">
+	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      	<header>
+			<p:inputText type="checkbox" id="btn-menu"/>
+			<p:outputLabel for="btn-menu" ><img id="imgmenu" src="../resources/icon/menu-icon.png" alt=""/></p:outputLabel>
+			<nav class="menu">
+				<ul>
+					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
+					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
+					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+				</ul>
+			</nav>
+		</header>
+	      <div class="collapse navbar-collapse justify-content-md-center" id="navigator">
+	       <ul class="nav navbar-nav">
+	          <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active" id="cadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
+	            <div class="dropdown-menu" aria-labelledby="cadastro">
+	              <h:link styleClass="dropdown-item" value="Aluno" outcome="registro.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treino" outcome="treinoabcd.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercício" outcome="new_exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	         <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active"  id="listar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listar</a>
+	            <div class="dropdown-menu" aria-labelledby="listar">
+	              <h:link styleClass="dropdown-item" value="Alunos" outcome="alunos.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treinos" outcome="fichas.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercícios" outcome="exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	          <li class="nav-item dropdown">
+	            <a class="nav-link dropdown-toggle active"  id="sub-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+	            <div class="dropdown-menu" aria-labelledby="sub-menu">
+	              <h:link styleClass="dropdown-item" value="Não Sei" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Configuração" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:form>
+	              <h:commandLink styleClass="dropdown-item" action="#{loginBean.logout()}" value="Logout" />
+	              </h:form>
+	            </div>
+	          </li>
+	        </ul>
+	      </div>
+	    </nav>
+  <main>
+   <div class="jumbotron container-fluid" style="margin-top: -40px;">
+   <h:form class="needs-validation" >
+   <p:messages autoUpdate="true" showIcon="false"></p:messages>
+  	<div class="form-row">
+    <div class="col-md-4 mb-3">
+      <p:outputLabel for="nome-completo">Nome Completo</p:outputLabel>
+      <p:inputText  style="#{alunoCreateBean.aluno.nome == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="nome-completo" placeholder="Nome completo" value="#{alunoCreateBean.aluno.nome}" validator="#{validator.validarUsername}" required="true" onblur="nomeia(this.value);" requiredMessage="Insira o nome do cliente">
+       	<f:ajax event="blur" render="nome-completo"></f:ajax>
+      </p:inputText>
+    </div>
+    <div class="col-md-4 mb-3">
+      <p:outputLabel for="email" value="Email"></p:outputLabel>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="e-mail-symbol">@</span>
+        </div>
+        <p:inputText autocomplete="false" style="#{alunoCreateBean.aluno.email == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="email" placeholder="Email" value="#{alunoCreateBean.aluno.email}" validator="#{validator.validarEmail}">
+        <f:ajax event="blur" render="email"></f:ajax>
+        </p:inputText>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="user">Usuário</label>
+      <input type="text" class="form-control" id="user" placeholder="Usuário" value="" readonly="readonly">
+      </input>
+    </div>
+  </div>
+  
+    <div class="form-row">
+    <div class="col-md-4 mb-2">
+    <p:outputLabel for="date">Data de Nascimento</p:outputLabel>
+      <p:inputMask style="#{alunoCreateBean.aluno.data == null ? 'border-color:red' : 'border-color:blue'}"  mask="99/99/9999" class="form-control" id="date" placeholder="dd/mm/yyyy" value="#{alunoCreateBean.data}" validator="#{validator.validarData}">
+      	<f:ajax event="blur" render="date"></f:ajax>
+      </p:inputMask>
+    </div>
+    <div class="col-md-2 mb-2">
+      <p:outputLabel for="phone">Celular</p:outputLabel>	
+      <div class="input-group">
+	  <p:inputMask style="#{alunoCreateBean.aluno.cel == null ? 'border-color:red' : 'border-color:blue'}" value="#{alunoCreateBean.aluno.cel}" styleClass="form-control" mask="(99)9.9999-9999"  placeholder="Celular" required="true" requiredMessage="Insira o número do celular do cliente" id="phone">
+	  <f:ajax event="blur" render="phone"></f:ajax>
+	  </p:inputMask>
+      </div>
+    </div>
+    <div class="col-md-2 mb-3">
+      <p:outputLabel for="sexo" value="Sexo"></p:outputLabel>
+	   			<h:selectOneMenu style="border-color:blue;" styleClass="form-control" id="sexo" value="#{alunoCreateBean.aluno.genero}" requiredMessage="Informe o sexo do cliente">
+			 	<f:selectItem itemLabel="Masculino" itemValue="M"  />
+			 	<f:selectItem itemLabel="Feminino" itemValue="F"/>
+ 				</h:selectOneMenu>
+    </div>
+    <div class="col-md-3 mb-2">
+      <p:outputLabel for="academia">Academia</p:outputLabel>	
+      <div class="input-group">
+        <p:inputText style="#{alunoCreateBean.aluno.academia == null ? 'border-color:red' : 'border-color:blue'}" class="form-control" id="academia" placeholder="Academia" required="true" value="#{alunoCreateBean.aluno.academia}" requiredMessage="Insira a academia do cliente">
+        <f:ajax event="blur" render="academia"></f:ajax>
+        </p:inputText>
+      </div>
+      </div>
+  </div>
+  <hr />
+  
+  <div class="form-row">
+	<div class="col-md-2 mb-3">
+      <label for="cep">CEP</label>
+      <p:inputMask style="#{alunoCreateBean.aluno.cep == null ? 'border-color:red' : 'border-color:blue'}" mask="99999-999" name="cep" id="cep" value="#{alunoCreateBean.aluno.cep}" size="10" maxlength="9" placeholder="Código postal" onblur="pesquisacep(this.value);" styleClass="form-control">
+      <f:ajax event="blur" render="cep"></f:ajax>
+      </p:inputMask>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="bairro">Rua</label>
+      <input name="rua" type="text" readonly="readonly" id="rua" value="" class="form-control" placeholder="Rua"></input>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="bairro">Bairro</label>
+      <input name="bairro" type="text" readonly="readonly" id="bairro" value="" class="form-control" placeholder="Bairro"></input>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="cidade">Cidade</label>
+      <input name="cidade" type="text" readonly="readonly" id="cidade" value="" class="form-control" placeholder="Cidade"></input>
+    </div>
+      
+    <div class="col-md-2 mb-3">
+      <label for="uf">Estado</label>
+      <input name="uf" type="text" id="uf" value="" class="form-control" placeholder="Estado" readonly="readonly"></input>
+    </div>
+    <input name="ibge" type="text" id="ibge" size="8" hidden="true"></input><br/>
+  </div>
+   <hr />
+  <p:commandButton styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+  <p:commandButton styleClass="btn btn-primary"  value="Cadastrar Aluno" update="@form" action="#{alunoCreateBean.create(fasle)}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+  <p:commandButton styleClass="btn btn-primary"  value="Ficha de Avaliação" iconPos="rigth" icon="ui-icon-triangle-1-e" action="#{alunoCreateBean.create(true)}" ><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+</h:form>
+     
 		
-	</ui:define>
-	</ui:composition>
+     <div class="container"></div>
+     </div>
+     </main>
+			    
+		<footer class="footer navbar-fixed-bottom">
+			<div class="container">
+			<p class="text-center">Copyright - 2018 | Personal Application by <a href="#">Caio Torrez</a></p>
+		</div>
+		
+		</footer>
+</h:body>
+</html>

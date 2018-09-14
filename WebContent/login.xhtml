@@ -14,14 +14,12 @@
 		<f:event type="preRenderView" listener="#{loginBean.validateSeassion()}"/>
 		</f:metadata>	
         <title>PersonalAPP</title>
-        <link rel="icon" href="resources/icon/icon-tab.png"></link>
+        <link type="img" rel="icon" href="resources/icon/icon-tab.png"></link>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
-        <link rel="stylesheet" href="resources/css/login.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
-   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>		
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="resources/css/login.css"/>
+        <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.css"/>
+   		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>		
     </h:head>
 
     <h:body styleClass="backgroud-body">
@@ -32,20 +30,6 @@
 	        <ul class="navbar-nav">
 	          <li class="nav-item active">
 	            <a class="nav-link d-block mx-auto justify-content-md-center" id="personal-txt" href="#">Personal Application <span class="sr-only">(current)</span></a>
-<!-- 	          </li> -->
-<!-- 	          <li class="nav-item"> -->
-<!-- 	            <a class="nav-link" href="#">Link</a> -->
-<!-- 	          </li> -->
-<!-- 	          <li class="nav-item"> -->
-<!-- 	            <a class="nav-link disabled" href="#">Disabled</a> -->
-<!-- 	          </li> -->
-<!-- 	          <li class="nav-item dropdown"> -->
-<!-- 	            <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-<!-- 	            <div class="dropdown-menu" aria-labelledby="dropdown08"> -->
-<!-- 	              <a class="dropdown-item" href="#">Action</a> -->
-<!-- 	              <a class="dropdown-item" href="#">Another action</a> -->
-<!-- 	              <a class="dropdown-item" href="#">Something else here</a> -->
-<!-- 	            </div> -->
 	          </li>
 	        </ul>
 	      </div>
@@ -57,6 +41,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-12"></div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <h:form id="form">
+                    <p:growl sticky="true"></p:growl>
                     <div class="form-container">
                     <h1 style="vertical-align: 100%;" class="text-center h2 mb-3 font-weight-normal">Login</h1>
                       <div class="form-group">
@@ -75,7 +60,7 @@
 							</div>
 						</div>
 					  <p>
-                      <p:commandButton id="myCheck" style="font-size:18px" styleClass="btn btn-default btn-sm btn-block" type="submit" 
+                      <p:commandButton id="myCheck" update="@form"  validateClient="true" onerror="alert('Login ou Senha Inválidos.');" style="font-size:18px" styleClass="btn btn-default btn-sm btn-block" type="submit" 
                       value="Entrar" action="#{loginBean.login()}" label="Entrar em PersonalAPP" title="Entrar em PersonalAPP" ></p:commandButton>
                       </p>
                       <p></p><p class="text-left mt-5 mb-3 text-muted h6" style="top: 100px;">&copy;Personal Application 2018</p>
@@ -112,7 +97,7 @@
          </div>
          </div>
         <div class="text-center">
-        	<input type="submit" value="Enviar" class="btn btn-info btn-block rounded-2 py-1"></input>
+        	<input type="submit" value="Entrar" class="btn btn-info btn-block rounded-2 py-1"></input>
         </div>
 
 		
@@ -129,20 +114,17 @@
 		<li><a href="#">Coisa 2</a></li>
 		<li><a href="#">Coisa 1</a></li>
 		</ul>
-		<!--footer_ul_amrc ends here-->
 		</div>
 		
 		
 		<div class=" col-sm-4 col-md  col-12 col">
 		<h5 class="headin5_amrc col_white_amrc pt2 ">Siga-nos</h5>
-		<!--headin5_amrc ends here-->
 		
 		<ul class="footer_ul2_amrc">
 		<li><a href="#"><i class="fa fa-facebook-official fa-lg fleft padding-right"></i> </a><p><a href="https://www.facebook.com/caiotorrez">Facebook</a></p></li>
 		<li><a href="#"><i class="fa fa-instagram fa-lg fleft padding-right"></i> </a><p><a href="https://www.instagram.com/caiotorrez">Instagram</a></p></li>
 		<li><a href="#"><i class="fa fa-whatsapp fa-lg fleft padding-right"></i> </a><p>+55 (83)9.8779-8217</p></li>
 		</ul>
-		<!--footer_ul2_amrc ends here-->
 		</div>
 		</div>
 		</div>
@@ -156,22 +138,10 @@
 		<li><a href="#">Sobre</a></li>
 		<li><a href="#">Termos e Condições</a></li>
 		</ul>
-		<!--foote_bottom_ul_amrc ends here-->
 		<p class="text-center">Copyright - 2018 | Personal Application by <a href="#">Caio Torrez</a></p>
-		
-<!-- 		<ul class="social_footer_ul"> -->
-<!-- 		<li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-<!-- 		<li><a href="#"><i class="fab fa-twitter"></i></a></li> -->
-<!-- 		<li><a href="#"><i class="fab fa-linkedin"></i></a></li> -->
-<!-- 		<li><a href="#"><i class="fab fa-instagram"></i></a></li> -->
-<!-- 		</ul> -->
-		<!--social_footer_ul ends here -->
 		</div>
 		
 		</footer>
 </h:body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>
 

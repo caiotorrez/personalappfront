@@ -8,8 +8,6 @@ import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.util.Messages;
-
 import com.personalapp.custom.CustomURLEncoderDecoder;
 import com.personalapp.model.suport.Token;
 import com.personalapp.repository.LoginDao;
@@ -38,7 +36,6 @@ public class LoginBean implements Serializable {
     public String login() throws IOException {
     	Token token = this.loginDAO.loginReturningToken(this.username, this.password);
         if (token == null) {
-        	Messages.create("Usuário ou Senha Inválidos").fatal().flash().add();
         	return null;
         }
         this.session = token.getAccessType();
@@ -46,17 +43,17 @@ public class LoginBean implements Serializable {
         return token.getAccessType().equals("professor") ? "/professor/index.xhtml?faces-redirect=true" : "/aluno/index.xhtml?faces-redirect=true";
     }
 
+    private void addTokenAndExpirationTimeToCookies(String token, String expirationTime) {
+    	this.externalContext.addResponseCookie("token", CustomURLEncoderDecoder.encodeUTF8(token), null);
+    	this.externalContext.addResponseCookie("expirationTime", expirationTime, null);
+    }
+    
     public String logout() throws IOException {
     	this.session = null;
         removeTokenAndExpirationTimeFromCookies();
         this.externalContext.responseReset();
         this.externalContext.invalidateSession();
         return "/login.xhtml?faces-redirect=true";
-    }
-
-    private void addTokenAndExpirationTimeToCookies(String token, String expirationTime) {
-    	this.externalContext.addResponseCookie("token", CustomURLEncoderDecoder.encodeUTF8(token), null);
-    	this.externalContext.addResponseCookie("expirationTime", expirationTime, null);
     }
 
     private void removeTokenAndExpirationTimeFromCookies() {

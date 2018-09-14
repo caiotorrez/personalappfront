@@ -1,12 +1,15 @@
 package com.personalapp.bean.treino;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import com.personalapp.config.ExceptionHandler;
@@ -17,7 +20,7 @@ import com.personalapp.repository.ImagemDao;
 
 @SuppressWarnings("serial")
 @Named
-@RequestScoped
+@ViewScoped
 public class ExercicioCreateBean implements Serializable {
 	
 	private final ExercicioDao exercicioDao;
@@ -62,6 +65,14 @@ public class ExercicioCreateBean implements Serializable {
         this.file = file;
     }
     
+	public DefaultStreamedContent getPicture() {
+		return new DefaultStreamedContent(new ByteArrayInputStream(this.file.getContents()));
+	}
+    
+	public void fileUploadListener(FileUploadEvent e) {
+		this.file = e.getFile();
+	}
+	
 //    public StreamedContent getimg() {
 //    	byte[] img = this.exercicioDao.findOne("aas").getImagem().getDados();
 //    	return new DefaultStreamedContent(new ByteArrayInputStream(img));

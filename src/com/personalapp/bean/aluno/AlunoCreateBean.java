@@ -1,21 +1,20 @@
 package com.personalapp.bean.aluno;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.util.Messages;
-import org.primefaces.event.SelectEvent;
-
 import com.personalapp.config.ExceptionHandler;
 import com.personalapp.model.Aluno;
+import com.personalapp.model.ApplicationUser;
 import com.personalapp.repository.AlunoDao;
-
 
 @SuppressWarnings("serial")
 @Named
@@ -24,6 +23,7 @@ public class AlunoCreateBean implements Serializable {
 	
 	private final AlunoDao alunoDao;
 	private Aluno aluno = new Aluno();
+	private String data;
 	
 	@Inject
 	public AlunoCreateBean(AlunoDao alunoDao) {
@@ -31,15 +31,14 @@ public class AlunoCreateBean implements Serializable {
 	}
 
 	@ExceptionHandler
-	public String create() {
+	public String create(boolean flag) throws ValidatorException {
 		if (this.alunoDao.findOne(this.aluno.getEmail()) == null) {
 			this.alunoDao.save(this.aluno);
-			Messages.create("O Aluno {0} foi adcionado com sucesso!", this.aluno.getNome()).flash().add();
-			return "alunos.xhtml?faces-redirect=true";
-		} else {
-			Messages.create("O email {0} ja está em uso.", this.aluno.getEmail()).error().fatal().flash().add();
-		} return null;
+			return flag ? "medidas.xhtml?email=" + this.aluno.getEmail().replaceAll("@", "%40") + "&nome=" + this.aluno.getNome().replaceAll(" ", "+") + "faces-redirect=true": "alunos.xhtml?faces-redirect=true";
+		} 
+		return null;
 	}
+
 
 	public Aluno getAluno() {
 		return aluno;
@@ -48,10 +47,16 @@ public class AlunoCreateBean implements Serializable {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
+
+
+	public String getData() {
+		return this.data;
+	}
+
+	public void setData(String event) throws ParseException {
+		this.data = event;
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = formato.parse(event);
+		this.aluno.setData(data);
+	}
 }

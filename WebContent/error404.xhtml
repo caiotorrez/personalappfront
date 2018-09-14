@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions">
+	 
 	<h:head>
+        <title>PersonalAPP</title>
+        <link type="img" rel="icon" href="../resources/icon/icon-tab.png"></link>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
-        <title>Personal Aplication - ERRO 404</title>
+        <link type="text/css" rel="stylesheet" href="../resources/css/error404.css"/>
     </h:head>
-    <h:body>
-    <h1>Erro 404 - Página não encontrada :\</h1>
-    </h:body>
-</html>
     
+<h:body>
+	<body>
+  <section id="not-found">
+    <div id="title">404 Error Page</div>
+    <h:link id="link" outcome="login">Voltar a Página Inicial</h:link>
+    <div class="circles">
+      <p>404<br></br>
+       <small>PAGE NOT FOUND</small>
+      </p>
+      <span class="circle big"></span>
+      <span class="circle med"></span>
+      <span class="circle small"></span>
+    </div>
+  </section>
+  </body>
+ </h:body>
+ </html>

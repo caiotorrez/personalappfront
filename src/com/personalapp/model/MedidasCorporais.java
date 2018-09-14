@@ -1,31 +1,49 @@
 package com.personalapp.model;
 
-import org.apache.tomcat.util.http.fileupload.FileUpload;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class MedidasCorporais extends AbstractEntity {
 	
+	
 	private String metodoDeAvaliacao;
-	private float peso;
-	private float gorduraCorporal;
-	private float bracoDireito;
-	private float bracoEsquerdo;
-	private float antebracoDireito;
-	private float antebracoEsquerdo;
-	private float larguraDosOmbros;
-	private float peitoral;
-	private float cintura;
-	private float quadril;
-	private float coxaDireita;
-	private float coxaEsquerda;
-	private FileUpload file;
+	private String peso;
+	private String gorduraCorporal;
+	private String larguraDosOmbros;
+	private String peitoral;
+	private String cintura;
+	private String quadril;
+	private String bracoDireito;
+	private String bracoEsquerdo;
+	private String antebracoDireito;
+	private String antebracoEsquerdo;
+	private String pernaDireita;
+	private String pernaEsquerda;
+	private String panturrilhaDireita;
+	private String panturrilhaEsquerda;
+	private Imagem frontal;
+	private Imagem posterior;
+	private Date dataDaAvaliacao;
 	
 	
-	public FileUpload getFile() {
-		return file;
+	public Date getDataDaAvaliacao() {
+		return dataDaAvaliacao;
 	}
-	public void setFile(FileUpload file) {
-		this.file = file;
+	public void setDataDaAvaliacao(Date dataDaAvaliacao) {
+		this.dataDaAvaliacao = dataDaAvaliacao;
+	}
+	
+	public Imagem getFrontal() {
+		return frontal;
+	}
+	public void setFrontal(Imagem frontal) {
+		this.frontal = frontal;
+	}
+	public Imagem getPosterior() {
+		return posterior;
+	}
+	public void setPosterior(Imagem posterior) {
+		this.posterior = posterior;
 	}
 	public String getMetodoDeAvaliacao() {
 		return metodoDeAvaliacao;
@@ -33,77 +51,89 @@ public class MedidasCorporais extends AbstractEntity {
 	public void setMetodoDeAvaliacao(String metodoDeAvaliacao) {
 		this.metodoDeAvaliacao = metodoDeAvaliacao;
 	}
-	public float getPeso() {
+	public String getPeso() {
 		return peso;
 	}
-	public void setPeso(float peso) {
+	public void setPeso(String peso) {
 		this.peso = peso;
 	}
-	public float getGorduraCorporal() {
+	public String getGorduraCorporal() {
 		return gorduraCorporal;
 	}
-	public void setGorduraCorporal(float gorduraCorporal) {
+	public void setGorduraCorporal(String gorduraCorporal) {
 		this.gorduraCorporal = gorduraCorporal;
 	}
-	public float getBracoDireito() {
-		return bracoDireito;
-	}
-	public void setBracoDireito(float bracoDireito) {
-		this.bracoDireito = bracoDireito;
-	}
-	public float getBracoEsquerdo() {
-		return bracoEsquerdo;
-	}
-	public void setBracoEsquerdo(float bracoEsquerdo) {
-		this.bracoEsquerdo = bracoEsquerdo;
-	}
-	public float getAntebracoDireito() {
-		return antebracoDireito;
-	}
-	public void setAntebracoDireito(float antebracoDireito) {
-		this.antebracoDireito = antebracoDireito;
-	}
-	public float getAntebracoEsquerdo() {
-		return antebracoEsquerdo;
-	}
-	public void setAntebracoEsquerdo(float antebracoEsquerdo) {
-		this.antebracoEsquerdo = antebracoEsquerdo;
-	}
-	public float getLarguraDosOmbros() {
+	public String getLarguraDosOmbros() {
 		return larguraDosOmbros;
 	}
-	public void setLarguraDosOmbros(float larguraDosOmbros) {
+	public void setLarguraDosOmbros(String larguraDosOmbros) {
 		this.larguraDosOmbros = larguraDosOmbros;
 	}
-	public float getPeitoral() {
+	public String getPeitoral() {
 		return peitoral;
 	}
-	public void setPeitoral(float peitoral) {
+	public void setPeitoral(String peitoral) {
 		this.peitoral = peitoral;
 	}
-	public float getCintura() {
+	public String getCintura() {
 		return cintura;
 	}
-	public void setCintura(float cintura) {
+	public void setCintura(String cintura) {
 		this.cintura = cintura;
 	}
-	public float getQuadril() {
+	public String getQuadril() {
 		return quadril;
 	}
-	public void setQuadril(float quadril) {
+	public void setQuadril(String quadril) {
 		this.quadril = quadril;
 	}
-	public float getCoxaDireita() {
-		return coxaDireita;
+	public String getBracoDireito() {
+		return bracoDireito;
 	}
-	public void setCoxaDireita(float coxaDireita) {
-		this.coxaDireita = coxaDireita;
+	public void setBracoDireito(String bracoDireito) {
+		this.bracoDireito = bracoDireito;
 	}
-	public float getCoxaEsquerda() {
-		return coxaEsquerda;
+	public String getBracoEsquerdo() {
+		return bracoEsquerdo;
 	}
-	public void setCoxaEsquerda(float coxaEsquerda) {
-		this.coxaEsquerda = coxaEsquerda;
+	public void setBracoEsquerdo(String bracoEsquerdo) {
+		this.bracoEsquerdo = bracoEsquerdo;
+	}
+	public String getAntebracoDireito() {
+		return antebracoDireito;
+	}
+	public void setAntebracoDireito(String antebracoDireito) {
+		this.antebracoDireito = antebracoDireito;
+	}
+	public String getAntebracoEsquerdo() {
+		return antebracoEsquerdo;
+	}
+	public void setAntebracoEsquerdo(String antebracoEsquerdo) {
+		this.antebracoEsquerdo = antebracoEsquerdo;
+	}
+	public String getPernaDireita() {
+		return pernaDireita;
+	}
+	public void setPernaDireita(String pernaDireita) {
+		this.pernaDireita = pernaDireita;
+	}
+	public String getPernaEsquerda() {
+		return pernaEsquerda;
+	}
+	public void setPernaEsquerda(String pernaEsquerda) {
+		this.pernaEsquerda = pernaEsquerda;
+	}
+	public String getPanturrilhaDireita() {
+		return panturrilhaDireita;
+	}
+	public void setPanturrilhaDireita(String panturrilhaDireita) {
+		this.panturrilhaDireita = panturrilhaDireita;
+	}
+	public String getPanturrilhaEsquerda() {
+		return panturrilhaEsquerda;
+	}
+	public void setPanturrilhaEsquerda(String panturrilhaEsquerda) {
+		this.panturrilhaEsquerda = panturrilhaEsquerda;
 	}
 
 }

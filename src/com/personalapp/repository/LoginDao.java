@@ -6,7 +6,9 @@ import static org.springframework.http.HttpMethod.POST;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
@@ -38,7 +40,6 @@ public class LoginDao implements Serializable {
         		ResponseEntity<Token> tokenExchange = restTemplate.exchange(LOGIN_URL, POST, new HttpEntity<>(loginJson, this.jsonUtil.createJsonHeader()), Token.class);
         		return tokenExchange.getBody();
         	} catch (Exception e) {
-        		System.err.println("Usuario ou Senha Invalidos!");
         		this.externalContext.redirect
             	(this.externalContext.getApplicationContextPath() + "/login.xhtml");
         		return null;

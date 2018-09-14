@@ -124,7 +124,7 @@ header label:hover {
 
 
 
-@media (max-width:768px) {
+@media (max-width:767px) {
 
     header label {
         display: block;
@@ -138,8 +138,7 @@ header label:hover {
         position: absolute;
         background: #fff;
         width: 100%;
-        margin-left: 100px;
-        margin-top: -100%;
+        margin-left: 100%;
         transition: all 0.3s;
     }
     

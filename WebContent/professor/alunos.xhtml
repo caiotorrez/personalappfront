@@ -19,10 +19,8 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
         <link rel="stylesheet" href="../resources/css/footer-head.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="../resources/css/bootstrap.css"/>
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </h:head>
     <h:body styleClass="backgroud-body" style="background-color: #263238;">
 	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -31,9 +29,13 @@
 			<label for="btn-menu" ><img id="imgmenu" src="../resources/icon/menu-icon.png" alt=""/></label>
 			<nav class="menu">
 				<ul>
-					<li><a href="#"><b>Inicio</b></a></li>
-					<li><h:link value="Treino" outcome="treino.xhtml"></h:link></li>
-                    <li><h:link value="Medidas" outcome="treino.xhtml"></h:link></li>
+					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
+					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
@@ -78,19 +80,18 @@
 	  
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron container-fluid" style="margin-top: -40px;">
-          	<h:form id="user-form">
-            <p:commandButton type="submit" action="index.xhtml?faces-redirect=true" icon="ui-icon-triangle-1-w" title="Voltar a pagina inicial"/>
-            <h:panelGrid columns="3">
-                <h:inputText  style="width:400px;" value="#{alunoListBean.nome}" title="Pesquise por nome do aluno" placeholder="Pesquisar aluno pelo nome">
-                	<f:ajax event="change" listener="#{alunoListBean.search}" render="pesq dataTable"></f:ajax>
-                	<f:ajax event="click" listener="#{alunoListBean.search}" render="pesq dataTable"></f:ajax>
-                	<f:ajax event="keypress" listener="#{alunoListBean.search}" render="pesq dataTable"></f:ajax>
+          	<h:form id="user-form" styleClass="form-inline">                
+            <div class="input-group">
+                <h:inputText styleClass="form-control form-control-sm" value="#{alunoListBean.nome}" title="Pesquise por nome do aluno" placeholder="Pesquisar aluno pelo nome">
+                	<f:ajax event="keyup" listener="#{alunoListBean.search}" render="pesq dataTable"></f:ajax>
                 </h:inputText>
+                <span class="input-group-btn">
                 <p:commandButton id="pesq" actionListener="#{alunoListBean.search}"
                                  ajax="true" update="dataTable" icon="ui-icon-search" />
-                <p:defaultCommand target="pesq"></p:defaultCommand>
-            </h:panelGrid>
-        </h:form>	
+                </span>
+            </div>
+        </h:form>
+      <p></p>	
       <p:dataTable value="#{alunoListBean.alunosList}" var="alunoList" id="dataTable" emptyMessage="Nenhum aluno encontrado"
 					rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" sortBy="#{alunoList.nome}" styleClass="table table-striped table-bordered" reflow="true" pageLinks="20">
 		<p:column  headerText="Aluno" width="50"
@@ -119,7 +120,7 @@
 		<h:link rendered="#{alunoList.fichaDeTreino != null}" value="#{alunoList.fichaDeTreino.titulo}" outcome="treino_impresso">
 		<f:param name="email" value="#{alunoList.email}" />
 		</h:link>
-		<h:link rendered="#{alunoList.fichaDeTreino == null}" value="Criar Treino" outcome="treinoabcd">
+		<h:link rendered="#{alunoList.fichaDeTreino == null}" value="Criar Treino" outcome="medidas">
 		<f:param name="email" value="#{alunoList.email}" />
 		<f:param name="nome" value="#{alunoList.nome}" />
 		</h:link>
@@ -129,6 +130,14 @@
 		<h:outputText value="view"/>
 		</p:column>
 		</p:dataTable>
+		
+		<h:form>
+		<hr></hr>
+		<span class="input-group-btn">
+        	<p:commandButton value="Voltar" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"/>
+		</span>
+		</h:form>
+		
         <div class="container">
         </div>
         

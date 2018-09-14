@@ -18,6 +18,8 @@ public class Aluno extends AbstractEntity {
 	private FichaDeTreino fichaDeTreino;
 	private MedidasCorporais medidasCorporais;
 	private List<FichaDeTreino> historico;
+	private List<MedidasCorporais> medidasHistorico;
+	private String cep;
 	
 	public List<FichaDeTreino> getHistorico() {
 		return historico;
@@ -72,5 +74,17 @@ public class Aluno extends AbstractEntity {
 	}
 	public void setMedidasCorporais(MedidasCorporais medidasCorporais) {
 		this.medidasCorporais = medidasCorporais;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public List<MedidasCorporais> getMedidasHistorico() {
+		return medidasHistorico;
+	}
+	public void setMedidasHistorico(List<MedidasCorporais> medidasHistorico) {
+		this.medidasHistorico = medidasHistorico;
 	}
 }

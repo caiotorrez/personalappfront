@@ -17,7 +17,7 @@ import com.personalapp.util.JsonUtil;
 public class MedidasDao implements Serializable {
 	
 	
-	private final String INFO_URL = APIUtil.BASE_URL + "/professor/alunos/medidas";
+	private final String SAVE_URL = APIUtil.BASE_URL + "/professor/alunos/medidas";
 	private final String FIND_ONE_URL = APIUtil.BASE_URL + "/professor/alunos/medidas/{email}";
 	private final CustomRestTemplate restTemplate;
 	private final JsonUtil jsonUtil;
@@ -29,8 +29,8 @@ public class MedidasDao implements Serializable {
 	}
 	
 	public MedidasCorporais save(MedidasCorporais medidasCorporais) {
-		if (medidasCorporais.getMetodoDeAvaliacao() != null && !medidasCorporais.getMetodoDeAvaliacao().trim().equals("")) {
-			return this.restTemplate.exchange(INFO_URL, POST, this.jsonUtil.tokenizedHttpEntityHeader(medidasCorporais), MedidasCorporais.class).getBody();			
+		if (medidasCorporais != null) {
+			return this.restTemplate.exchange(SAVE_URL, POST, this.jsonUtil.tokenizedHttpEntityHeader(medidasCorporais), MedidasCorporais.class).getBody();			
 		} else {
 			return null;
 		}

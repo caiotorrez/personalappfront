@@ -17,6 +17,7 @@ import com.personalapp.config.ExceptionHandler;
 import com.personalapp.custom.CustomRestTemplate;
 import com.personalapp.custom.CustomTypeReference;
 import com.personalapp.model.Aluno;
+import com.personalapp.model.ApplicationUser;
 import com.personalapp.util.APIUtil;
 import com.personalapp.util.JsonUtil;
 
@@ -61,5 +62,11 @@ public class AlunoDao implements Serializable {
 		UriComponents url = UriComponentsBuilder.fromUriString(FIND_ALUNO_URL).queryParam("username", username).build();
 		return this.restTemplate.exchange(url.toUriString(), GET, this.jsonUtil.tokenizedHttpEntityHeader(), Aluno.class).getBody();
 
+    }
+    
+    @ExceptionHandler
+    public ApplicationUser check(ApplicationUser user) {
+    	user.setUsername(user.getUsername().trim());
+    	return this.restTemplate.exchange(ALUNOS_URL + "/check", POST, this.jsonUtil.tokenizedHttpEntityHeader(user), ApplicationUser.class).getBody();
     }
 }
