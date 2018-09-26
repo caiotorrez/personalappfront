@@ -46,7 +46,7 @@ public class ExercicioCreateBean implements Serializable {
 		}
 		this.exercicioDao.save(this.exercicio);
 		Messages.create("O Exercício {0} foi criado com sucesso!", this.exercicio.getTitulo()).flash().add();
-		return "index.xhtml?faces-redirect=true";
+		return "exercise.xhtml?faces-redirect=true";
 	}
 
 	public Exercicio getExercicio() {
@@ -72,9 +72,4 @@ public class ExercicioCreateBean implements Serializable {
 	public void fileUploadListener(FileUploadEvent e) {
 		this.file = e.getFile();
 	}
-	
-//    public StreamedContent getimg() {
-//    	byte[] img = this.exercicioDao.findOne("aas").getImagem().getDados();
-//    	return new DefaultStreamedContent(new ByteArrayInputStream(img));
-//    }
  }

@@ -24,6 +24,7 @@ public class AlunoCreateBean implements Serializable {
 	private final AlunoDao alunoDao;
 	private Aluno aluno = new Aluno();
 	private String data;
+	private String cep;
 	
 	@Inject
 	public AlunoCreateBean(AlunoDao alunoDao) {
@@ -47,7 +48,6 @@ public class AlunoCreateBean implements Serializable {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-
 
 	public String getData() {
 		return this.data;

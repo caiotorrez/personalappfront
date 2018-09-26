@@ -61,7 +61,6 @@ public class AlunoDao implements Serializable {
     public Aluno findAluno(String username) {
 		UriComponents url = UriComponentsBuilder.fromUriString(FIND_ALUNO_URL).queryParam("username", username).build();
 		return this.restTemplate.exchange(url.toUriString(), GET, this.jsonUtil.tokenizedHttpEntityHeader(), Aluno.class).getBody();
-
     }
     
     @ExceptionHandler

@@ -148,7 +148,7 @@ header label:hover {
     }
     
     .menu li {
-    width:100%;
+    	width:100%;
         border-bottom: 1px solid #c3c3c3;
         display: block;
 		padding: 15px 20px;
@@ -156,6 +156,7 @@ header label:hover {
 		text-decoration: none;
 	    text-align: center;
 	    flex-grow: 1;
+	    font-size: 25px;
     }
     
     .menu li:hover {

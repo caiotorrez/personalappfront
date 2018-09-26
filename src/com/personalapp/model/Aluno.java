@@ -3,6 +3,8 @@ package com.personalapp.model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.lang.NonNull;
+
 import com.personalapp.model.treino.FichaDeTreino;
 
 @SuppressWarnings("serial")

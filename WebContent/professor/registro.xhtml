@@ -19,9 +19,10 @@
         <link rel="stylesheet" href="../resources/css/footer-head.css"/>
         <link rel="stylesheet" href="../resources/css/bootstrap.css"></link>
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<script src="../resources/javascript/cep.js"></script>
-
+		<script src="../resources/javascript/cep.js" type="text/javascript"></script>
+		<script src="../resources/javascript/jquery.mask.min.js" type="text/javascript"></script>
     </h:head>
+    
     <h:body styleClass="backgroud-body" style="background-color: #263238;">
 	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       	<header>
@@ -32,10 +33,11 @@
 					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
 					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
 					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
 					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
-					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Alunos" outcome="registro.xhtml"></h:link></li>
+					<li><h:link value="Ficha de Treino" outcome="treinoabcd.xhtml"></h:link></li>
+					<li><h:link value="Exercício" outcome="new_exercise.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
@@ -78,12 +80,12 @@
 	    </nav>
   <main>
    <div class="jumbotron container-fluid" style="margin-top: -40px;">
-   <h:form class="needs-validation" >
+   <h:form id="form" class="needs-validation" >
    <p:messages autoUpdate="true" showIcon="false"></p:messages>
   	<div class="form-row">
     <div class="col-md-4 mb-3">
       <p:outputLabel for="nome-completo">Nome Completo</p:outputLabel>
-      <p:inputText  style="#{alunoCreateBean.aluno.nome == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="nome-completo" placeholder="Nome completo" value="#{alunoCreateBean.aluno.nome}" validator="#{validator.validarUsername}" required="true" onblur="nomeia(this.value);" requiredMessage="Insira o nome do cliente">
+      <p:inputText style="#{validatorRegister.usernameIsValid}" styleClass="form-control" id="nome-completo" placeholder="Nome completo" value="#{alunoCreateBean.aluno.nome}" validator="#{validatorRegister.validarUsername}" required="true" onblur="nomeia(this.value);" requiredMessage="Insira o nome do cliente">
        	<f:ajax event="blur" render="nome-completo"></f:ajax>
       </p:inputText>
     </div>
@@ -93,7 +95,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="e-mail-symbol">@</span>
         </div>
-        <p:inputText autocomplete="false" style="#{alunoCreateBean.aluno.email == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="email" placeholder="Email" value="#{alunoCreateBean.aluno.email}" validator="#{validator.validarEmail}">
+        <p:inputText required="true" requiredMessage="Insira um email válido para o cliente" style="#{validatorRegister.emailIsValid}" styleClass="form-control" id="email" placeholder="Email" value="#{alunoCreateBean.aluno.email}" validator="#{validatorRegister.validarEmail}">
         <f:ajax event="blur" render="email"></f:ajax>
         </p:inputText>
       </div>
@@ -108,16 +110,16 @@
     <div class="form-row">
     <div class="col-md-4 mb-2">
     <p:outputLabel for="date">Data de Nascimento</p:outputLabel>
-      <p:inputMask style="#{alunoCreateBean.aluno.data == null ? 'border-color:red' : 'border-color:blue'}"  mask="99/99/9999" class="form-control" id="date" placeholder="dd/mm/yyyy" value="#{alunoCreateBean.data}" validator="#{validator.validarData}">
+      <p:inputMask required="true" requiredMessage="Insira uma data válida para o cliente" style="#{validatorRegister.dataIsValid}"  mask="99/99/9999" class="form-control" id="date" placeholder="dd/mm/yyyy" value="#{alunoCreateBean.data}" autoClear="true" validator="#{validatorRegister.validarData}">
       	<f:ajax event="blur" render="date"></f:ajax>
       </p:inputMask>
     </div>
     <div class="col-md-2 mb-2">
       <p:outputLabel for="phone">Celular</p:outputLabel>	
       <div class="input-group">
-	  <p:inputMask style="#{alunoCreateBean.aluno.cel == null ? 'border-color:red' : 'border-color:blue'}" value="#{alunoCreateBean.aluno.cel}" styleClass="form-control" mask="(99)9.9999-9999"  placeholder="Celular" required="true" requiredMessage="Insira o número do celular do cliente" id="phone">
+	  <p:inputText  validator="#{validatorRegister.validarCelular}" style="#{validatorRegister.celIsValid}" value="#{alunoCreateBean.aluno.cel}" styleClass="form-control" placeholder="Celular" required="true" requiredMessage="Insira o número do celular do cliente" id="phone">
 	  <f:ajax event="blur" render="phone"></f:ajax>
-	  </p:inputMask>
+	  </p:inputText>
       </div>
     </div>
     <div class="col-md-2 mb-3">
@@ -130,7 +132,7 @@
     <div class="col-md-3 mb-2">
       <p:outputLabel for="academia">Academia</p:outputLabel>	
       <div class="input-group">
-        <p:inputText style="#{alunoCreateBean.aluno.academia == null ? 'border-color:red' : 'border-color:blue'}" class="form-control" id="academia" placeholder="Academia" required="true" value="#{alunoCreateBean.aluno.academia}" requiredMessage="Insira a academia do cliente">
+        <p:inputText style="#{alunoCreateBean.aluno.academia == null ? '' : 'border-color:blue'}" class="form-control" id="academia" placeholder="Academia" required="true" value="#{alunoCreateBean.aluno.academia}" requiredMessage="Insira a academia do cliente">
         <f:ajax event="blur" render="academia"></f:ajax>
         </p:inputText>
       </div>
@@ -140,10 +142,10 @@
   
   <div class="form-row">
 	<div class="col-md-2 mb-3">
-      <label for="cep">CEP</label>
-      <p:inputMask style="#{alunoCreateBean.aluno.cep == null ? 'border-color:red' : 'border-color:blue'}" mask="99999-999" name="cep" id="cep" value="#{alunoCreateBean.aluno.cep}" size="10" maxlength="9" placeholder="Código postal" onblur="pesquisacep(this.value);" styleClass="form-control">
-      <f:ajax event="blur" render="cep"></f:ajax>
-      </p:inputMask>
+      <label  for="cep">CEP</label>
+      <p:inputText style="#{validatorRegister.cepIsValid}" validator="#{validatorRegister.validarCep}" styleClass="form-control" value="#{alunoCreateBean.aluno.cep}" required="true" requiredMessage="Insira um cep válido para o cliente" name="cep" id="cep" onblur="pesquisacep(this.value);">
+      	<f:ajax event="blur" render="cep"></f:ajax>
+      </p:inputText>
     </div>
     <div class="col-md-3 mb-3">
       <label for="bairro">Rua</label>

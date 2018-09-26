@@ -8,9 +8,7 @@
 	  xmlns:o="http://omnifaces.org/ui"
 	  xmlns:of="http://omnifaces.org/functions"
 	  xmlns:f="http://java.sun.com/jsf/core">
-      
-	  
-	  
+
 	<h:head>
 	<f:metadata>
 		<f:viewParam id="emailParam" name="email" value="#{medidasCreateBean.email}" required="true" ></f:viewParam>
@@ -35,10 +33,11 @@
 					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
 					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
 					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
 					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
-					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Alunos" outcome="registro.xhtml"></h:link></li>
+					<li><h:link value="Exercício" outcome="new_exercise.xhtml"></h:link></li>
+					<li><h:link value="Ficha de Treino" outcome="treinoabcd.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>

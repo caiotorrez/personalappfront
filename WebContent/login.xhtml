@@ -19,8 +19,9 @@
         <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
         <link type="text/css" rel="stylesheet" href="resources/css/login.css"/>
         <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.css"/>
-   		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>		
-    </h:head>
+   		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   		<script type="text/javascrpit" href="resources/javascript/bootstrap.min.js"></script>
+	    </h:head>
 
     <h:body styleClass="backgroud-body">
     	<body>
@@ -60,7 +61,7 @@
 							</div>
 						</div>
 					  <p>
-                      <p:commandButton id="myCheck" update="@form"  validateClient="true" onerror="alert('Login ou Senha Inválidos.');" style="font-size:18px" styleClass="btn btn-default btn-sm btn-block" type="submit" 
+                      <p:commandButton id="myCheck" update="@form"  validateClient="true" style="font-size:18px" styleClass="btn btn-default btn-sm btn-block" type="submit" 
                       value="Entrar" action="#{loginBean.login()}" label="Entrar em PersonalAPP" title="Entrar em PersonalAPP" ></p:commandButton>
                       </p>
                       <p></p><p class="text-left mt-5 mb-3 text-muted h6" style="top: 100px;">&copy;Personal Application 2018</p>

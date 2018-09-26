@@ -30,19 +30,20 @@
 			<nav class="menu">
 				<ul>
 					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
-					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
+					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
 					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
 					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
-					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Alunos" outcome="registro.xhtml"></h:link></li>
+					<li><h:link value="Ficha de Treino" outcome="treinoabcd.xhtml"></h:link></li>
+					<li><h:link value="Exercício" outcome="new_exercise.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
 	      <div class="collapse navbar-collapse justify-content-md-center" id="navigator">
 	       <ul class="nav navbar-nav">
 	          <li class="nav-item dropdown" >
-	            <a class="nav-link dropdown-toggle active" href="https://example.com" id="cadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
+	            <a class="nav-link dropdown-toggle active"  id="cadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
 	            <div class="dropdown-menu" aria-labelledby="cadastro">
 	              <h:link styleClass="dropdown-item" value="Aluno" outcome="registro.xhtml"></h:link>
 	              <div class="dropdown-divider"></div>
@@ -52,7 +53,7 @@
 	            </div>
 	          </li>
 	         <li class="nav-item dropdown" >
-	            <a class="nav-link dropdown-toggle active" href="https://example.com" id="listar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listar</a>
+	            <a class="nav-link dropdown-toggle active"  id="listar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listar</a>
 	            <div class="dropdown-menu" aria-labelledby="listar">
 	              <h:link styleClass="dropdown-item" value="Alunos" outcome="alunos.xhtml"></h:link>
 	              <div class="dropdown-divider"></div>
@@ -62,7 +63,7 @@
 	            </div>
 	          </li>
 	          <li class="nav-item dropdown">
-	            <a class="nav-link dropdown-toggle active" href="https://example.com" id="sub-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+	            <a class="nav-link dropdown-toggle active"  id="sub-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
 	            <div class="dropdown-menu" aria-labelledby="sub-menu">
 	              <h:link styleClass="dropdown-item" value="Não Sei" outcome="exercise.xhtml"></h:link>
 	              <div class="dropdown-divider"></div>
@@ -78,7 +79,6 @@
 	    </nav>
 	  <main>
 	  
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron container-fluid" style="margin-top: -40px;">
           	<h:form id="user-form" styleClass="form-inline">                
             <div class="input-group">
@@ -110,20 +110,20 @@
 		<h:outputText value="#{alunoList.academia}"/>
 		</p:column>
 		
-		<p:column headerText="Editar Info" width="10" style="text-align: left">
-		<h:link value="Editar" outcome="edit">
+		<p:column headerText="Editar Info" width="10" style="text-align: center">
+		<b><h:link value="Editar" outcome="edit">
 			<f:param name="email" value="#{alunoList.email}" />
-		</h:link>
+		</h:link></b>
 		</p:column>
 		
-		<p:column headerText="Ficha de Treino" width="10" style="text-align: left">
-		<h:link rendered="#{alunoList.fichaDeTreino != null}" value="#{alunoList.fichaDeTreino.titulo}" outcome="treino_impresso">
+		<p:column headerText="Ficha de Treino" width="10" style="text-align: center">
+		<b><h:link rendered="#{alunoList.fichaDeTreino != null}" value="#{alunoList.fichaDeTreino.titulo}" outcome="treinoabcd">
 		<f:param name="email" value="#{alunoList.email}" />
 		</h:link>
-		<h:link rendered="#{alunoList.fichaDeTreino == null}" value="Criar Treino" outcome="medidas">
+		<h:link rendered="#{alunoList.fichaDeTreino == null}" value="Criar Treino" outcome="treinoabcd">
 		<f:param name="email" value="#{alunoList.email}" />
 		<f:param name="nome" value="#{alunoList.nome}" />
-		</h:link>
+		</h:link></b>
 		</p:column>
 		
 		<p:column headerText="Perfil" width="10" style="text-align: left">
@@ -150,8 +150,5 @@
 		</div>
 		
 		</footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </h:body>
 </html>

@@ -1,780 +1,862 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="../WEB-INF/template/templateBar.xhtml"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:o="http://omnifaces.org/ui"
-				xmlns:of="http://omnifaces.org/functions"
-                xmlns:f="http://java.sun.com/jsf/core">
-	<ui:define name="content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions">
+	  
+	  
 	<h:head>
-	<link href="css/registrotreino.css" rel='stylesheet' type='text/css' />
 	<f:metadata>
+		<f:event type="preRenderView" listener="#{professorViewBean.init(loginBean.username)}"/>
 		<f:viewParam id="emailParam" name="email" value="#{treinoCreateBean.email}" required="false" ></f:viewParam>
 		<f:viewParam id="nomelParam" name="nome" value="#{treinoCreateBean.nome}" required="false"></f:viewParam>
 	</f:metadata>
-	</h:head>
-	<h:body>
-	<o:form>
-	<div>
-	 <ul>
-	   <li> 
-	   		<h:outputText value="Associar treino ao aluno :"  style="margin-right: 4px;"/>
-	   			<h:selectOneMenu id="listaAlunos" value="#{treinoCreateBean.email}" required="true" style="width:200px; height:28px; position:relative;" requiredMessage="É nescessário associar o treino a um aluno.">
-			 	<f:selectItem itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="" noSelectionOption="true" />
-			 	<f:selectItems itemDisabled="#{treinoCreateBean.email != null ? true : false}" value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
+        <title>PersonalAPP</title>
+        <link rel="icon" href="../resources/icon/icon-tab.png"></link>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width,  user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"></meta>
+        <link rel="stylesheet" href="../resources/css/footer-head.css"/>
+        <link rel="stylesheet" href="../resources/css/bootstrap.css"></link>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    </h:head>
+    <h:body styleClass="backgroud-body" style="background-color: #263238;">
+	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      	<header>
+			<input type="checkbox" id="btn-menu"/>
+			<label for="btn-menu" ><img id="imgmenu" src="../resources/icon/menu-icon.png" alt=""/></label>
+			<nav class="menu">
+				<ul>
+					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
+					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
+					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
+					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
+					<li><h:link value="Alunos" outcome="registro.xhtml"></h:link></li>
+					<li><h:link value="Ficha de Treino" outcome="treinoabcd.xhtml"></h:link></li>
+					<li><h:link value="Exercício" outcome="new_exercise.xhtml"></h:link></li>
+				</ul>
+			</nav>
+		</header>
+	      <div class="collapse navbar-collapse justify-content-md-center" id="navigator">
+	       <ul class="nav navbar-nav">
+	          <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active" href="" id="cadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
+	            <div class="dropdown-menu" aria-labelledby="cadastro">
+	              <h:link styleClass="dropdown-item" value="Aluno" outcome="registro.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treino" outcome="treinoabcd.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercício" outcome="new_exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	         <li class="nav-item dropdown" >
+	            <a class="nav-link dropdown-toggle active" href="" id="listar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listar</a>
+	            <div class="dropdown-menu" aria-labelledby="listar">
+	              <h:link styleClass="dropdown-item" value="Alunos" outcome="alunos.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Treinos" outcome="fichas.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Exercícios" outcome="exercise.xhtml"></h:link>
+	            </div>
+	          </li>
+	          <li class="nav-item dropdown">
+	            <a class="nav-link dropdown-toggle active" href="" id="sub-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+	            <div class="dropdown-menu" aria-labelledby="sub-menu">
+	              <h:link styleClass="dropdown-item" value="Não Sei" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:link styleClass="dropdown-item" value="Configuração" outcome="exercise.xhtml"></h:link>
+	              <div class="dropdown-divider"></div>
+	              <h:form>
+	              <h:commandLink styleClass="dropdown-item" action="#{loginBean.logout()}" value="Logout" />
+	              </h:form>
+	            </div>
+	          </li>
+	        </ul>
+	      </div>
+	    </nav>
+	
+	<main>
+	 <h:form id="form" class="needs-validation" >
+<!-- 	  	 <p:message id="messagex"></p:message> -->
+	  <div class="jumbotron container-fluid" style="margin-top: -40px;">
+<!-- 	  	 <p:growl id="growl"></p:growl> -->
+	   	<div class="form-row">
+	   	<div class="col-md-3 mb-3">
+	   		<h5><p:outputLabel style="margin-rigth:30px;" for="listaAlunos" value="Associar treino ao aluno :"/></h5>
+	   			<h:selectOneMenu styleClass="form-control" id="listaAlunos" value="#{treinoCreateBean.email}" required="true" requiredMessage="É nescessário associar o treino a um aluno.">
+			 		<f:selectItem itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="" noSelectionOption="true" />
+			 		<f:selectItems itemDisabled="#{treinoCreateBean.email != null ? true : false}" value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
  				</h:selectOneMenu>
- 			
- 			<p:outputLabel value="Data de validade do treino" style="margin-left:50px;"></p:outputLabel>
- 			<p:outputLabel for="button" value="Inicio:" style="margin-left:10px;margin-right:20px;" />
-        	<p:calendar id="button" value="#{treinoCreateBean.fichaDeTreino.inicioDoTreino}" showOn="button" size="10" required="true" requiredMessage="Escolha uma data."/>
- 			<p:outputLabel for="button2" value="Fim:" style="margin-left:20px;margin-right:10px;" />
-        	<p:calendar id="button2" value="#{treinoCreateBean.fichaDeTreino.fimDoTreino}" showOn="button" size="10" required="true" requiredMessage="Escolha uma data."/>
-		</li>
-	 </ul>
+ 		</div>
+ 		</div>
+ 		<div class="form-row">
+	   	<div class="col-md-2 mb-1">
+ 			<p:outputLabel for="button" value="Inicio:"/><br></br>
+        	<p:calendar id="button" value="#{treinoCreateBean.fichaDeTreino.inicioDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
+        </div>
+        <div class="col-md-2 mb-1">
+ 			<p:outputLabel for="button2" style="margin-left:5px;"  value="Fim:"/>
+        	<p:calendar id="button2" value="#{treinoCreateBean.fichaDeTreino.fimDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
+		</div>
+	</div>
+	 <hr/>
+	<div id="Cabeçalho" class="form-row">
+	 <div class="col-md-2 mb-1">
+	  <p:outputLabel value="Titulo" for="tituloDoTreino"></p:outputLabel>
+	    <p:inputText id="tituloDoTreino" styleClass="form-control" value="#{treinoCreateBean.fichaDeTreino.titulo}" required="true" requiredMessage="Insira um título"/>
 	 </div>
-	 
-	 <div id="Cabeçalho">
-	 <ul>
-	   <li>Titulo: <h:inputText value="#{treinoCreateBean.fichaDeTreino.titulo}"  required="true" requiredMessage="Insira um título"/></li>
-	   <li>Objetivo: <h:inputText value="#{treinoCreateBean.fichaDeTreino.objetivo}"  required="true" requiredMessage="Insira um objetivo" /></li>
-	   <li>Tipo de Estimulo: <h:inputText value="#{treinoCreateBean.fichaDeTreino.estimulo}"  required="true" requiredMessage="Insira um Estimulo"/></li>
-	   <li>Breve Descrição: <h:inputText value="#{treinoCreateBean.fichaDeTreino.descricao}" required="true" requiredMessage="Insira uma descrição" style="width:300px"/></li>
-	 </ul>
-	 
-	 
-	 
+	 <div class="col-md-2 mb-1">
+	  <p:outputLabel value="Objetivo" for="objetivo"></p:outputLabel>
+	  	<h:inputText id="objetivo" styleClass="form-control" value="#{treinoCreateBean.fichaDeTreino.objetivo}" required="true" requiredMessage="Insira um objetivo" />
 	 </div>
-	
+	 <div class="col-md-2 mb-1">
+	  <p:outputLabel value="Tipo de Estimulo" for="estimulo"></p:outputLabel>
+	  <h:inputText id="estimulo" styleClass="form-control" value="#{treinoCreateBean.fichaDeTreino.estimulo}" required="true" requiredMessage="Insira um Estimulo"/>
+	 </div>
+	 <div class="col-md-2 mb-1">
+	  <p:outputLabel value="Breve Descrição" for="descricao"></p:outputLabel>
+	  <h:inputText id="descricao" styleClass="form-control" value="#{treinoCreateBean.fichaDeTreino.descricao}" required="true" requiredMessage="Insira uma descrição"/>
+	 </div>
+	</div>
+	<hr/>
 	<div id="div1">
-	 <div>
-	 <ul>
-	   <li>Treino A (Dia x - Dia y)</li>
-	 </ul>
-	 </div>
-	<p:dataTable var="rows" value="" >
-	<p:column headerText="Exercicio" width="200">
-			
-			<h:selectOneMenu id="exe1" value="#{treinoCreateBean.exeA1}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+		 <div>
+		   <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;  Treino A" style="font-size: 1.5em; font-weight: bold;"></p:outputLabel>
+		 </div>
+	<p:dataTable var="rows" value="" resizeMode="true" reflow="true">
+	<p:column headerText="Exercicio" width="30%;">
+			<h:selectOneMenu styleClass="form-control" id="exe1" value="#{treinoCreateBean.exeA1}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
- 			
- 			<h:selectOneMenu id="exe2" value="#{treinoCreateBean.exeA2}" required="false"  style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe2" value="#{treinoCreateBean.exeA2}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe3"  value="#{treinoCreateBean.exeA3}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe3"  value="#{treinoCreateBean.exeA3}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe4"  value="#{treinoCreateBean.exeA4}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe4"  value="#{treinoCreateBean.exeA4}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe5" value="#{treinoCreateBean.exeA5}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe5" value="#{treinoCreateBean.exeA5}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe6" value="#{treinoCreateBean.exeA6}" required="false" style="width:200px; height:28px;position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe6" value="#{treinoCreateBean.exeA6}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
 			</h:selectOneMenu>
     </p:column>
     
-    <p:column headerText="Séries" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA1.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA1.seriesF}"> -</p:inputNumber>
+    <p:column headerText="Séries" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA1.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA1.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA2.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA2.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA2.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA2.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA3.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA3.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA3.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA3.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA4.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA4.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA4.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA4.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA5.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA5.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA5.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA5.seriesF}"> -</p:inputNumber>
-        
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA6.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA6.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA6.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA6.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Repetições" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA1.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA1.repsF}"> -</p:inputNumber>
+    <p:column headerText="Repetições" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA1.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA1.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA2.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA2.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA2.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA2.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA3.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA3.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA3.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA3.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA4.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA4.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA4.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA4.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA5.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA5.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA5.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA5.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA6.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoA6.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA6.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoA6.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Carga" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA1.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA1.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA2.cargaI}" ></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA2.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA3.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA3.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA4.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA4.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA5.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA5.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA6.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA6.cargaF}"> -</p:inputNumber>
+    <p:column headerText="Carga" width="13%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA1.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA1.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA2.cargaI}" ></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA2.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA3.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA3.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA4.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA4.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA5.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA5.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA6.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoA6.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Ajuste" width="46">
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA1.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA2.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA3.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA4.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA5.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA6.ajuste}"></p:inputNumber>
+    <p:column headerText="Ajuste" width="5%" style="text-align: center" >
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA1.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA2.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA3.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA4.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA5.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoA6.ajuste}"></p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Intervalo" width="100">
+    <p:column headerText="Intervalo" width="10%" style="text-align: center">
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA1.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA2.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA3.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA4.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA5.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoA6.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoA6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Cadência" width="61">
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA1.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA2.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA3.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA4.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA5.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA6.cadencia}"/>
+    <p:column headerText="Cadência" width="7%" style="text-align: center">
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA1.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA2.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA3.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA4.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA5.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoA6.cadencia}"/><br></br>
     </p:column>
     
-    <p:column headerText="Método" width="100">
-    <p:inputText size="10" value="#{treinoCreateBean.infoA1.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoA2.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoA3.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoA4.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoA5.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoA6.metodo}"></p:inputText>
-    </p:column>
-
-    <p:column headerText="Observações"> 
-    <p:inputTextarea rows="10" autoResize="false" cols="46" style="" value="#{treinoCreateBean.regiaoA.obs}"></p:inputTextarea>
+    <p:column headerText="Método" width="12%" style="text-align: center">
+    <p:inputText size="15" value="#{treinoCreateBean.infoA1.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoA2.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoA3.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoA4.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoA5.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoA6.metodo}"></p:inputText><br></br>
     </p:column>
 	</p:dataTable>
+	<p:dataTable value="">
+    	<p:column priority="1" headerText="Observações" width="auto" style="text-align:center;" >
+    	<p:inputTextarea rows="5" autoResize="true" placeholder="Digite aqui as observações..." cols="150" style="display:" value="#{treinoCreateBean.regiaoA.obs}"></p:inputTextarea>
+    	</p:column>
+    </p:dataTable>
 	</div>
 	
-	<div id="div2">
-	 <div>
-	 <ul>
-	   <li>Treino B (Dia x - Dia y)</li>
-	 </ul>
-	 </div>
-	<p:dataTable var="rows" value="" >
-	<p:column headerText="Exercicio" width="200">
-			
-			<h:selectOneMenu id="exe1" value="#{treinoCreateBean.exeB1}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+	<hr />
+		<div id="div2">
+	<h:panelGroup id="grupoB">
+		 <div>
+		   <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;  Treino B" rendered="#{treinoCreateBean.indexTreino >= 1}" style="font-size: 1.5em; font-weight: bold;"></p:outputLabel>
+		 </div>
+	<p:dataTable id="datatableB" var="rows" value="" resizeMode="true" reflow="true" rendered="#{treinoCreateBean.indexTreino >= 1}">
+	<p:column headerText="Exercicio" width="30%;">
+			<h:selectOneMenu styleClass="form-control" id="exe1" value="#{treinoCreateBean.exeB1}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
- 			
- 			<h:selectOneMenu id="exe2" value="#{treinoCreateBean.exeB2}" required="false"  style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe2" value="#{treinoCreateBean.exeB2}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe3"  value="#{treinoCreateBean.exeB3}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe3"  value="#{treinoCreateBean.exeB3}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe4"  value="#{treinoCreateBean.exeB4}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe4"  value="#{treinoCreateBean.exeB4}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe5" value="#{treinoCreateBean.exeB5}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe5" value="#{treinoCreateBean.exeB5}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe6" value="#{treinoCreateBean.exeB6}" required="false" style="width:200px; height:28px;position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe6" value="#{treinoCreateBean.exeB6}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
 			</h:selectOneMenu>
     </p:column>
     
-    <p:column headerText="Séries" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB1.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB1.seriesF}"> -</p:inputNumber>
+    <p:column headerText="Séries" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB1.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB1.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB2.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB2.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB2.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB2.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB3.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB3.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB3.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB3.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB4.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB4.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB4.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB4.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB5.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB5.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB5.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB5.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB6.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB6.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB6.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB6.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Repetições" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB1.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB1.repsF}"> -</p:inputNumber>
+    <p:column headerText="Repetições" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB1.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB1.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB2.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB2.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB2.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB2.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB3.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB3.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB3.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB3.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB4.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB4.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB4.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB4.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB5.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB5.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB5.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB5.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB6.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoB6.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB6.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoB6.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Carga" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB1.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB1.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB2.cargaI}" ></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB2.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB3.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB3.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB4.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB4.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB5.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB5.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB6.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB6.cargaF}"> -</p:inputNumber>
+    <p:column headerText="Carga" width="13%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB1.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB1.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB2.cargaI}" ></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB2.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB3.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB3.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB4.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB4.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB5.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB5.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB6.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoB6.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Ajuste" width="46">
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB1.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB2.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB3.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB4.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB5.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB6.ajuste}"></p:inputNumber>
+    <p:column headerText="Ajuste" width="5%" style="text-align: center" >
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB1.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB2.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB3.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB4.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB5.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoB6.ajuste}"></p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Intervalo" width="100">
+    <p:column headerText="Intervalo" width="10%" style="text-align: center">
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB1.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB2.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB3.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB4.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB5.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoB6.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoB6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Cadência" width="61">
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB1.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB2.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB3.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB4.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB5.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB6.cadencia}"/>
+    <p:column headerText="Cadência" width="7%" style="text-align: center">
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB1.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB2.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB3.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB4.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB5.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoB6.cadencia}"/><br></br>
     </p:column>
     
-    <p:column headerText="Método" width="100">
-    <p:inputText size="10" value="#{treinoCreateBean.infoB1.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoB2.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoB3.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoB4.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoB5.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoB6.metodo}"></p:inputText>
-    </p:column>
-
-    <p:column headerText="Observações"> 
-    <p:inputTextarea rows="10" autoResize="false" cols="46" style="" value="#{treinoCreateBean.regiaoB.obs}"></p:inputTextarea>
+    <p:column headerText="Método" width="12%" style="text-align: center">
+    <p:inputText size="15" value="#{treinoCreateBean.infoB1.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoB2.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoB3.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoB4.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoB5.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoB6.metodo}"></p:inputText><br></br>
     </p:column>
 	</p:dataTable>
+	<p:dataTable value="" rendered="#{treinoCreateBean.indexTreino >= 1}">
+    	<p:column priority="1" headerText="Observações" width="auto" style="text-align:center;" >
+    	<p:inputTextarea rows="5" autoResize="true" placeholder="Digite aqui as observações..." cols="150" style="display:" value="#{treinoCreateBean.regiaoB.obs}"></p:inputTextarea>
+    	</p:column>
+    </p:dataTable>
+    </h:panelGroup>
 	</div>
 	
-	<div id="div3">
-	 <div>
-	 <ul>
-	   <li>Treino C (Dia x - Dia y)</li>
-	 </ul>
-	 </div>
-	<p:dataTable var="rows" value="" >
-	<p:column headerText="Exercicio" width="200">
-			
-			<h:selectOneMenu id="exe1" value="#{treinoCreateBean.exeC1}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+		<hr />
+		<div id="div3">
+	<h:panelGroup id="grupoC">
+		 <div>
+		   <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;  Treino C" rendered="#{treinoCreateBean.indexTreino >= 2}" style="font-size: 1.5em; font-weight: bold;"></p:outputLabel>
+		 </div>
+	<p:dataTable id="datatableC" var="rows" value="" resizeMode="true" reflow="true" rendered="#{treinoCreateBean.indexTreino >= 2}">
+	<p:column headerText="Exercicio" width="30%;">
+			<h:selectOneMenu styleClass="form-control" id="exe1" value="#{treinoCreateBean.exeC1}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
- 			
- 			<h:selectOneMenu id="exe2" value="#{treinoCreateBean.exeC2}" required="false"  style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe2" value="#{treinoCreateBean.exeC2}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe3"  value="#{treinoCreateBean.exeC3}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe3"  value="#{treinoCreateBean.exeC3}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe4"  value="#{treinoCreateBean.exeC4}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe4"  value="#{treinoCreateBean.exeC4}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe5" value="#{treinoCreateBean.exeC5}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe5" value="#{treinoCreateBean.exeC5}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe6" value="#{treinoCreateBean.exeC6}" required="false" style="width:200px; height:28px;position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe6" value="#{treinoCreateBean.exeC6}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
 			</h:selectOneMenu>
     </p:column>
     
-    <p:column headerText="Séries" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC1.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC1.seriesF}"> -</p:inputNumber>
+    <p:column headerText="Séries" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC1.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC1.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC2.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC2.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC2.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC2.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC3.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC3.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC3.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC3.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC4.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC4.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC4.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC4.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC5.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC5.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC5.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC5.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC6.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC6.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC6.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC6.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Repetições" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC1.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC1.repsF}"> -</p:inputNumber>
+    <p:column headerText="Repetições" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC1.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC1.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+       
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC2.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC2.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC2.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC2.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC3.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC3.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC3.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC3.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC4.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC4.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC4.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC4.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC5.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC5.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC5.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC5.repsF}"> -</p:inputNumber>
-        
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC6.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoC6.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC6.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoC6.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Carga" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC1.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC1.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC2.cargaI}" ></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC2.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC3.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC3.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC4.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC4.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC5.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC5.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC6.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC6.cargaF}"> -</p:inputNumber>
+    <p:column headerText="Carga" width="13%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC1.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC1.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC2.cargaI}" ></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC2.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC3.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC3.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC4.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC4.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC5.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC5.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC6.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoC6.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Ajuste" width="46">
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC1.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC2.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC3.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC4.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC5.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC6.ajuste}"></p:inputNumber>
+    <p:column headerText="Ajuste" width="5%" style="text-align: center" >
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC1.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC2.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC3.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC4.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC5.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoC6.ajuste}"></p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Intervalo" width="100">
+    <p:column headerText="Intervalo" width="10%" style="text-align: center">
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC1.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC2.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC3.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC4.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC5.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoC6.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoC6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Cadência" width="61">
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC1.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC2.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC3.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC4.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC5.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC6.cadencia}"/>
+    <p:column headerText="Cadência" width="7%" style="text-align: center">
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC1.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC2.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC3.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC4.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC5.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoC6.cadencia}"/><br></br>
     </p:column>
     
-    <p:column headerText="Método" width="100">
-    <p:inputText size="10" value="#{treinoCreateBean.infoC1.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoC2.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoC3.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoC4.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoC5.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoC6.metodo}"></p:inputText>
-    </p:column>
-
-    <p:column headerText="Observações"> 
-    <p:inputTextarea rows="10" autoResize="false" cols="46" style="" value="#{treinoCreateBean.regiaoC.obs}"></p:inputTextarea>
+    <p:column headerText="Método" width="12%" style="text-align: center">
+    <p:inputText size="15" value="#{treinoCreateBean.infoC1.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoC2.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoC3.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoC4.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoC5.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoC6.metodo}"></p:inputText><br></br>
     </p:column>
 	</p:dataTable>
+	<p:dataTable value="" rendered="#{treinoCreateBean.indexTreino >= 2}">
+    	<p:column priority="1" headerText="Observações" width="auto" style="text-align:center;" >
+    	<p:inputTextarea rows="5" autoResize="true" placeholder="Digite aqui as observações..." cols="150" style="display:" value="#{treinoCreateBean.regiaoC.obs}"></p:inputTextarea>
+    	</p:column>
+    </p:dataTable>
+    </h:panelGroup>
 	</div>
 	
-	<div id="div4">
-	 <div>
-	 <ul>
-	   <li>Treino D (Dia x - Dia y)</li>
-	 </ul>
-	 </div>
-	<p:dataTable var="rows" value="" >
-	<p:column headerText="Exercicio" width="200">
-			
-			<h:selectOneMenu id="exe1" value="#{treinoCreateBean.exeD1}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+<hr />
+		<div id="div4">
+	<h:panelGroup id="grupoD">
+		 <div>
+		   <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;  Treino D" rendered="#{treinoCreateBean.indexTreino >= 3}" style="font-size: 1.5em; font-weight: bold;"></p:outputLabel>
+		 </div>
+	<p:dataTable id="datatableD" var="rows" value="" resizeMode="true" reflow="true" rendered="#{treinoCreateBean.indexTreino >= 3}">
+	<p:column headerText="Exercicio" width="30%;">
+			<h:selectOneMenu styleClass="form-control" id="exe1" value="#{treinoCreateBean.exeD1}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
- 			
- 			<h:selectOneMenu id="exe2" value="#{treinoCreateBean.exeD2}" required="false"  style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe2" value="#{treinoCreateBean.exeD2}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe3"  value="#{treinoCreateBean.exeD3}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe3"  value="#{treinoCreateBean.exeD3}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe4"  value="#{treinoCreateBean.exeD4}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe4"  value="#{treinoCreateBean.exeD4}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe5" value="#{treinoCreateBean.exeD5}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe5" value="#{treinoCreateBean.exeD5}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe6" value="#{treinoCreateBean.exeD6}" required="false" style="width:200px; height:28px;position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe6" value="#{treinoCreateBean.exeD6}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
 			</h:selectOneMenu>
     </p:column>
     
-    <p:column headerText="Séries" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD1.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD1.seriesF}"> -</p:inputNumber>
-       
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD2.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD2.seriesF}"> -</p:inputNumber>
+    <p:column headerText="Séries" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD1.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD1.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD3.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD3.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD2.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD2.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD4.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD4.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD3.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD3.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD5.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD5.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD4.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD4.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD6.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD6.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD5.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD5.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD6.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD6.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Repetições" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD1.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD1.repsF}"> -</p:inputNumber>
+    <p:column headerText="Repetições" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD1.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD1.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
        
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD2.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD2.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD2.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD2.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD3.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD3.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD3.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD3.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD4.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD4.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD4.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD4.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD5.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD5.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD5.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD5.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD6.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoD6.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD6.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoD6.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
- 
-    <p:column headerText="Carga" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD1.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD1.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD2.cargaI}" ></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD2.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD3.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD3.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD4.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD4.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD5.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD5.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD6.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD6.cargaF}"> -</p:inputNumber>
-    </p:column>
-    
-    <p:column headerText="Ajuste" width="46">
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD1.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD2.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD3.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD4.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD5.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD6.ajuste}"></p:inputNumber>
+
+    <p:column headerText="Carga" width="13%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD1.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD1.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD2.cargaI}" ></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD2.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD3.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD3.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD4.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD4.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD5.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD5.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD6.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoD6.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Intervalo" width="100">
+    <p:column headerText="Ajuste" width="5%" style="text-align: center" >
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD1.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD2.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD3.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD4.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD5.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoD6.ajuste}"></p:inputNumber><br></br>
+    </p:column>
+    
+    <p:column headerText="Intervalo" width="10%" style="text-align: center">
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD1.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD2.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD3.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD4.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD5.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
         <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoD6.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoD6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
     </p:column>
     
-    <p:column headerText="Cadência" width="61">
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD1.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD2.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD3.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD4.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD5.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD6.cadencia}"/>
+    <p:column headerText="Cadência" width="7%" style="text-align: center">
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD1.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD2.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD3.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD4.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD5.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoD6.cadencia}"/><br></br>
     </p:column>
     
-    <p:column headerText="Método" width="100">
-    <p:inputText size="10" value="#{treinoCreateBean.infoD1.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoD2.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoD3.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoD4.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoD5.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoD6.metodo}"></p:inputText>
-    </p:column>
-
-    <p:column headerText="Observações"> 
-    <p:inputTextarea rows="10" autoResize="false" cols="46" style="" value="#{treinoCreateBean.regiaoD.obs}"></p:inputTextarea>
+    <p:column headerText="Método" width="12%" style="text-align: center">
+    <p:inputText size="15" value="#{treinoCreateBean.infoD1.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoD2.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoD3.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoD4.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoD5.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoD6.metodo}"></p:inputText><br></br>
     </p:column>
 	</p:dataTable>
+	<p:dataTable value="" rendered="#{treinoCreateBean.indexTreino >= 3}">
+    	<p:column priority="1" headerText="Observações" width="auto" style="text-align:center;" >
+    	<p:inputTextarea rows="5" autoResize="true" placeholder="Digite aqui as observações..." cols="150" style="display:" value="#{treinoCreateBean.regiaoD.obs}"></p:inputTextarea>
+    	</p:column>
+    </p:dataTable>
+    </h:panelGroup>
 	</div>
 	
-	<div id="div1">
-	 <div>
-	 <ul>
-	   <li>Treino E (Dia x - Dia y)</li>
-	 </ul>
-	 </div>
-	<p:dataTable var="rows" value="" >
-	<p:column headerText="Exercicio" width="200">
-			
-			<h:selectOneMenu id="exe1" value="#{treinoCreateBean.exeE1}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+<hr />
+		<div id="div5">
+	<h:panelGroup id="grupoE">
+		 <div>
+		   <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;  Treino E" rendered="#{treinoCreateBean.indexTreino >= 4}" style="font-size: 1.5em; font-weight: bold;"></p:outputLabel>
+		 </div>
+	<p:dataTable id="datatableE" var="rows" value="" resizeMode="true" reflow="true" rendered="#{treinoCreateBean.indexTreino >= 4}">
+	<p:column headerText="Exercicio" width="30%;">
+			<h:selectOneMenu styleClass="form-control" id="exe1" value="#{treinoCreateBean.exeE1}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
- 			
- 			<h:selectOneMenu id="exe2" value="#{treinoCreateBean.exeE2}" required="false"  style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe2" value="#{treinoCreateBean.exeE2}" required="false" title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe3"  value="#{treinoCreateBean.exeE3}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe3"  value="#{treinoCreateBean.exeE3}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe4"  value="#{treinoCreateBean.exeE4}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe4"  value="#{treinoCreateBean.exeE4}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe5" value="#{treinoCreateBean.exeE5}" required="false" style="width:200px; height:28px; position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe5" value="#{treinoCreateBean.exeE5}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}"/>
  			</h:selectOneMenu>
  			
- 			<h:selectOneMenu id="exe6" value="#{treinoCreateBean.exeE6}" required="false" style="width:200px; height:28px;position:relative;" title="Selecione um Treino">
+ 			<h:selectOneMenu styleClass="form-control" id="exe6" value="#{treinoCreateBean.exeE6}" required="false"  title="Selecione um Treino">
 			 	<f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
 			 	<f:selectItems value="#{exercicioListBean.exercicioList}" var="exeList" itemLabel="#{exeList.titulo}" itemValue="#{exeList.titulo}" />
 			</h:selectOneMenu>
     </p:column>
     
-    <p:column headerText="Séries" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE1.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE1.seriesF}"> -</p:inputNumber>
+    <p:column headerText="Séries" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE1.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE1.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE2.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE2.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE2.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE2.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE3.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE3.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE3.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE3.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE4.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE4.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE4.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE4.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE5.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE5.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE5.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE5.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE6.seriesI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE6.seriesF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE6.seriesI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE6.seriesF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
  
-    <p:column headerText="Repetições" width="72">
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE1.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE1.repsF}"> -</p:inputNumber>
+    <p:column headerText="Repetições" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE1.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE1.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+       
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE2.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE2.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE2.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE2.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE3.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE3.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE3.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE3.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE4.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE4.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE4.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE4.repsF}"> -</p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE5.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE5.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
         
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE5.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE5.repsF}"> -</p:inputNumber>
-        
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE6.repsI}"></p:inputNumber>
-        <p:inputNumber  maxValue="99" size="1" minValue="0" value="#{treinoCreateBean.infoE6.repsF}"> -</p:inputNumber>
-    </p:column>
- 
-    <p:column headerText="Carga" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE1.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE1.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE2.cargaI}" ></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE2.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE3.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE3.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE4.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE4.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE5.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE5.cargaF}"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE6.cargaI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE6.cargaF}"> -</p:inputNumber>
-    </p:column>
-    
-    <p:column headerText="Ajuste" width="46">
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE1.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE2.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE3.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE4.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE5.ajuste}"></p:inputNumber>
-        <p:inputNumber  maxValue="360" size="2" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE6.ajuste}"></p:inputNumber>
-    </p:column>
-    
-    <p:column headerText="Intervalo" width="100">
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE1.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE2.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE3.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE4.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE5.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE6.intervaloI}"></p:inputNumber>
-        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber>
-    </p:column>
-    
-    <p:column headerText="Cadência" width="61">
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE1.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE2.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE3.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE4.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE5.cadencia}"/>
-    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE6.cadencia}"/>
-    </p:column>
-    
-    <p:column headerText="Método" width="100">
-    <p:inputText size="10" value="#{treinoCreateBean.infoE1.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoE2.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoE3.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoE4.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoE5.metodo}"></p:inputText>
-    <p:inputText size="10" value="#{treinoCreateBean.infoE6.metodo}"></p:inputText>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE6.repsI}"></p:inputNumber>
+        <p:inputNumber  maxValue="99" size="3" minValue="0" value="#{treinoCreateBean.infoE6.repsF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
     </p:column>
 
-    <p:column headerText="Observações"> 
-    <p:inputTextarea rows="10" autoResize="false" cols="46" style="" value="#{treinoCreateBean.regiaoE.obs}"></p:inputTextarea>
+    <p:column headerText="Carga" width="13%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE1.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE1.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE2.cargaI}" ></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE2.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE3.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE3.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE4.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE4.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE5.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE5.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE6.cargaI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" symbol="kg" symbolPosition="rigth" value="#{treinoCreateBean.infoE6.cargaF}">&nbsp;<b> - </b>&nbsp;</p:inputNumber><br></br>
+    </p:column>
+    
+    <p:column headerText="Ajuste" width="5%" style="text-align: center" >
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE1.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE2.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE3.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE4.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE5.ajuste}"></p:inputNumber><br></br>
+        <p:inputNumber  maxValue="360"  size="3" minValue="0" symbol="º" symbolPosition="rigth" value="#{treinoCreateBean.infoE6.ajuste}"></p:inputNumber><br></br>
+    </p:column>
+    
+    <p:column headerText="Intervalo" width="10%" style="text-align: center">
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE1.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE1.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE2.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE2.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE3.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE3.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE4.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE4.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE5.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE5.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+        <p:inputNumber  maxValue="999" size="2" minValue="0" value="#{treinoCreateBean.infoE6.intervaloI}"></p:inputNumber>
+        <p:inputNumber  maxValue="999" size="4" minValue="0" value="#{treinoCreateBean.infoE6.intervaloF}" symbol="s" symbolPosition="rigth"> -</p:inputNumber><br></br>
+    </p:column>
+    
+    <p:column headerText="Cadência" width="7%" style="text-align: center">
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE1.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE2.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE3.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE4.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE5.cadencia}"/><br></br>
+    <p:inputMask mask="9999" size="5" value="#{treinoCreateBean.infoE6.cadencia}"/><br></br>
+    </p:column>
+    
+    <p:column headerText="Método" width="12%" style="text-align: center">
+    <p:inputText size="15" value="#{treinoCreateBean.infoE1.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoE2.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoE3.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoE4.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoE5.metodo}"></p:inputText><br></br>
+    <p:inputText size="15" value="#{treinoCreateBean.infoE6.metodo}"></p:inputText><br></br>
     </p:column>
 	</p:dataTable>
+	<p:dataTable value="" rendered="#{treinoCreateBean.indexTreino >= 4}">
+    	<p:column priority="1" headerText="Observações" width="auto" style="text-align:center;" >
+    	<p:inputTextarea rows="5" autoResize="true" placeholder="Digite aqui as observações..." cols="150" style="display:" value="#{treinoCreateBean.regiaoE.obs}"></p:inputTextarea>
+    	</p:column>
+    </p:dataTable>
+    </h:panelGroup>
 	</div>
+	
+	<hr/>
+	<p:commandButton value="+" id="plus"  disabled="#{treinoCreateBean.indexTreino > 3}">
+		<f:ajax listener="#{treinoCreateBean.incremetaTreino}" render="plus less #{treinoCreateBean.render}"></f:ajax>
+	</p:commandButton>
+	<p:commandButton id="less" value="-" disabled="#{treinoCreateBean.indexTreino le 0}">
+		<f:ajax listener="#{treinoCreateBean.decrementaTreino}" render="#{treinoCreateBean.derender} plus less"></f:ajax>
+	</p:commandButton>
+	
 	
 	<div>	
-		<p:commandButton value="Salvar" type="submit" action="#{treinoCreateBean.create}" style= "left:45%; margin-top:30px; width:100px; background-color:red; border-color:red;" ></p:commandButton>
+		<p:commandButton value="Salvar" type="submit" action="#{treinoCreateBean.create}" style="left:45%; margin-top:30px; width:100px; background-color:#e53238; border-color:red;" ></p:commandButton>
 		<p:button outcome="index" value="Cancelar" style="left:45%; margin-top:30px; width:100px; background-color:black; border-color:black;"></p:button>
 	</div>
-	 </o:form>
-	 
-	 	<div class="copyright">
-			<div class="copy">
-				<p>
-					© 2018 PersonalAplication developed by <a href="www.facebook.com.br/caiotorrez" target="_blank" > CaioTorrez</a>
-				</p>
-			</div>
-			<div class="clear"></div>
 	</div>
-	 </h:body>
-	 </ui:define>
-	 </ui:composition>
+	</h:form>
+	</main>
+
+	<footer class="footer navbar-fixed-bottom">
+	  <div class="container">
+		<p class="text-center">Copyright - 2018 | Personal Application by <a href="#">Caio Torrez</a></p>
+	  </div>
+	</footer>
+
+	</h:body>
+	</html>

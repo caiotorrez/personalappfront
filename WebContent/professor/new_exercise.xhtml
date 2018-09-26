@@ -31,10 +31,11 @@
 					<h5 class="dropdown-header" style="align-self: flex-end;">Listar</h5>
 					<li><h:link value="Alunos" outcome="alunos.xhtml"></h:link></li>
 					<li><h:link value="Exercícios" outcome="exercise.xhtml"></h:link></li>
+					<li><h:link value="Fichas de Treino" outcome="fichas.xhtml"></h:link></li>
 					<h4 class="dropdown-header" style="align-self: flex-end;">Cadastrar</h4>
-					<li><h:link value="Alunos" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Fichas de Treino" outcome="treino.xhtml"></h:link></li>
-					<li><h:link value="Exercícios" outcome="treino.xhtml"></h:link></li>
+					<li><h:link value="Alunos" outcome="registro.xhtml"></h:link></li>
+					<li><h:link value="Ficha de Treino" outcome="treinoabcd.xhtml"></h:link></li>
+					<li><h:link value="Exercício" outcome="new_exercise.xhtml"></h:link></li>
 				</ul>
 			</nav>
 		</header>
@@ -82,23 +83,23 @@
   	<div class="form-row">
     <div class="col-md-4 mb-3">
       <p:outputLabel for="titulo" value="Nome do Exercício"></p:outputLabel>
-      <p:inputText  style="#{exercicioCreateBean.exercicio.titulo == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="titulo" placeholder="Nome do exercício" value="#{exercicioCreateBean.exercicio.titulo}" required="true" requiredMessage="Insira o nome do exercício">
-<!--        	<f:ajax event="blur" render="nome-completo"></f:ajax> -->
+      <p:inputText  style="#{validatorExercicioBuild.exercicioNomeIsValid}" styleClass="form-control" id="titulo" placeholder="Nome do exercício" value="#{exercicioCreateBean.exercicio.titulo}" required="true" requiredMessage="Insira o nome do exercício" validatorMessage="Título já existente no sistema" validator="#{validatorExercicioBuild.validarNomeExercicio}">
+       	<f:ajax event="blur" render="titulo"></f:ajax>
       </p:inputText>
     </div>
     <div class="col-md-4 mb-3">
       <p:outputLabel for="regiao" value="Região Muscular"></p:outputLabel>
       <div class="input-group">
-        <p:inputText style="#{exercicioCreateBean.exercicio.regiao == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="regiao" placeholder="Região muscular" value="#{exercicioCreateBean.exercicio.regiao}" required="true" requiredMessage="Insira a região da musculatura">
-<!--         <f:ajax event="blur" render="email"></f:ajax> -->
+        <p:inputText style="#{exercicioCreateBean.exercicio.regiao == null ? '' : 'border-color:blue'}" styleClass="form-control" id="regiao" placeholder="Região muscular" value="#{exercicioCreateBean.exercicio.regiao}" required="true" requiredMessage="Insira a região da musculatura">
+	        <f:ajax event="blur" render="regiao "></f:ajax>
         </p:inputText>
       </div>
     </div>
     <div class="col-md-4 mb-3">
       <p:outputLabel for="descricao" value="Descrição do Exercício"></p:outputLabel>
       <div class="input-group">
-        <p:inputText style="#{exercicioCreateBean.exercicio.descricao == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="descricao" placeholder="Descrição do exercício" value="#{exercicioCreateBean.exercicio.descricao}" required="true" requiredMessage="Insira a descrição do exercício">
-<!--         <f:ajax event="blur" render="email"></f:ajax> -->
+        <p:inputText style="#{exercicioCreateBean.exercicio.descricao == null ? '' : 'border-color:blue'}" styleClass="form-control" id="descricao" placeholder="Descrição do exercício" value="#{exercicioCreateBean.exercicio.descricao}" required="true" requiredMessage="Insira a descrição do exercício">
+	        <f:ajax event="blur" render="descricao"></f:ajax>
         </p:inputText>
       </div>
     </div>
@@ -108,23 +109,23 @@
     <div class="col-md-4 mb-3">
       <p:outputLabel for="url-video" value="URL do Vídeo"></p:outputLabel>
       <div class="input-group">
-        <p:inputText style="#{exercicioCreateBean.exercicio.urlVideo == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="url-video" placeholder="URL do vídeo" value="#{exercicioCreateBean.exercicio.urlVideo}" required="true" requiredMessage="Insira a url do vídeo.">
-<!--         <f:ajax event="blur" render="email"></f:ajax> -->
+        <p:inputText style="#{validatorExercicioBuild.urlIsValid}" styleClass="form-control" id="url-video" placeholder="URL do vídeo" value="#{exercicioCreateBean.exercicio.urlVideo}" required="true" requiredMessage="Insira a url do vídeo." validator="#{validatorExercicioBuild.validarUrlsExercicio}">
+	        <f:ajax event="blur" render="url-video"></f:ajax>
         </p:inputText>
       </div>
     </div>
      <div class="col-md-4 mb-3">
       <p:outputLabel for="url-texto" value="URL dos Destalhes em Texto"></p:outputLabel>
       <div class="input-group">
-        <p:inputText style="#{exercicioCreateBean.exercicio.urlDetalhes == null ? 'border-color:red' : 'border-color:blue'}" styleClass="form-control" id="url-texto" placeholder="URL dos detalhes em texto" value="#{exercicioCreateBean.exercicio.urlDetalhes}" required="true" requiredMessage="Insira a url dos detalhes em texto">
-<!--         <f:ajax event="blur" render="email"></f:ajax> -->
+        <p:inputText style="#{exercicioCreateBean.exercicio.urlDetalhes == null ? '' : 'border-color:blue'}" styleClass="form-control" id="url-texto" placeholder="URL dos detalhes em texto" value="#{exercicioCreateBean.exercicio.urlDetalhes}" required="true" requiredMessage="Insira a url dos detalhes em texto">
+	        <f:ajax event="blur" render="url-texto"></f:ajax>
         </p:inputText>
       </div>
     </div>
    </div>
        <p:outputLabel for="upload-posterior" value="Insira uma Imagem do Exercício"></p:outputLabel>
    		<p:fileUpload id="upload-posterior" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{exercicioCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
-    		invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)" />
+    		allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="São permitidas somente imagens (jpeg, jpg e png)" />
    
    <hr />
   <p:commandButton styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>

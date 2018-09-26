@@ -5,6 +5,7 @@ function limpa_formulário_cep() {
 	document.getElementById('cidade').value = ("");
 	document.getElementById('uf').value = ("");
 	document.getElementById('ibge').value = ("");
+	document.getElementById('form:cep').value = ("");
 }
 
 function meu_callback(conteudo) {
@@ -23,6 +24,11 @@ function meu_callback(conteudo) {
 	}
 }
 
+$(document).ready(function() {
+	$("#form\\:cep").mask("00000-000")
+	$("#form\\:phone").mask("(00)0.0000-0000")
+	})
+	
 function nomeia(nome) {
 	if (nome != "") {
 	var nome = nome.trim();
@@ -68,11 +74,12 @@ function pesquisacep(valor) {
 		else {
 			//cep é inválido.
 			limpa_formulário_cep();
-			alert("Formato de CEP inválido.");
+			return null;
 		}
 	} //end if.
 	else {
 		//cep sem valor, limpa formulário.
 		limpa_formulário_cep();
+		return null;
 	}
 };

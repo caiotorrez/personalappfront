@@ -1,16 +1,15 @@
 package com.personalapp.bean.aluno;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
-import org.primefaces.event.SelectEvent;
 
 import com.personalapp.config.ExceptionHandler;
 import com.personalapp.model.Aluno;
@@ -37,6 +36,7 @@ public class AlunoEditBean implements Serializable {
 
 	@ExceptionHandler
 	public String update() {
+		System.out.println(this.email);
 		this.alunoDao.update(this.aluno);
 		Messages.create("O Aluno {0} foi adcionado com sucesso!", this.aluno.getNome()).flash().add();
 		return "alunos.xhtml?faces-redirect=true";
@@ -58,9 +58,14 @@ public class AlunoEditBean implements Serializable {
 		this.email = email;
 	}
 	
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
+	public String getData() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(aluno.getData());
+	}
+	
+	public void setData(String event) throws ParseException {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = formato.parse(event);
+		this.aluno.setData(data);
+	}
 }
