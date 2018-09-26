@@ -10,7 +10,6 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.personalapp.model.ApplicationUser;
 import com.personalapp.repository.AlunoDao;
 
 @SuppressWarnings("serial")
@@ -86,9 +85,7 @@ public class ValidatorRegister implements Serializable {
 	
 	public void validarUsername(FacesContext context, UIComponent component, Object o) throws ValidatorException {
 		String username = (String) o;
-		ApplicationUser user = new ApplicationUser();
-		user.setUsername(username);
-		if (username == null || username.trim().equals("") || this.alunoDao.check(user) != null) {
+		if (username == null || username.trim().equals("")) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário inválido ou  já cadastrado", "");
 			this.usernameIsValid = "border-color:red";
 			throw new ValidatorException(message);

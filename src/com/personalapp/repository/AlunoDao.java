@@ -65,7 +65,8 @@ public class AlunoDao implements Serializable {
     
     @ExceptionHandler
     public ApplicationUser check(ApplicationUser user) {
-    	user.setUsername(user.getUsername().trim());
-    	return this.restTemplate.exchange(ALUNOS_URL + "/check", POST, this.jsonUtil.tokenizedHttpEntityHeader(user), ApplicationUser.class).getBody();
+    	ApplicationUser userDB = this.restTemplate.exchange(ALUNOS_URL + "/check", POST, this.jsonUtil.tokenizedHttpEntityHeader(user), ApplicationUser.class).getBody();
+    	System.out.println(userDB.getUsername());
+    	return userDB;
     }
 }

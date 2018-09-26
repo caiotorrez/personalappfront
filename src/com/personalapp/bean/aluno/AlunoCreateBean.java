@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -24,7 +23,6 @@ public class AlunoCreateBean implements Serializable {
 	private final AlunoDao alunoDao;
 	private Aluno aluno = new Aluno();
 	private String data;
-	private String cep;
 	
 	@Inject
 	public AlunoCreateBean(AlunoDao alunoDao) {
@@ -51,6 +49,17 @@ public class AlunoCreateBean implements Serializable {
 
 	public String getData() {
 		return this.data;
+	}
+	
+	public String getUsername() {
+		if (this.aluno.getNome() != null) {
+			ApplicationUser user = new ApplicationUser();
+			user.setUsername(this.aluno.getNome().trim());
+			String username = this.alunoDao.check(user).getUsername();
+			System.out.println(username);
+			return username;
+		}
+		return "";
 	}
 
 	public void setData(String event) throws ParseException {

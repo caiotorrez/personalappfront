@@ -85,8 +85,8 @@
   	<div class="form-row">
     <div class="col-md-4 mb-3">
       <p:outputLabel for="nome-completo">Nome Completo</p:outputLabel>
-      <p:inputText style="#{validatorRegister.usernameIsValid}" styleClass="form-control" id="nome-completo" placeholder="Nome completo" value="#{alunoCreateBean.aluno.nome}" validator="#{validatorRegister.validarUsername}" required="true" onblur="nomeia(this.value);" requiredMessage="Insira o nome do cliente">
-       	<f:ajax event="blur" render="nome-completo"></f:ajax>
+      <p:inputText style="#{validatorRegister.usernameIsValid}" styleClass="form-control" id="nome-completo" placeholder="Nome completo" value="#{alunoCreateBean.aluno.nome}" validator="#{validatorRegister.validarUsername}" required="true" requiredMessage="Insira o nome do cliente">
+       	<f:ajax event="blur" render="nome-completo user"></f:ajax>
       </p:inputText>
     </div>
     <div class="col-md-4 mb-3">
@@ -101,9 +101,10 @@
       </div>
     </div>
     <div class="col-md-3 mb-3">
-      <label for="user">Usuário</label>
-      <input type="text" class="form-control" id="user" placeholder="Usuário" value="" readonly="readonly">
-      </input>
+      <p:outputLabel for="user" value="Usuário"></p:outputLabel>
+      <p:inputText id="user" styleClass="form-control" placeholder="Usuário" value="#{alunoCreateBean.username}" readonly="true" disabled="true"></p:inputText>
+<!--       <input type="text" class="form-control" id="user" placeholder="Usuário" value="" readonly="readonly"> -->
+<!--       </input> -->
     </div>
   </div>
   
