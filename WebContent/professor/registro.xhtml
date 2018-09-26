@@ -168,8 +168,9 @@
     <input name="ibge" type="text" id="ibge" size="8" hidden="true"></input><br/>
   </div>
    <hr />
+   <p:defaultCommand target="btn-register"></p:defaultCommand>
   <p:commandButton styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
-  <p:commandButton styleClass="btn btn-primary"  value="Cadastrar Aluno" update="@form" action="#{alunoCreateBean.create(fasle)}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+  <p:commandButton id="btn-register" styleClass="btn btn-primary"  value="Cadastrar Aluno" update="@form" action="#{alunoCreateBean.create(fasle)}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
   <p:commandButton styleClass="btn btn-primary"  value="Ficha de Avaliação" iconPos="rigth" icon="ui-icon-triangle-1-e" action="#{alunoCreateBean.create(true)}" ><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
 </h:form>
      

@@ -421,6 +421,7 @@ public class TreinoCreateBean implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+		System.out.println(email);
 	}
 	
 	public void setExeA1(String titulo) {

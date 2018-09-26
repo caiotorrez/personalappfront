@@ -82,26 +82,25 @@
 	
 	<main>
 	 <h:form id="form" class="needs-validation" >
-<!-- 	  	 <p:message id="messagex"></p:message> -->
 	  <div class="jumbotron container-fluid" style="margin-top: -40px;">
-<!-- 	  	 <p:growl id="growl"></p:growl> -->
+	  	 <p:messages autoUpdate="true" ></p:messages>
 	   	<div class="form-row">
 	   	<div class="col-md-3 mb-3">
 	   		<h5><p:outputLabel style="margin-rigth:30px;" for="listaAlunos" value="Associar treino ao aluno :"/></h5>
-	   			<h:selectOneMenu styleClass="form-control" id="listaAlunos" value="#{treinoCreateBean.email}" required="true" requiredMessage="É nescessário associar o treino a um aluno.">
-			 		<f:selectItem itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="" noSelectionOption="true" />
-			 		<f:selectItems itemDisabled="#{treinoCreateBean.email != null ? true : false}" value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
+	   			<h:selectOneMenu  styleClass="form-control" id="listaAlunos" value="#{treinoCreateBean.email}" required="treinoCreateBean.email != null" requiredMessage="É nescessário associar o treino a um aluno.">
+			 		<f:selectItem  itemLabel="#{treinoCreateBean.email == null ? '' : treinoCreateBean.nome}" itemValue="#{treinoCreateBean.email}" />
+			 		<f:selectItems itemDisabled="#{treinoCreateBean.email != null}" value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{treinoCreateBean.email != null ? '' :  alunList.email}"/>
  				</h:selectOneMenu>
  		</div>
  		</div>
  		<div class="form-row">
 	   	<div class="col-md-2 mb-1">
  			<p:outputLabel for="button" value="Inicio:"/><br></br>
-        	<p:calendar id="button" value="#{treinoCreateBean.fichaDeTreino.inicioDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
+        	<p:calendar id="button" readonlyInput="true" placeholder="dd/mm/yyyy" value="#{treinoCreateBean.fichaDeTreino.inicioDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
         </div>
         <div class="col-md-2 mb-1">
  			<p:outputLabel for="button2" style="margin-left:5px;"  value="Fim:"/>
-        	<p:calendar id="button2" value="#{treinoCreateBean.fichaDeTreino.fimDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
+        	<p:calendar id="button2" readonlyInput="true" placeholder="dd/mm/yyyy" value="#{treinoCreateBean.fichaDeTreino.fimDoTreino}" pattern="dd/MM/yyyy" showOn="button" size="21" required="true" requiredMessage="Escolha uma data."/>
 		</div>
 	</div>
 	 <hr/>
@@ -845,8 +844,8 @@
 	
 	
 	<div>	
-		<p:commandButton value="Salvar" type="submit" action="#{treinoCreateBean.create}" style="left:45%; margin-top:30px; width:100px; background-color:#e53238; border-color:red;" ></p:commandButton>
-		<p:button outcome="index" value="Cancelar" style="left:45%; margin-top:30px; width:100px; background-color:black; border-color:black;"></p:button>
+		<p:commandButton value="Salvar" update="@form" type="submit" action="#{treinoCreateBean.create}" style="left:45%; margin-top:30px; width:100px; background-color:#e53238; border-color:red;" ><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+		<p:commandButton action="index.xhtml?faces-redirect=true" immediate="true" value="Cancelar" style="left:45%; margin-top:30px; width:100px; background-color:black; border-color:black;"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
 	</div>
 	</div>
 	</h:form>
