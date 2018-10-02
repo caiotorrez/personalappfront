@@ -1,15 +1,14 @@
 package com.personalapp.bean.user.view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.primefaces.context.PrimeFacesContext;
 
 import com.personalapp.config.ExceptionHandler;
 import com.personalapp.model.Aluno;
@@ -28,16 +27,72 @@ public class TreinoViewBean implements Serializable {
 	private final AlunoDao alunoDao;
 	private final ExternalContext externalContext;
 	private Aluno aluno;
+	private String email = "";
+	private int i;
+	private Exercicio exercicio = new Exercicio();
+	private List<Exercicio> exeA;
+
+	public List<Exercicio> getExeA() {
+		return exeA;
+	}
+
+	public void setExeA(List<Exercicio> exeA) {
+		this.exeA = exeA;
+	}
+	
+	public void setI(int i) {
+		this.i = i;
+	}
+	
+	public int getI() {
+		return this.i;
+	}
+	
+	public void setExercicio(Exercicio exercicio) {
+		this.exercicio = exercicio;
+	}
+	
+	public Exercicio getExercicio() {
+		return this.exercicio;
+	}
+	
 
 	@Inject
 	public TreinoViewBean(AlunoDao alunoDao, ExternalContext externalContext) {
 		this.externalContext = externalContext;
 		this.alunoDao = alunoDao;
+		this.aluno = alunoDao.findOne("caio.torres@ccc.ufcg.edu.br");
+		
 	}
 	
 	@ExceptionHandler
+//	@PostConstruct
 	public void init(String username) {
 		this.aluno = this.alunoDao.findAluno(username);
+		this.exeA = this.listExercicioA();
+	}
+	
+//	@PostConstruct
+//	public void relist() {
+//		this.exeA = this.containsTreino("A") ? listExercicioA() : null;
+//	}
+	
+	@PostConstruct
+	public void searchTreino() throws IOException {
+//		if (this.email == null || this.email.trim().equals("")) {
+//			this.externalContext.redirect(this.externalContext.getApplicationContextPath());
+//		} else {
+			this.aluno = this.alunoDao.findOne("caio.torres@ccc.ufcg.edu.br");
+			this.exeA = this.listExercicioA();
+//		}
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return this.email;
 	}
 	
 	public boolean containsTreino(String letter) {
@@ -45,7 +100,7 @@ public class TreinoViewBean implements Serializable {
 			return false;
 		}
 		if (letter.toUpperCase().equals("A")) {
-			return this.aluno.getFichaDeTreino().getTreinoA() != null;
+			return this.alunoDao.findOne("caio.torres@ccc.ufcg.edu.br").getFichaDeTreino().getTreinoA() != null;
 		}
 		if (letter.toUpperCase().equals("B")) {
 			return this.aluno.getFichaDeTreino().getTreinoB() != null;
@@ -60,7 +115,8 @@ public class TreinoViewBean implements Serializable {
 	}
 
 	public List<Exercicio> listExercicioA() {
-		return gerador.buildListExerciciosA(this.aluno.getFichaDeTreino());
+		this.exeA = gerador.buildListExerciciosA(this.alunoDao.findOne("caio.torres@ccc.ufcg.edu.br").getFichaDeTreino());
+		return this.exeA;
 	}
 	public List<Exercicio> listExercicioB() {
 		return gerador.buildListExerciciosB(this.aluno.getFichaDeTreino());
@@ -80,8 +136,4 @@ public class TreinoViewBean implements Serializable {
 		return geradorInfos.buildListInfosA(this.aluno.getFichaDeTreino());
 	}
 	
-    public void showMessage() {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "What we do in life", "Echoes in eternity.");
-        System.out.println(PrimeFacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap());
-    }
 }

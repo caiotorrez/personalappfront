@@ -35,7 +35,6 @@ public class ProfessorViewBean implements Serializable {
 		if (this.professor == null) {
 			this.externalContext.invalidateSession();
 		}
-		
 	}
 	
 	public Professor getProfessor() {

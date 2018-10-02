@@ -36,7 +36,7 @@
 		<div class="table1">
 				<h3><p:outputLabel value="#{treinoViewBean.containsTreino('A') ? 'Treino A' : ''}"></p:outputLabel></h3>
 				
-				<p:dataTable 	 rowKey="row" rendered="#{treinoViewBean.containsTreino('A')}" value="#{treinoViewBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+				<p:dataTable rowKey="row" rendered="#{treinoViewBean.containsTreino('A')}" value="#{treinoViewBean.listExercicioA()}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
 					<p:column priority="1" headerText="Exercício" width="40" style="text-align: left" >
 						<p:outputLabel value="#{fichaDeTreinoA.titulo}"></p:outputLabel>
 <!-- 							 <p:dialog header="#{fichaDeTreinoA.titulo}" widgetVar="dlg" modal="true" -->

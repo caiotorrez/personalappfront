@@ -33,7 +33,9 @@ public class AlunoCreateBean implements Serializable {
 	public String create(boolean flag) throws ValidatorException {
 		if (this.alunoDao.findOne(this.aluno.getEmail()) == null) {
 			this.alunoDao.save(this.aluno);
-			return flag ? "medidas.xhtml?email=" + this.aluno.getEmail().replaceAll("@", "%40") + "&nome=" + this.aluno.getNome().replaceAll(" ", "+") + "faces-redirect=true": "alunos.xhtml?faces-redirect=true";
+			return flag ? 
+					"medidas.xhtml?email=" + this.aluno.getEmail().replaceAll("@", "%40") + "&nome=" + this.aluno.getNome().replaceAll(" ", "+") + "faces-redirect=true"
+					: "alunos.xhtml?faces-redirect=true";
 		} 
 		return null;
 	}
@@ -56,7 +58,6 @@ public class AlunoCreateBean implements Serializable {
 			ApplicationUser user = new ApplicationUser();
 			user.setUsername(this.aluno.getNome().trim());
 			String username = this.alunoDao.check(user).getUsername();
-			System.out.println(username);
 			return username;
 		}
 		return "";

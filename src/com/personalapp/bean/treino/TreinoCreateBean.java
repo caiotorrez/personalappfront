@@ -163,26 +163,34 @@ public class TreinoCreateBean implements Serializable {
 			R1.setId(R1.getId());
 			this.fichaDeTreino.setTreinoA(R1);
 		}
-		RegiaoMuscular R2 = this.regiaoDao.save(regiaoB);
-		if (R2 != null) {
-			R2.setId(R2.getId());
-			this.fichaDeTreino.setTreinoB(R2);
+		if (this.indexRederizacaoTreinos == 1) {
+			RegiaoMuscular R2 = this.regiaoDao.save(regiaoB);
+			if (R2 != null) {
+				R2.setId(R2.getId());
+				this.fichaDeTreino.setTreinoB(R2);
+			}
 		}
-		RegiaoMuscular R3 = this.regiaoDao.save(regiaoC);
-		if (R3 != null) {
-			R3.setId(R3.getId());
-			this.fichaDeTreino.setTreinoC(R3);
+		if (this.indexRederizacaoTreinos == 2) {
+			RegiaoMuscular R3 = this.regiaoDao.save(regiaoC);
+			if (R3 != null) {
+				R3.setId(R3.getId());
+				this.fichaDeTreino.setTreinoC(R3);
+			}
 		}
-		RegiaoMuscular R4 = this.regiaoDao.save(regiaoD);
-		if (R4 != null) {
-			R4.setId(R4.getId());
-			this.fichaDeTreino.setTreinoD(R4);
+		if (this.indexRederizacaoTreinos == 3) {
+			RegiaoMuscular R4 = this.regiaoDao.save(regiaoD);
+			if (R4 != null) {
+				R4.setId(R4.getId());
+				this.fichaDeTreino.setTreinoD(R4);
+			}
 		}
-		RegiaoMuscular R5 = this.regiaoDao.save(regiaoE);
-		if (R5 != null) {
-			R5.setId(R5.getId());
-			this.fichaDeTreino.setTreinoE(R5);
-		}		
+		if (this.indexRederizacaoTreinos == 4) {
+			RegiaoMuscular R5 = this.regiaoDao.save(regiaoE);
+			if (R5 != null) {
+				R5.setId(R5.getId());
+				this.fichaDeTreino.setTreinoE(R5);
+			}
+		}
 	}
 	
 	private void buildInfos() {
@@ -421,7 +429,6 @@ public class TreinoCreateBean implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-		System.out.println(email);
 	}
 	
 	public void setExeA1(String titulo) {

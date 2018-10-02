@@ -124,7 +124,7 @@
     </div>
    </div>
        <p:outputLabel for="upload-posterior" value="Insira uma Imagem do Exercício"></p:outputLabel>
-   		<p:fileUpload id="upload-posterior" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{exercicioCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
+   		<p:fileUpload id="upload-posterior" auto="true" fileLimitMessage="Arquivo excede o limite de upload" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{exercicioCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
     		allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="São permitidas somente imagens (jpeg, jpg e png)" />
    
    <hr />
