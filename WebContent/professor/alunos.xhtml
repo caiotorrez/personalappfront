@@ -117,7 +117,7 @@
 		</p:column>
 		
 		<p:column headerText="Ficha de Treino" width="10" style="text-align: center">
-		<b><h:link rendered="#{alunoList.fichaDeTreino != null}" value="#{alunoList.fichaDeTreino.titulo}" outcome="treinoabcd">
+		<b><h:link rendered="#{alunoList.fichaDeTreino != null}" value="#{alunoList.fichaDeTreino.titulo}" outcome="treino">
 		<f:param name="email" value="#{alunoList.email}" />
 		</h:link>
 		<h:link rendered="#{alunoList.fichaDeTreino == null}" value="Criar Treino" outcome="treinoabcd">

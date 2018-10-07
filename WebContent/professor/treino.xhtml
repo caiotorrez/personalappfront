@@ -18,6 +18,10 @@
         <link rel="stylesheet" href="../resources/css/footer-head.css"/>
         <link rel="stylesheet" href="../resources/css/bootstrap.css"></link>
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   		<f:metadata>
+		<f:viewParam id="emailParam" name="email" value="#{treinoViewBean.email}" required="false"></f:viewParam>
+		<f:viewAction action="#{treinoViewBean.searchTreino()}"/>
+	</f:metadata>
     </h:head>
     <h:body styleClass="backgroud-body" style="background-color: #263238;">
 	    <nav id="navigator-body" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -78,11 +82,18 @@
 	  
       <div class="jumbotron container-fluid" style="margin-top: -40px;">
           	<h:form id="form" styleClass="form-inline">                
-			<h:inputText id="ii" value="#{treinoViewBean.i}" required="true">
-			</h:inputText>
+			   	<div class="col-md-3 mb-3">
+			   		<h5><p:outputLabel style="margin-rigth:30px;" for="listaAlunos" value="Associar treino ao aluno :"/></h5>
+					 		<f:ajax render="@all">
+					 		<h:selectOneMenu  styleClass="form-control" id="listaAlunos" value="#{treinoViewBean.email}" required="true" requiredMessage="É nescessário associar o treino a um aluno.">
+					 		<f:selectItem id="selected" itemLabel="" itemValue=""></f:selectItem>
+					 		<f:selectItems value="#{alunoListBean.alunosList}" var="alunList" itemLabel="#{alunList.nome}" itemValue="#{alunList.email}"/>
+		 				</h:selectOneMenu>
+					 		</f:ajax>
+		 		 </div>
             <div class="table1">
-				<h3><p:outputLabel value="#{treinoViewBean.containsTreino('A') ? 'Treino A' : ''}"></p:outputLabel></h3><br></br><br></br>
-				<p:dataTable id="data" selectionMode="single" selection="#{treinoViewBean.exercicio}" rowKey="#{fichaDeTreinoA.imagem}" value="#{treinoViewBean.exeA}" rendered="#{treinoViewBean.containsTreino('A')}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
+				<h3><p:outputLabel rendered="#{treinoViewBean.containsTreino('A')}" value="Treino A"></p:outputLabel></h3><br></br><br></br>
+				<p:dataTable  id="data" selectionMode="single" selection="#{treinoViewBean.exercicio}" rowKey="#{fichaDeTreinoA.imagem}" value="#{treinoViewBean.listExercicioA()}" rendered="#{treinoViewBean.containsTreino('A')}" var="fichaDeTreinoA" tabindex="integer" rowIndexVar="index">
 					<p:ajax event="rowSelect" update="form" oncomplete="PF('dlg').show();"></p:ajax>
 					<p:column id="titulo-id" priority="1" headerText="Exercício" width="40" style="text-align: left" >
 						<h:outputText immediate="true" value="#{fichaDeTreinoA.titulo}"></h:outputText>
@@ -109,9 +120,9 @@
 						<p:button href="#{fichaDeTreinoA.urlVideo}" target="_blank" icon="ui-icon-info" title="Texto Descritivo"></p:button>
 					</p:column>
 				</p:dataTable>
-				<p:dataTable value="#{alunoEditBean.aluno.fichaDeTreino.treinoA}" var="obsA" emptyMessage="Sem Observações">
-				<p:column priority="1" headerText="Observações" width="auto"  >
-						 <h:outputText value="#{obsA.obs == '' ? 'Sem observações' : obsA.obs}"/>
+				<p:dataTable rendered="#{treinoViewBean.containsTreino('A')}" value="x" emptyMessage="Sem Observações">
+				<p:column priority="1" headerText="Observações" width="auto" style="text-align: center">
+						 <h:outputText value="#{treinoViewBean.getObs('A') == '' ? 'Sem observações' : treinoViewBean.getObs('A')}"/>
 					</p:column>
 				</p:dataTable>
 			
