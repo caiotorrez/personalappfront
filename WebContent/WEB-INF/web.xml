@@ -63,18 +63,9 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>
  
-<!-- <filter> -->
-<!--     <filter-name>primeFacesFileUploadFilter</filter-name> -->
-<!--     <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class> -->
-<!-- </filter> -->
-<!-- <filter-mapping> -->
-<!--     <filter-name>primeFacesFileUploadFilter</filter-name> -->
-<!--     <servlet-name>facesServlet</servlet-name> -->
-<!-- </filter-mapping> -->
 <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.personalapp.filter.LoginFilter</filter-class>
-<!--     <url-pattern>/faces/Html/Employee/*</url-pattern> -->
 </filter>
 <filter-mapping>
     <filter-name>LoginFilter</filter-name>
