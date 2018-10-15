@@ -1,4 +1,4 @@
-package com.personalapp.bean.user.view;
+package com.personalapp.bean.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;

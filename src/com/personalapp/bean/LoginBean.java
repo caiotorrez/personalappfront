@@ -50,7 +50,7 @@ public class LoginBean implements Serializable {
     
     public String logout() throws IOException {
     	this.session = null;
-        removeTokenAndExpirationTimeFromCookies();
+        this.removeTokenAndExpirationTimeFromCookies();
         this.externalContext.responseReset();
         this.externalContext.invalidateSession();
         return "/login.xhtml?faces-redirect=true";

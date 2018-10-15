@@ -124,12 +124,13 @@
     </div>
    </div>
        <p:outputLabel for="upload-posterior" value="Insira uma Imagem do Exercício"></p:outputLabel>
-   		<p:fileUpload id="upload-posterior" auto="true" fileLimitMessage="Arquivo excede o limite de upload" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{exercicioCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
-    		allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="São permitidas somente imagens (jpeg, jpg e png)" />
+   		<p:fileUpload id="upload-posterior" auto="false" fileLimitMessage="Arquivo excede o limite de upload" multiple="false" fileLimit="5000" value="#{medidasCreateBean.file2}"  fileUploadListener="#{exercicioCreateBean.fileUploadListener}" cancelLabel="Cancelar" label="Selecionar Imagem" mode="advanced" skinSimple="true"
+    		required="true"  requiredMessage="Insira uma imagem correspondente ao exercício" allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="São permitidas somente imagens (jpeg, jpg e png)" />
    
    <hr />
-  <p:commandButton styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
-  <p:commandButton styleClass="btn btn-primary"  value="Cadastrar Exercício" update="@form" action="#{exercicioCreateBean.create()}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+ 
+  <p:commandButton  styleClass="btn btn-primary" value="Voltar" immediate="true" action="index.xhtml?faces-redirect=true" type="submit" icon="ui-icon-triangle-1-w" title="Voltar a Página Inicial"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
+  <p:commandButton renderDisabledClick="true" styleClass="btn btn-primary"  value="Cadastrar Exercício" update="@form" action="#{exercicioCreateBean.create()}"><f:ajax render="@all" resetValues="true"></f:ajax></p:commandButton>
 </h:form>
      
 		
@@ -144,5 +145,15 @@
 		
 		</footer>
 	</h:body>
+	<script type="text/javascript">
+	$(document).keypress(function(event){
+	
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+		return;	
+	}
+	
+});
+	</script>
 </html>
 		

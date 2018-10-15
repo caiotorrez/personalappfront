@@ -35,13 +35,6 @@
 	</repositories>        
 
   <dependencies>
-        <!-- <dependency> -->
-        <!--    <groupId>javax.servlet</groupId> -->
-        <!--    <artifactId>jstl</artifactId> -->
-        <!--    <version>1.2</version> -->
-        <!-- </dependency> -->
-
-    <!-- Mojarra JSF 2.2.6 -->
     <dependency>
         <groupId>org.glassfish</groupId>
         <artifactId>javax.faces</artifactId>
@@ -217,16 +210,6 @@
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
-      <plugin>
-        <groupId>org.wildfly.plugins</groupId>
-        <artifactId>wildfly-maven-plugin</artifactId>
-        <version>${wildfly-maven-plugin.version}</version>
-        <configuration>
-          <server-args>
-            <server-arg>-Djboss.http.port=8080</server-arg>
-          </server-args>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>

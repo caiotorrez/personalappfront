@@ -21,6 +21,7 @@
    		<f:metadata>
 		<f:viewParam id="emailParam" name="email" value="#{treinoViewBean.email}" required="false"></f:viewParam>
 		<f:viewAction action="#{treinoViewBean.searchTreino()}"/>
+		<f:viewAction action="#{professorViewBean.init(loginBean.username)}"/>
 	</f:metadata>
     </h:head>
     <h:body styleClass="backgroud-body" style="background-color: #263238;">
