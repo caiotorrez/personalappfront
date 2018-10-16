@@ -3,6 +3,7 @@
   <groupId>PersonalTrainnerJFS</groupId>
   <artifactId>PersonalTrainnerJFS</artifactId>
   <version>0.0.1</version>
+  <packaging>war</packaging>
   
   
     <properties>
@@ -10,6 +11,7 @@
         <myfaces2.version>2.2.3</myfaces2.version>
         <weld.version>2.2.1.Final</weld.version>
         <jsf.version>2.2.6</jsf.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
       
       
@@ -260,5 +262,4 @@
       </plugin>
     </plugins>
   </build>
-  <packaging>war</packaging>
 </project>

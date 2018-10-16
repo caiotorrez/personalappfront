@@ -84,10 +84,10 @@
           	<h:form id="user-form" styleClass="form-inline">                
             <div class="input-group">
                 <h:inputText styleClass="form-control form-control-sm" value="#{treinoListBean.titulo}" title="Pesquise por nome do aluno" placeholder="Pesquisar aluno pelo nome">
-                	<f:ajax event="keyup" listener="#{treinoListBean.titulo}" render="pesq dataTable"></f:ajax>
+                	<f:ajax event="keyup" listener="#{treinoListBean.search()}" render="pesq dataTable"></f:ajax>
                 </h:inputText>
                 <span class="input-group-btn">
-                <p:commandButton id="pesq" actionListener="#{alunoListBean.search}"
+                <p:commandButton id="pesq" actionListener="#{treinoListBean.search()}"
                                  ajax="true" update="dataTable" icon="ui-icon-search" />
                 </span>
             </div>
