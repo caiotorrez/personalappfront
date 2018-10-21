@@ -6,9 +6,7 @@ import static org.springframework.http.HttpMethod.POST;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;

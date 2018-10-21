@@ -36,7 +36,6 @@ public class AlunoEditBean implements Serializable {
 
 	@ExceptionHandler
 	public String update() {
-		System.out.println(this.email);
 		this.alunoDao.update(this.aluno);
 		Messages.create("O Aluno {0} foi adcionado com sucesso!", this.aluno.getNome()).flash().add();
 		return "alunos.xhtml?faces-redirect=true";
