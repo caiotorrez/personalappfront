@@ -3,7 +3,7 @@ package com.personalapp.model;
 
 
 @SuppressWarnings("serial")
-public class Professor extends AbstractEntity {
+public class Professor extends BaseEntity {
 	
 	private String nome;
 	private String email;

@@ -1,9 +1,9 @@
 package com.personalapp.model.treino;
 
-import com.personalapp.model.AbstractEntity;
+import com.personalapp.model.BaseEntity;
 
 @SuppressWarnings("serial")
-public class InfoExercicio extends AbstractEntity {
+public class InfoExercicio extends BaseEntity {
 	
 	private int seriesI;
 	private int seriesF;

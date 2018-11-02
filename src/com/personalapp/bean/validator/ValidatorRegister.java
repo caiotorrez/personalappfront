@@ -52,7 +52,7 @@ public class ValidatorRegister implements Serializable {
 	public void validarEmail(FacesContext context, UIComponent component, Object o) throws ValidatorException {
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		String email = (String) o;
-		if (email == null || email.trim().equals("") || !email.matches(regex) || this.alunoDao.findOne(email) != null) {
+		if (email == null || email.trim().equals("") || !email.matches(regex) || this.alunoDao.findOne(email) != null) { // tem que fazer um getExistBy
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email inválido ou já cadastrado", "");
 			this.emailIsValid = "border-color:red";
 			throw new ValidatorException(message);

@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+import com.personalapp.custom.CustomURLEncoderDecoder;
+
 import static java.util.Arrays.asList;
 
 import java.io.Serializable;
@@ -18,7 +21,7 @@ public class TokenUtil implements Serializable {
 		if (request.getCookies() == null) return "";
 		List<Cookie> cookieList = asList(request.getCookies());
 		return cookieList.stream()
-				.filter(cookie -> cookie.getName().equals("token"))
+				.filter(cookie -> cookie.getName().equals("_sh_"))
 				.map(Cookie::getValue)
 				.findFirst().orElse("");
 	}
@@ -28,7 +31,7 @@ public class TokenUtil implements Serializable {
 		if (request.getCookies() == null) return false;
 		List<Cookie> cookieList = asList(request.getCookies());
 		String expirationTime = cookieList.stream()
-				.filter(cookie -> cookie.getName().equals("expirationTime"))
+				.filter(cookie -> cookie.getName().equals("_xt_"))
 				.map(Cookie::getValue)
 				.findFirst().orElse("");
 		return validateIfTimeNowIsBeforeTokenExpires(expirationTime);
@@ -38,7 +41,7 @@ public class TokenUtil implements Serializable {
 		if (expirationTime.isEmpty()) return false;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
 				.withZone(ZoneId.of("UTC"));
-		LocalDateTime tokenExpirationTime = LocalDateTime.parse(expirationTime, formatter);
+		LocalDateTime tokenExpirationTime = LocalDateTime.parse(CustomURLEncoderDecoder.decodeUTF8(expirationTime), formatter);
 		return LocalDateTime.now(ZoneId.of("UTC")).isBefore(tokenExpirationTime);
 	}
 

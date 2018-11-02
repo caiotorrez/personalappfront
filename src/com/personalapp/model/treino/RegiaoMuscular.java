@@ -1,10 +1,10 @@
 package com.personalapp.model.treino;
 
 
-import com.personalapp.model.AbstractEntity;
+import com.personalapp.model.BaseEntity;
 
 @SuppressWarnings("serial")
-public class RegiaoMuscular extends AbstractEntity {
+public class RegiaoMuscular extends BaseEntity {
 	
 
 	private Exercicio excecicio1;

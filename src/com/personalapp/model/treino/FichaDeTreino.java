@@ -3,10 +3,10 @@
 import java.time.Instant;
 import java.util.Date;
 
-import com.personalapp.model.AbstractEntity;
+import com.personalapp.model.BaseEntity;
 
 @SuppressWarnings("serial")
-public class FichaDeTreino extends AbstractEntity {
+public class FichaDeTreino extends BaseEntity {
 
 	
 	private String titulo;

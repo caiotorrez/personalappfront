@@ -8,7 +8,7 @@ import org.springframework.lang.NonNull;
 import com.personalapp.model.treino.FichaDeTreino;
 
 @SuppressWarnings("serial")
-public class Aluno extends AbstractEntity {
+public class Aluno extends BaseEntity {
 	
 
 	private String nome;

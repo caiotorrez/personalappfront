@@ -2,6 +2,8 @@ package com.personalapp.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -44,13 +46,16 @@ public class LoginBean implements Serializable {
     }
 
     private void addTokenAndExpirationTimeToCookies(String token, String expirationTime) {
-    	this.externalContext.addResponseCookie("token", CustomURLEncoderDecoder.encodeUTF8(token), null);
-    	this.externalContext.addResponseCookie("expirationTime", expirationTime, null);
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("maxAge", 64000);
+    	map.put("httpOnly", true);
+    	this.externalContext.addResponseCookie("_sh_", CustomURLEncoderDecoder.encodeUTF8(token), map);
+    	this.externalContext.addResponseCookie("_xt_", CustomURLEncoderDecoder.encodeUTF8(expirationTime), map);
     }
     
     public String logout() throws IOException {
+    	this.removeTokenAndExpirationTimeFromCookies();
     	this.session = null;
-        this.removeTokenAndExpirationTimeFromCookies();
         this.externalContext.responseReset();
         this.externalContext.invalidateSession();
         return "/login.xhtml?faces-redirect=true";

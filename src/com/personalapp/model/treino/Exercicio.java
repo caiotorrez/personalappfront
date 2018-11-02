@@ -1,11 +1,11 @@
 package com.personalapp.model.treino;
 
-import com.personalapp.model.AbstractEntity;
+import com.personalapp.model.BaseEntity;
 import com.personalapp.model.Imagem;
 
 
 @SuppressWarnings("serial")
-public class Exercicio extends AbstractEntity {
+public class Exercicio extends BaseEntity {
 	
 
 	private String titulo;

@@ -2,15 +2,16 @@ package com.personalapp.util;
 
 import static com.personalapp.custom.CustomURLEncoderDecoder.decodeUTF8;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import java.io.Serializable;
+import java.util.Map;
 
 import javax.faces.annotation.RequestCookieMap;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
-import java.io.Serializable;
-import java.util.Map;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 @SuppressWarnings("serial")
 public class JsonUtil implements Serializable {
@@ -27,8 +28,8 @@ public class JsonUtil implements Serializable {
     
 	public HttpHeaders createTokenizedHeader() {
         HttpHeaders header = createJsonHeader();
-        Cookie tokenCookie = (Cookie) this.cookieMap.get("token");
-        header.add("Authorization", decodeUTF8(tokenCookie.getValue()));
+        Cookie tokenCookie = (Cookie) this.cookieMap.get("_sh_");
+        header.add("Authorization", "Bearer " + decodeUTF8(tokenCookie.getValue()));
         return header;
     }
 	

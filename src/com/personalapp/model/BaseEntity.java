@@ -3,7 +3,7 @@ package com.personalapp.model;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class AbstractEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
 	protected Long id;
 
@@ -31,7 +31,7 @@ public class AbstractEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AbstractEntity other = (AbstractEntity) obj;
+		BaseEntity other = (BaseEntity) obj;
 		if (id != other.id)
 			return false;
 		return true;

@@ -2,7 +2,7 @@ package com.personalapp.model;
 
 
 @SuppressWarnings("serial")
-public class ApplicationUser extends AbstractEntity {
+public class ApplicationUser extends BaseEntity {
 	
 	private String username;
 	private String password;

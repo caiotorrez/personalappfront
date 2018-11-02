@@ -3,7 +3,7 @@ package com.personalapp.model;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class MedidasCorporais extends AbstractEntity {
+public class MedidasCorporais extends BaseEntity {
 	
 	
 	private String metodoDeAvaliacao;

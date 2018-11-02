@@ -7,7 +7,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
-public class Imagem extends AbstractEntity {
+public class Imagem extends BaseEntity {
 	
 	//return new DefaultStreamedContent(new ByteArrayInputStream(img));
 	private String titulo;
